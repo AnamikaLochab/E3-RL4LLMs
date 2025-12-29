@@ -12,3 +12,4 @@ logs/
 *.npz
 *.tar
 *.zip
+results/
