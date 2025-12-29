@@ -1,0 +1,152 @@
+Launching eval at Mon Nov 17 01:31:49 PM EST 2025
+INFO 11-17 13:32:07 [__init__.py:216] Automatically detected platform cuda.
+INFO 11-17 13:32:14 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_tw_covvar_0.00005/global_step_480/actor/huggingface'}
+INFO 11-17 13:32:14 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+INFO 11-17 13:32:14 [model.py:1510] Using max model len 131072
+INFO 11-17 13:32:15 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=16384.
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:15 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:15 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='../checkpoint/e3_1_5b_tw_covvar_0.00005/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_tw_covvar_0.00005/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../checkpoint/e3_1_5b_tw_covvar_0.00005/global_step_480/actor/huggingface, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2","vllm.mamba_mixer","vllm.short_conv","vllm.linear_attention","vllm.plamo2_mamba_mixer","vllm.gdn_attention","vllm.sparse_attn_indexer"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":[2,1],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":512,"local_cache_dir":null}
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:22 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m WARNING 11-17 13:32:23 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:23 [gpu_model_runner.py:2602] Starting to load model ../checkpoint/e3_1_5b_tw_covvar_0.00005/global_step_480/actor/huggingface...
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:23 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:23 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:43 [default_loader.py:267] Loading weights took 19.41 seconds
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:43 [gpu_model_runner.py:2653] Model loading took 3.3461 GiB and 19.754477 seconds
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:50 [backends.py:548] Using cache directory: /home/alochab/.cache/vllm/torch_compile_cache/a8c3a1f53f/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:50 [backends.py:559] Dynamo bytecode transform time: 6.95 s
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:32:55 [backends.py:197] Cache the graph for dynamic shape for later use
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:10 [backends.py:218] Compiling a graph for dynamic shape takes 19.42 s
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:14 [monitor.py:34] torch.compile takes 26.37 s in total
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:15 [gpu_worker.py:298] Available KV cache memory: 66.15 GiB
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:15 [kv_cache_utils.py:1087] GPU KV cache size: 2,477,072 tokens
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:15 [kv_cache_utils.py:1091] Maximum concurrency for 131,072 tokens per request: 18.90x
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:20 [gpu_model_runner.py:3480] Graph capturing finished in 5 secs, took 0.92 GiB
+[1;36m(EngineCore_DP0 pid=2933868)[0;0m INFO 11-17 13:33:20 [core.py:210] init engine (profile, create kv cache, warmup model) took 36.67 seconds
+INFO 11-17 13:33:20 [llm.py:306] Supported_tasks: ['generate']
+INFO 11-17 14:34:23 [__init__.py:216] Automatically detected platform cuda.
+INFO 11-17 14:34:28 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_0.00001/global_step_480/actor/huggingface'}
+INFO 11-17 14:34:28 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+INFO 11-17 14:34:28 [model.py:1510] Using max model len 131072
+INFO 11-17 14:34:29 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=16384.
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:29 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:29 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='../checkpoint/e3_1_5b_dGRPO_0.00001/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_0.00001/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_0.00001/global_step_480/actor/huggingface, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2","vllm.mamba_mixer","vllm.short_conv","vllm.linear_attention","vllm.plamo2_mamba_mixer","vllm.gdn_attention","vllm.sparse_attn_indexer"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":[2,1],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":512,"local_cache_dir":null}
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:36 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m WARNING 11-17 14:34:36 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:36 [gpu_model_runner.py:2602] Starting to load model ../checkpoint/e3_1_5b_dGRPO_0.00001/global_step_480/actor/huggingface...
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:36 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:36 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:56 [default_loader.py:267] Loading weights took 19.48 seconds
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:34:56 [gpu_model_runner.py:2653] Model loading took 3.3461 GiB and 19.880602 seconds
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:03 [backends.py:548] Using cache directory: /home/alochab/.cache/vllm/torch_compile_cache/e91e13c9de/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:03 [backends.py:559] Dynamo bytecode transform time: 6.27 s
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:05 [backends.py:164] Directly load the compiled graph(s) for dynamic shape from the cache, took 1.445 s
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:06 [monitor.py:34] torch.compile takes 6.27 s in total
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:07 [gpu_worker.py:298] Available KV cache memory: 66.15 GiB
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:07 [kv_cache_utils.py:1087] GPU KV cache size: 2,477,072 tokens
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:07 [kv_cache_utils.py:1091] Maximum concurrency for 131,072 tokens per request: 18.90x
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:11 [gpu_model_runner.py:3480] Graph capturing finished in 4 secs, took 0.92 GiB
+[1;36m(EngineCore_DP0 pid=2964475)[0;0m INFO 11-17 14:35:11 [core.py:210] init engine (profile, create kv cache, warmup model) took 14.45 seconds
+INFO 11-17 14:35:12 [llm.py:306] Supported_tasks: ['generate']
+INFO 11-17 15:34:45 [__init__.py:216] Automatically detected platform cuda.
+INFO 11-17 15:34:51 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_0.00003/global_step_480/actor/huggingface'}
+INFO 11-17 15:34:51 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+INFO 11-17 15:34:51 [model.py:1510] Using max model len 131072
+INFO 11-17 15:34:51 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=16384.
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:52 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:52 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='../checkpoint/e3_1_5b_dGRPO_0.00003/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_0.00003/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_0.00003/global_step_480/actor/huggingface, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2","vllm.mamba_mixer","vllm.short_conv","vllm.linear_attention","vllm.plamo2_mamba_mixer","vllm.gdn_attention","vllm.sparse_attn_indexer"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":[2,1],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":512,"local_cache_dir":null}
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:58 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m WARNING 11-17 15:34:58 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:59 [gpu_model_runner.py:2602] Starting to load model ../checkpoint/e3_1_5b_dGRPO_0.00003/global_step_480/actor/huggingface...
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:59 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:34:59 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:17 [default_loader.py:267] Loading weights took 18.06 seconds
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:18 [gpu_model_runner.py:2653] Model loading took 3.3461 GiB and 18.357254 seconds
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:24 [backends.py:548] Using cache directory: /home/alochab/.cache/vllm/torch_compile_cache/efe1e4a319/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:24 [backends.py:559] Dynamo bytecode transform time: 6.30 s
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:26 [backends.py:164] Directly load the compiled graph(s) for dynamic shape from the cache, took 1.451 s
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:27 [monitor.py:34] torch.compile takes 6.30 s in total
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:27 [gpu_worker.py:298] Available KV cache memory: 66.15 GiB
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:28 [kv_cache_utils.py:1087] GPU KV cache size: 2,477,072 tokens
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:28 [kv_cache_utils.py:1091] Maximum concurrency for 131,072 tokens per request: 18.90x
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:32 [gpu_model_runner.py:3480] Graph capturing finished in 4 secs, took 0.92 GiB
+[1;36m(EngineCore_DP0 pid=3056593)[0;0m INFO 11-17 15:35:32 [core.py:210] init engine (profile, create kv cache, warmup model) took 14.30 seconds
+INFO 11-17 15:35:33 [llm.py:306] Supported_tasks: ['generate']
+INFO 11-17 16:44:09 [__init__.py:216] Automatically detected platform cuda.
+INFO 11-17 16:44:14 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_0.00005_2sub_half/global_step_480/actor/huggingface'}
+INFO 11-17 16:44:14 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+INFO 11-17 16:44:14 [model.py:1510] Using max model len 131072
+INFO 11-17 16:44:15 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=16384.
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:16 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:16 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='../checkpoint/e3_1_5b_dGRPO_0.00005_2sub_half/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_0.00005_2sub_half/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_0.00005_2sub_half/global_step_480/actor/huggingface, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2","vllm.mamba_mixer","vllm.short_conv","vllm.linear_attention","vllm.plamo2_mamba_mixer","vllm.gdn_attention","vllm.sparse_attn_indexer"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":[2,1],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":512,"local_cache_dir":null}
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:21 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m WARNING 11-17 16:44:22 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:22 [gpu_model_runner.py:2602] Starting to load model ../checkpoint/e3_1_5b_dGRPO_0.00005_2sub_half/global_step_480/actor/huggingface...
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:22 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:22 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:41 [default_loader.py:267] Loading weights took 18.66 seconds
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:41 [gpu_model_runner.py:2653] Model loading took 3.3461 GiB and 18.959850 seconds
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:48 [backends.py:548] Using cache directory: /home/alochab/.cache/vllm/torch_compile_cache/3c3a14f8bc/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:48 [backends.py:559] Dynamo bytecode transform time: 6.31 s
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:49 [backends.py:164] Directly load the compiled graph(s) for dynamic shape from the cache, took 1.418 s
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:50 [monitor.py:34] torch.compile takes 6.31 s in total
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:51 [gpu_worker.py:298] Available KV cache memory: 66.15 GiB
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:51 [kv_cache_utils.py:1087] GPU KV cache size: 2,477,072 tokens
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:51 [kv_cache_utils.py:1091] Maximum concurrency for 131,072 tokens per request: 18.90x
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:55 [gpu_model_runner.py:3480] Graph capturing finished in 4 secs, took 0.92 GiB
+[1;36m(EngineCore_DP0 pid=3092803)[0;0m INFO 11-17 16:44:55 [core.py:210] init engine (profile, create kv cache, warmup model) took 14.08 seconds
+INFO 11-17 16:44:56 [llm.py:306] Supported_tasks: ['generate']
+INFO 11-17 17:52:32 [__init__.py:216] Automatically detected platform cuda.
+INFO 11-17 17:52:38 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_0.0005/global_step_480/actor/huggingface'}
+INFO 11-17 17:52:38 [model.py:547] Resolved architecture: Qwen2ForCausalLM
+INFO 11-17 17:52:38 [model.py:1510] Using max model len 131072
+INFO 11-17 17:52:38 [scheduler.py:205] Chunked prefill is enabled with max_num_batched_tokens=16384.
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:39 [core.py:644] Waiting for init message from front-end.
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:39 [core.py:77] Initializing a V1 LLM engine (v0.11.0) with config: model='../checkpoint/e3_1_5b_dGRPO_0.0005/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_0.0005/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser=''), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_0.0005/global_step_480/actor/huggingface, enable_prefix_caching=True, chunked_prefill_enabled=True, pooler_config=None, compilation_config={"level":3,"debug_dump_path":"","cache_dir":"","backend":"","custom_ops":[],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output","vllm.mamba_mixer2","vllm.mamba_mixer","vllm.short_conv","vllm.linear_attention","vllm.plamo2_mamba_mixer","vllm.gdn_attention","vllm.sparse_attn_indexer"],"use_inductor":true,"compile_sizes":[],"inductor_compile_config":{"enable_auto_functionalized_v2":false},"inductor_passes":{},"cudagraph_mode":[2,1],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"cudagraph_copy_inputs":false,"full_cuda_graph":false,"use_inductor_graph_partition":false,"pass_config":{},"max_capture_size":512,"local_cache_dir":null}
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:45 [parallel_state.py:1208] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m WARNING 11-17 17:52:45 [topk_topp_sampler.py:66] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:45 [gpu_model_runner.py:2602] Starting to load model ../checkpoint/e3_1_5b_dGRPO_0.0005/global_step_480/actor/huggingface...
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:45 [gpu_model_runner.py:2634] Loading model from scratch...
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:52:45 [cuda.py:366] Using Flash Attention backend on V1 engine.
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:05 [default_loader.py:267] Loading weights took 19.15 seconds
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:05 [gpu_model_runner.py:2653] Model loading took 3.3461 GiB and 19.462430 seconds
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:12 [backends.py:548] Using cache directory: /home/alochab/.cache/vllm/torch_compile_cache/a4da17319a/rank_0_0/backbone for vLLM's torch.compile
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:12 [backends.py:559] Dynamo bytecode transform time: 6.21 s
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:13 [backends.py:164] Directly load the compiled graph(s) for dynamic shape from the cache, took 1.416 s
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:14 [monitor.py:34] torch.compile takes 6.21 s in total
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:15 [gpu_worker.py:298] Available KV cache memory: 66.15 GiB
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:15 [kv_cache_utils.py:1087] GPU KV cache size: 2,477,072 tokens
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:15 [kv_cache_utils.py:1091] Maximum concurrency for 131,072 tokens per request: 18.90x
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:19 [gpu_model_runner.py:3480] Graph capturing finished in 4 secs, took 0.92 GiB
+[1;36m(EngineCore_DP0 pid=3115134)[0;0m INFO 11-17 17:53:19 [core.py:210] init engine (profile, create kv cache, warmup model) took 14.13 seconds
+INFO 11-17 17:53:20 [llm.py:306] Supported_tasks: ['generate']

@@ -161,7 +161,8 @@ class DataParallelPPOActor(BasePPOActor):
 
                     # compute entropy
                     if calculate_entropy:
-                        entropy_rmpad = self.compute_entropy_from_logits(logits_rmpad)  # ((total_nnz / sp) + pad)
+                        entropy_rmpad = self.compute_entropy_from_logits(logits_rmpad).detach()  # ((total_nnz / sp) + pad)
+                        del logits_rmpad
 
                 # gather log_prob if sp > 1
                 if self.use_ulysses_sp:
@@ -381,7 +382,9 @@ class DataParallelPPOActor(BasePPOActor):
                     loss_agg_mode = self.config.loss_agg_mode
 
                     # all return: (bsz, response_length)
-                    calculate_entropy = False
+                    #change start
+                    calculate_entropy = True
+                    #change end
                     if entropy_coeff != 0:
                         calculate_entropy = True
                     entropy, log_prob = self._forward_micro_batch(micro_batch=data, temperature=temperature, calculate_entropy=calculate_entropy)
@@ -398,9 +401,22 @@ class DataParallelPPOActor(BasePPOActor):
                         loss_agg_mode=loss_agg_mode,
                     )
 
-                    if entropy_coeff != 0:
-                        entropy_loss = agg_loss(loss_mat=entropy, loss_mask=response_mask, loss_agg_mode=loss_agg_mode)
+                    # if entropy_coeff != 0:
+                    #     entropy_loss = agg_loss(loss_mat=entropy, loss_mask=response_mask, loss_agg_mode=loss_agg_mode)
+                        #change start
+                         
+                    entropy_loss = agg_loss(loss_mat=entropy, loss_mask=response_mask, loss_agg_mode=loss_agg_mode)
+                    metrics["actor/entropy_loss"] = entropy_loss.detach().item()
+                    # masked_entropy = torch.masked_select(entropy, response_mask.bool())
+                    # metrics["actor/entropy/mean"] = masked_entropy.mean().detach().item()
+                    # metrics["actor/entropy/max"]  = masked_entropy.max().detach().item()
+                    # metrics["actor/entropy/min"]  = masked_entropy.min().detach().item()
+                    
 
+                        #change end
+                    if entropy_coeff != 0:
+                        print("In entropy")
+                        entropy_loss = agg_loss(loss_mat=entropy, loss_mask=response_mask, loss_agg_mode=loss_agg_mode)
                         # compute policy loss
                         policy_loss = pg_loss - entropy_loss * entropy_coeff
                     else:
@@ -428,6 +444,7 @@ class DataParallelPPOActor(BasePPOActor):
                         "actor/pg_clipfrac": pg_clipfrac.detach().item(),
                         "actor/ppo_kl": ppo_kl.detach().item(),
                         "actor/pg_clipfrac_lower": pg_clipfrac_lower.detach().item(),
+                        # "actor/entropy_loss": entropy_loss.detach().item(), #added
                     }
                     append_to_dict(metrics, data)
 

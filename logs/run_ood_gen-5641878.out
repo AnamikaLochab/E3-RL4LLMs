@@ -1,0 +1,35 @@
+host=h009.gautschi.rcac.purdue.edu
+CVD=0,1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-efd9e6c2-6beb-34b6-874d-4d9cc81add3f)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-8113ffbd-d361-7298-a1fd-2cdf16fe86c2)
+torch: 2.5.1+cu124
+is_available: True
+count: 2
+name0: NVIDIA H100 80GB HBM3
+CVD env: 0,1
+INFO 12-27 21:54:52 config.py:350] This model supports multiple tasks: {'generate', 'embedding'}. Defaulting to 'generate'.
+WARNING 12-27 21:54:52 arg_utils.py:1013] Chunked prefill is enabled by default for models with max_model_len > 32K. Currently, chunked prefill might not work with some features or models. If you encounter any issues, please disable chunked prefill by setting --enable-chunked-prefill=False.
+INFO 12-27 21:54:52 config.py:1136] Chunked prefill is enabled with max_num_batched_tokens=512.
+INFO 12-27 21:54:52 llm_engine.py:249] Initializing an LLM engine (v0.6.4.post1) with config: model='../checkpoint/e3_1_5b_dGRPO_1.0_a15/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_1.0_a15/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, quantization_param_path=None, device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='outlines'), observability_config=ObservabilityConfig(otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_1.0_a15/global_step_480/actor/huggingface, num_scheduler_steps=1, chunked_prefill_enabled=True multi_step_stream_outputs=True, enable_prefix_caching=False, use_async_output_proc=True, use_cached_outputs=False, chat_template_text_format=string, mm_processor_kwargs=None, pooler_config=None)
+INFO 12-27 21:54:53 selector.py:135] Using Flash Attention backend.
+INFO 12-27 21:54:54 model_runner.py:1072] Starting to load model ../checkpoint/e3_1_5b_dGRPO_1.0_a15/global_step_480/actor/huggingface...
+INFO 12-27 21:55:19 model_runner.py:1077] Loading model weights took 3.3460 GB
+INFO 12-27 21:55:20 worker.py:232] Memory profiling results: total_gpu_memory=79.18GiB initial_memory_usage=4.08GiB peak_torch_memory=4.76GiB memory_usage_post_profile=4.18GiB non_torch_memory=0.80GiB kv_cache_size=69.66GiB gpu_memory_utilization=0.95
+INFO 12-27 21:55:20 gpu_executor.py:113] # GPU blocks: 163050, # CPU blocks: 9362
+INFO 12-27 21:55:20 gpu_executor.py:117] Maximum concurrency for 131072 tokens per request: 19.90x
+INFO 12-27 21:55:22 model_runner.py:1400] Capturing cudagraphs for decoding. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI.
+INFO 12-27 21:55:22 model_runner.py:1404] If out-of-memory error occurs during cudagraph capture, consider decreasing `gpu_memory_utilization` or switching to eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+INFO 12-27 21:55:29 model_runner.py:1518] Graph capturing finished in 7 secs, took 0.28 GiB
+INFO 12-28 01:03:19 config.py:350] This model supports multiple tasks: {'embedding', 'generate'}. Defaulting to 'generate'.
+WARNING 12-28 01:03:19 arg_utils.py:1013] Chunked prefill is enabled by default for models with max_model_len > 32K. Currently, chunked prefill might not work with some features or models. If you encounter any issues, please disable chunked prefill by setting --enable-chunked-prefill=False.
+INFO 12-28 01:03:19 config.py:1136] Chunked prefill is enabled with max_num_batched_tokens=512.
+INFO 12-28 01:03:19 llm_engine.py:249] Initializing an LLM engine (v0.6.4.post1) with config: model='../checkpoint/e3_1_5b_dGRPO_1.0_a16/global_step_480/actor/huggingface', speculative_config=None, tokenizer='../checkpoint/e3_1_5b_dGRPO_1.0_a16/global_step_480/actor/huggingface', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=131072, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, quantization_param_path=None, device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='outlines'), observability_config=ObservabilityConfig(otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=0, served_model_name=../checkpoint/e3_1_5b_dGRPO_1.0_a16/global_step_480/actor/huggingface, num_scheduler_steps=1, chunked_prefill_enabled=True multi_step_stream_outputs=True, enable_prefix_caching=False, use_async_output_proc=True, use_cached_outputs=False, chat_template_text_format=string, mm_processor_kwargs=None, pooler_config=None)
+INFO 12-28 01:03:20 selector.py:135] Using Flash Attention backend.
+INFO 12-28 01:03:21 model_runner.py:1072] Starting to load model ../checkpoint/e3_1_5b_dGRPO_1.0_a16/global_step_480/actor/huggingface...
+INFO 12-28 01:03:48 model_runner.py:1077] Loading model weights took 3.3460 GB
+INFO 12-28 01:03:48 worker.py:232] Memory profiling results: total_gpu_memory=79.18GiB initial_memory_usage=4.08GiB peak_torch_memory=4.76GiB memory_usage_post_profile=4.18GiB non_torch_memory=0.80GiB kv_cache_size=69.66GiB gpu_memory_utilization=0.95
+INFO 12-28 01:03:48 gpu_executor.py:113] # GPU blocks: 163050, # CPU blocks: 9362
+INFO 12-28 01:03:48 gpu_executor.py:117] Maximum concurrency for 131072 tokens per request: 19.90x
+INFO 12-28 01:03:50 model_runner.py:1400] Capturing cudagraphs for decoding. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI.
+INFO 12-28 01:03:50 model_runner.py:1404] If out-of-memory error occurs during cudagraph capture, consider decreasing `gpu_memory_utilization` or switching to eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+INFO 12-28 01:03:58 model_runner.py:1518] Graph capturing finished in 7 secs, took 0.28 GiB

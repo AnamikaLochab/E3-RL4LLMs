@@ -1,0 +1,56 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
+The following have been reloaded with a version change:
+  1) gcc/14.1.0 => gcc/11.4.1
+
++ NUM_EPISODES=3
++ n_samples_per_prompt=8
++ n_rollout_max=8
++ n_rollout_min=8
++ LR_ACTOR=5e-6
++ entropy_coeff=0
++ n_rollout_update=0
++ enable_temperature_scheduler=False
++ enable_annealing=False
++ TRAIN_DATADIR=./dataset/train_data_10k.parquet
++ VAL_DATADIR=./dataset/valid_data.parquet
++ MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ PRETRAIN_DIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ SAVE_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001_2/
++ TENSORBOARD_PATH=../checkpoint/e3_1_5b_dGRPO_0.00001_2//tensorboard
++ export TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001_2//tensorboard
++ TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001_2//tensorboard
++ export HYDRA_FULL_ERROR=1
++ HYDRA_FULL_ERROR=1
++ python3 -m e3.main_e3 algorithm.adv_estimator=divgrpo data.train_files=./dataset/train_data_10k.parquet data.val_files=./dataset/valid_data.parquet data.train_batch_size=64 data.max_prompt_length=2048 data.max_response_length=6144 data.filter_overlong_prompts=True data.truncation=error actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B actor_rollout_ref.actor.optim.lr=5e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=512 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.gpu_memory_utilization=0.8 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_low=8 actor_rollout_ref.rollout.n_high=8 actor_rollout_ref.rollout.n_update=0 actor_rollout_ref.rollout.temperature=1 actor_rollout_ref.rollout.enable_temperature_scheduler=False actor_rollout_ref.rollout.enable_annealing=False actor_rollout_ref.rollout.max_steps=4 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.use_kl_in_reward=False trainer.critic_warmup=0 'trainer.logger=[console,tensorboard]' trainer.project_name=GRPO trainer.experiment_name=Qwen trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_0.00001_2/ trainer.save_freq=50 trainer.test_freq=10 trainer.total_epochs=3
+2025-11-17 22:57:50,800	INFO worker.py:2003 -- Started a local Ray instance. View the dashboard at [1m[32m127.0.0.1:8265 [39m[22m
+/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[36m(TaskRunner pid=3364613)[0m DeprecationWarning: `ray.state.available_resources_per_node` is a private attribute and access will be removed in a future Ray version.
+[36m(TaskRunner pid=3364613)[0m WARNING:2025-11-17 22:58:11,214:Waiting for register center actor mKH8Sb_register_center to be ready. Elapsed time: 0 seconds out of 300 seconds.
+[36m(WorkerDict pid=3368432)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3368432)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+[36m(WorkerDict pid=3368432)[0m   warnings.warn(  # warn only once
+[36m(WorkerDict pid=3368199)[0m [rank0]:[W1117 22:58:28.663591814 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[36m(WorkerDict pid=3368199)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=3368199)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=3368199)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3368199)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3368199)[0m   warnings.warn(  # warn only once[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3368430)[0m [rank2]:[W1117 22:58:29.815010242 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 2]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3368430)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`[32m [repeated 6x across cluster][0m
+[36m(WorkerDict pid=3368199)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3368199)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=3368199)[0m   warnings.warn(  # warn only once[32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=3368432)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3368199)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3368199)[0m   warnings.warn(
+[36m(WorkerDict pid=3368430)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 2x across cluster][0m
+[36m(TaskRunner pid=3364613)[0m Training Progress:   0%|          | 0/480 [00:00<?, ?it/s]
+[36m(WorkerDict pid=3368430)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3368430)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3364613)[0m Training Progress:   0%|          | 1/480 [02:06<16:45:54, 126.00s/it]
+[36m(TaskRunner pid=3364613)[0m Training Progress:   0%|          | 2/480 [04:03<16:05:51, 121.24s/it]
+[2025-11-17T23:04:37.084] error: *** JOB 4862553 ON h013 CANCELLED AT 2025-11-17T23:04:37 DUE to SIGNAL Terminated ***

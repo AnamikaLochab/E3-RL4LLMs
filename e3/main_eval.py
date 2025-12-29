@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import json
-from e3.trainer.reward_fn import compute_score
+from e3.trainer.fn_score import compute_score
 from collections import defaultdict
 from transformers import AutoTokenizer
 from tqdm import tqdm

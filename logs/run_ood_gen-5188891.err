@@ -1,0 +1,62 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
+The following have been reloaded with a version change:
+  1) gcc/14.1.0 => gcc/11.4.1
+
+Traceback (most recent call last):
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/exception_handler.py", line 28, in __call__
+    return func(*args, **kwargs)
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/cli/main.py", line 73, in main_sourced
+    from ..base.context import context
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/base/context.py", line 26, in <module>
+    from frozendict import frozendict
+ImportError: cannot import name 'frozendict' from 'frozendict' (unknown location)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch/gautschi/alochab/miniconda_clean/bin/conda", line 13, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/cli/main.py", line 105, in main
+    return conda_exception_handler(main, *args, **kwargs)
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/exception_handler.py", line 409, in conda_exception_handler
+    return_value = exception_handler(func, *args, **kwargs)
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/exception_handler.py", line 31, in __call__
+    return self.handle_exception(exc_val, exc_tb)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/exception_handler.py", line 62, in handle_exception
+    from .exceptions import (
+    ...<3 lines>...
+    )
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/exceptions.py", line 19, in <module>
+    from .auxlib.logz import stringify
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/auxlib/logz.py", line 6, in <module>
+    from ..common.serialize import json
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/common/serialize/__init__.py", line 10, in <module>
+    from .json import CondaJSONEncoder, loads
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/conda/common/serialize/json.py", line 12, in <module>
+    from requests.compat import json
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/requests/__init__.py", line 45, in <module>
+    from .exceptions import RequestsDependencyWarning
+  File "/scratch/gautschi/alochab/miniconda_clean/lib/python3.13/site-packages/requests/exceptions.py", line 7, in <module>
+    from urllib3.exceptions import HTTPError as BaseHTTPError
+ModuleNotFoundError: No module named 'urllib3.exceptions'
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib64/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_infer.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib64/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_infer.py", line 1, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

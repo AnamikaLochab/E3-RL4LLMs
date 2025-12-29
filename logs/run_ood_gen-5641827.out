@@ -1,0 +1,9 @@
+host=h007.gautschi.rcac.purdue.edu
+CVD=0,1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-db646b2e-34d7-6970-5b59-f5869bcdc276)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-e383603f-e148-cc11-bbce-fcfb0608e066)
+torch: 2.9.1+cu128
+is_available: True
+count: 2
+name0: NVIDIA H100 80GB HBM3
+CVD env: 0,1

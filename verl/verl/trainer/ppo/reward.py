@@ -91,11 +91,15 @@ def load_reward_manager(config, tokenizer, num_examine, **reward_kwargs):
         else:
             final_compute_score = _default_compute_score
 
+    #change start
+    print("In load_reward_manage,", num_examine)
+    #change end
+
     return reward_manager_cls(
         tokenizer=tokenizer,
         num_examine=num_examine,
         compute_score=final_compute_score,
-        reward_fn_key=config.data.reward_fn_key,
+        # reward_fn_key=config.data.reward_fn_key,
         **reward_kwargs,
     )
 
@@ -127,5 +131,7 @@ def compute_reward_async(data: DataProto, config, tokenizer):
     Load the reward manager and compute the reward for a batch of data.
     This is meant to be run in a separate Ray worker.
     """
-    reward_fn = load_reward_manager(config, tokenizer, num_examine=0, **config.reward_model.get("reward_kwargs", {}))
+    #changed num_examine from 0 to 1
+    print("In compute, 100")
+    reward_fn = load_reward_manager(config, tokenizer, num_examine=100, **config.reward_model.get("reward_kwargs", {}))
     return compute_reward(data, reward_fn)

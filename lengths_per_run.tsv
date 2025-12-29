@@ -1,0 +1,13 @@
+run	dataset	length
+./metrics/grpo_1_5b_s16_1_metrics.json	aime	5022.814583333334
+./metrics/grpo_1_5b_s16_1_metrics.json	amc	3702.4367469879517
+./metrics/grpo_1_5b_s16_1_metrics.json	math	2586.312125
+./metrics/grpo_1_5b_s16_1_metrics.json	olympiad_bench	3676.213796296296
+./metrics/div_grpo_1_5b_0.0001_s16_1_metrics.json	aime	5360.19375
+./metrics/div_grpo_1_5b_0.0001_s16_1_metrics.json	amc	4450.213855421687
+./metrics/div_grpo_1_5b_0.0001_s16_1_metrics.json	math	3283.051625
+./metrics/div_grpo_1_5b_0.0001_s16_1_metrics.json	olympiad_bench	4419.8303703703705
+./metrics/div_grpo_1_5b_0.00008_s16_1_metrics.json	aime	5228.783333333334
+./metrics/div_grpo_1_5b_0.00008_s16_1_metrics.json	amc	4373.130271084337
+./metrics/div_grpo_1_5b_0.00008_s16_1_metrics.json	math	3348.571125
+./metrics/div_grpo_1_5b_0.00008_s16_1_metrics.json	olympiad_bench	4456.875370370371

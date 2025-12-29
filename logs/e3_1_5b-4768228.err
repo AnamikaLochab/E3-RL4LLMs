@@ -1,0 +1,902 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
+The following have been reloaded with a version change:
+  1) gcc/14.1.0 => gcc/11.4.1
+
++ NUM_EPISODES=3
++ n_samples_per_prompt=8
++ n_rollout_max=8
++ n_rollout_min=8
++ LR_ACTOR=5e-6
++ entropy_coeff=0
++ n_rollout_update=0
++ enable_temperature_scheduler=False
++ enable_annealing=False
++ TRAIN_DATADIR=./dataset/train_data_10k.parquet
++ VAL_DATADIR=./dataset/valid_data.parquet
++ MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ PRETRAIN_DIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ SAVE_DIR=../checkpoint/e3_1_5b_dGRPO_0.00008/
++ TENSORBOARD_PATH=../checkpoint/e3_1_5b_dGRPO_0.00008//tensorboard
++ export TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00008//tensorboard
++ TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00008//tensorboard
++ export HYDRA_FULL_ERROR=1
++ HYDRA_FULL_ERROR=1
++ python3 -m e3.main_e3 algorithm.adv_estimator=divgrpo data.train_files=./dataset/train_data_10k.parquet data.val_files=./dataset/valid_data.parquet data.train_batch_size=64 data.max_prompt_length=2048 data.max_response_length=6144 data.filter_overlong_prompts=True data.truncation=error actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B actor_rollout_ref.actor.optim.lr=5e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=512 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.gpu_memory_utilization=0.8 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_low=8 actor_rollout_ref.rollout.n_high=8 actor_rollout_ref.rollout.n_update=0 actor_rollout_ref.rollout.temperature=1 actor_rollout_ref.rollout.enable_temperature_scheduler=False actor_rollout_ref.rollout.enable_annealing=False actor_rollout_ref.rollout.max_steps=480 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.use_kl_in_reward=False trainer.critic_warmup=0 'trainer.logger=[console,tensorboard]' trainer.project_name=GRPO trainer.experiment_name=Qwen trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_0.00008/ trainer.save_freq=50 trainer.test_freq=10 trainer.total_epochs=3
+2025-11-13 15:55:10,962	INFO worker.py:2003 -- Started a local Ray instance. View the dashboard at [1m[32m127.0.0.1:8265 [39m[22m
+/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[36m(TaskRunner pid=1209153)[0m DeprecationWarning: `ray.state.available_resources_per_node` is a private attribute and access will be removed in a future Ray version.
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 15:55:31,272:Waiting for register center actor IXnlfB_register_center to be ready. Elapsed time: 0 seconds out of 300 seconds.
+[36m(WorkerDict pid=1212919)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=1212919)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+[36m(WorkerDict pid=1212919)[0m   warnings.warn(  # warn only once
+[36m(WorkerDict pid=1212919)[0m [rank1]:[W1113 15:55:54.627181227 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 1]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[36m(WorkerDict pid=1212919)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=1212919)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=1212921)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212921)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212921)[0m   warnings.warn(  # warn only once[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212921)[0m [rank3]:[W1113 15:55:57.934954140 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 3]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212744)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`[32m [repeated 6x across cluster][0m
+[36m(WorkerDict pid=1212744)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(  # warn only once[32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=1212919)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=1212921)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212921)[0m   warnings.warn(
+[36m(WorkerDict pid=1212920)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 2x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:   0%|          | 0/480 [00:00<?, ?it/s]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:   0%|          | 1/480 [01:56<15:33:56, 116.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   0%|          | 2/480 [03:56<15:45:08, 118.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   1%|          | 3/480 [06:00<16:01:17, 120.92s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   1%|          | 4/480 [07:56<15:44:37, 119.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   1%|          | 5/480 [09:56<15:44:42, 119.33s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   1%|▏         | 6/480 [12:00<15:54:48, 120.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   1%|▏         | 7/480 [14:02<15:55:43, 121.23s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 16:13:36,743:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:   2%|▏         | 8/480 [16:07<16:03:29, 122.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   2%|▏         | 9/480 [18:05<15:51:27, 121.20s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   2%|▏         | 10/480 [21:26<19:02:37, 145.87s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   2%|▏         | 11/480 [23:23<17:50:32, 136.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   2%|▎         | 12/480 [25:20<17:01:08, 130.92s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   3%|▎         | 13/480 [27:20<16:32:40, 127.54s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   3%|▎         | 14/480 [29:19<16:10:35, 124.97s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   3%|▎         | 15/480 [31:16<15:49:17, 122.49s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   3%|▎         | 16/480 [33:15<15:38:44, 121.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   4%|▎         | 17/480 [35:13<15:28:59, 120.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   4%|▍         | 18/480 [37:10<15:19:47, 119.45s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   4%|▍         | 19/480 [39:08<15:13:52, 118.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   4%|▍         | 20/480 [42:30<18:24:12, 144.03s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   4%|▍         | 21/480 [44:30<17:25:15, 136.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   5%|▍         | 22/480 [46:28<16:42:07, 131.28s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   5%|▍         | 23/480 [48:26<16:09:10, 127.24s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   5%|▌         | 24/480 [50:21<15:37:33, 123.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   5%|▌         | 25/480 [52:16<15:18:04, 121.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   5%|▌         | 26/480 [54:12<15:04:40, 119.56s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   6%|▌         | 27/480 [56:14<15:06:31, 120.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   6%|▌         | 28/480 [58:06<14:47:17, 117.78s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   6%|▌         | 29/480 [1:00:03<14:43:28, 117.54s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   6%|▋         | 30/480 [1:03:17<17:34:13, 140.56s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 17:02:47,257:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:   6%|▋         | 31/480 [1:05:15<16:40:51, 133.75s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   7%|▋         | 32/480 [1:07:01<15:36:34, 125.44s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 17:06:35,339:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:   7%|▋         | 33/480 [1:09:03<15:25:41, 124.25s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   7%|▋         | 34/480 [1:10:58<15:03:03, 121.49s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   7%|▋         | 35/480 [1:12:48<14:35:45, 118.08s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   8%|▊         | 36/480 [1:14:36<14:12:55, 115.26s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   8%|▊         | 37/480 [1:16:27<14:01:09, 113.93s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   8%|▊         | 38/480 [1:18:24<14:04:30, 114.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   8%|▊         | 39/480 [1:20:10<13:44:10, 112.13s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   8%|▊         | 40/480 [1:23:18<16:30:20, 135.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   9%|▊         | 41/480 [1:25:07<15:30:15, 127.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   9%|▉         | 42/480 [1:27:00<14:57:01, 122.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   9%|▉         | 43/480 [1:28:47<14:19:48, 118.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   9%|▉         | 44/480 [1:30:36<13:58:46, 115.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:   9%|▉         | 45/480 [1:32:21<13:34:02, 112.28s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  10%|▉         | 46/480 [1:34:16<13:37:44, 113.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  10%|▉         | 47/480 [1:36:04<13:25:33, 111.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  10%|█         | 48/480 [1:37:55<13:22:50, 111.51s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  10%|█         | 49/480 [1:39:50<13:27:16, 112.38s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  10%|█         | 50/480 [1:43:10<16:33:16, 138.60s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  11%|█         | 51/480 [1:44:59<15:27:39, 129.74s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  11%|█         | 52/480 [1:46:45<14:35:33, 122.74s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  11%|█         | 53/480 [1:48:29<13:52:11, 116.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  11%|█▏        | 54/480 [1:50:18<13:34:52, 114.77s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  11%|█▏        | 55/480 [1:52:04<13:14:10, 112.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  12%|█▏        | 56/480 [1:53:50<12:58:28, 110.16s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  12%|█▏        | 57/480 [1:55:38<12:53:20, 109.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  12%|█▏        | 58/480 [1:57:23<12:41:35, 108.28s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  12%|█▏        | 59/480 [1:59:08<12:32:48, 107.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  12%|█▎        | 60/480 [2:02:04<14:55:01, 127.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  13%|█▎        | 61/480 [2:03:53<14:13:21, 122.20s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  13%|█▎        | 62/480 [2:05:40<13:39:55, 117.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  13%|█▎        | 63/480 [2:07:25<13:10:42, 113.77s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  13%|█▎        | 64/480 [2:09:17<13:04:59, 113.22s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  14%|█▎        | 65/480 [2:11:02<12:46:21, 110.80s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  14%|█▍        | 66/480 [2:12:53<12:44:44, 110.83s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  14%|█▍        | 67/480 [2:14:36<12:27:49, 108.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  14%|█▍        | 68/480 [2:16:22<12:19:20, 107.67s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  14%|█▍        | 69/480 [2:18:10<12:18:42, 107.84s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  15%|█▍        | 70/480 [2:21:11<14:46:19, 129.71s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  15%|█▍        | 71/480 [2:23:00<14:01:06, 123.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  15%|█▌        | 72/480 [2:24:47<13:26:13, 118.56s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  15%|█▌        | 73/480 [2:26:33<12:59:17, 114.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  15%|█▌        | 74/480 [2:28:21<12:43:53, 112.89s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  16%|█▌        | 75/480 [2:30:07<12:27:12, 110.70s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  16%|█▌        | 76/480 [2:31:59<12:28:19, 111.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  16%|█▌        | 77/480 [2:33:48<12:22:17, 110.52s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  16%|█▋        | 78/480 [2:35:39<12:20:17, 110.49s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  16%|█▋        | 79/480 [2:37:29<12:17:35, 110.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  17%|█▋        | 80/480 [2:40:27<14:32:13, 130.83s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  17%|█▋        | 81/480 [2:42:15<13:44:25, 123.97s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  17%|█▋        | 82/480 [2:44:03<13:10:35, 119.18s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  17%|█▋        | 83/480 [2:45:53<12:50:11, 116.40s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  18%|█▊        | 84/480 [2:47:41<12:32:10, 113.97s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  18%|█▊        | 85/480 [2:49:31<12:20:44, 112.52s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  18%|█▊        | 86/480 [2:51:18<12:09:26, 111.08s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 18:50:42,795:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  18%|█▊        | 87/480 [2:53:12<12:12:42, 111.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  18%|█▊        | 88/480 [2:55:01<12:06:07, 111.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  19%|█▊        | 89/480 [2:56:45<11:50:15, 108.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  19%|█▉        | 90/480 [2:59:43<14:02:34, 129.63s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  19%|█▉        | 91/480 [3:01:27<13:09:19, 121.75s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:00:49,114:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:00:55,954:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:01:00,974:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  19%|█▉        | 92/480 [3:03:25<13:00:30, 120.70s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  19%|█▉        | 93/480 [3:05:11<12:31:00, 116.44s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  20%|█▉        | 94/480 [3:07:00<12:14:28, 114.17s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  20%|█▉        | 95/480 [3:08:45<11:53:55, 111.26s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  20%|██        | 96/480 [3:10:34<11:48:11, 110.66s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  20%|██        | 97/480 [3:12:17<11:31:46, 108.37s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  20%|██        | 98/480 [3:13:53<11:06:11, 104.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  21%|██        | 99/480 [3:15:44<11:16:47, 106.58s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(WorkerDict pid=1212744)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=1212744)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(TaskRunner pid=1209153)[0m Training Progress:  21%|██        | 100/480 [3:18:59<14:02:34, 133.04s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  21%|██        | 101/480 [3:20:40<13:00:10, 123.51s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:20:05,177:Timeout during parsing: Alright, so I'm trying to figure out how many functions \( f \) there are from the set \( \{-1005, -1004, \ldots, 0, \ldots, 1004, 1005\} \) to \( \{-2010, -2009, \ldots, 0, \ldots, 2009, 2010\} \) such that two conditions are satisfied. 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m First, the function needs to be strictly increasing, meaning if \( a < b \), then \( f(a) < f(b) \). Second, there shouldn't be any \( n \) in \( \{-1005, \ldots, 1005\} \) such that \( |f(n)| = |n| \). Hmm, let me digest that. 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, \( f \) is injective because it's strictly increasing, and since it's strictly increasing, it must also be injective (one-to-one). Therefore, it's a strictly increasing injective function. So the number of such functions should correspond to choosing a strictly increasing sequence of 2011 elements (since the domain has 2011 elements from -1005 to 1005 inclusive, right? Because 1005 - (-1005) + 1 = 2011). 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But wait, actually, the domain is from -1005 to 1005, which is 2011 elements. The codomain is from -2010 to 2010, which is 4021 elements. Since the function is strictly increasing, selecting 2011 elements in order will determine the function. So, the number of strictly increasing functions is equal to the number of ways to choose 2011 elements from 4021 and arrange them in increasing order. So, \( \binom{4021}{2011} \). 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But hold on, that's only considering the strictly increasing functions, right? The second condition adds a twist. So, we have to subtract the number of functions where for some \( n \), \( |f(n)| = |n| \). Wait, let's parse the second condition more carefully. It says there's no \( n \) such that \( |f(n)| = |n| \). So, for every element \( n \) in the domain, \( f(n) \) cannot be equal to \( n \) or \( -n \). So, each \( n \) must satisfy \( f(n) \neq n \) and \( f(n) \neq -n \). 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Hmm, that seems a bit complex, but maybe we can think of the problem as similar to derangements, but in a more general setting. Because in a derangement, each element cannot map to itself, but here it's a bit different because we also have a reflection condition—if an element maps to its negative, that could cause issues. Wait, no, the second condition is that for no \( n \) does \( f(n) \) have the same absolute value as \( n \). So, more formally, for all \( n \), \( |f(n)| \neq |n| \). 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, if I reparameterize the domain and codomain to make it symmetric, maybe. Let's let \( m = f(n) + n \). Then, \( |m| = |f(n) + n| \). But the condition is \( |f(n)| \neq |n| \), which means \( |f(n) + n| \neq 2|n| \). Hmm, maybe that's not the right substitution.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, for each \( n \), \( f(n) \) cannot be \( n \) or \( -n \). So, for each \( n \), when mapping, \( f(n) \) can be any element in the codomain except \( n \) and \( -n \). But since the codomain is a symmetric ring, skipping these precludes fixing certain points.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, if we index all of this, perhaps I can model the codomain as two copies of the domain but shifted. Let's see: for each \( n \in \{-1005, \ldots, 1005\} \), \( f(n) \) cannot be in \( \{n, -n\} \). So we're effectively choosing for each position \( n \) in the domain a number in the codomain that's not \( n \) or \( -n \), and the choices are strictly increasing.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, the problem reduces to counting the number of strictly increasing functions with \( f(n) \neq n \) and \( f(n) \neq -n \) for all \( n \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m This seems like a derangement problem, but on two copies of the domain. Let me think. Maybe if I model this as a permutation problem on 2011 elements, but with restrictions based on each element and its negative.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, perhaps the total number is the same as the number of cyclic shifts or something, but I might be overcomplicating.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps it's the number of derangements on a set where each element cannot map to itself or its negative. Hmm.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But maybe instead of getting bogged down here, I can model this as a bipartite graph matching problem. Let's consider the domain \( D = \{-1005, -1004, \ldots, 0, \ldots, 1004, 1005\} \) and the codomain \( C = \{-2010, -2009, \ldots, 0, \ldots, 2009, 2010\} \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m We need to choose a function from D to C such that it's strictly increasing, and \( f(n) \neq n \) and \( f(n) \neq -n \) for each n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, it's like we need a bijection? Wait, no, the domain and codomain have different sizes—2011 elements and 4021 elements. So, it's an injection.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but the function needs to be strictly increasing, so it's essentially a strictly monotonic embedding. So, it's not a bijection.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Hence, my earlier idea of choosing the function as selecting a monotonic sequence is correct. So, the number is \( \binom{4021}{2011} \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But with the additional constraints: for each n, \( f(n) \neq n \) and \( f(n) \neq -n \). So, we can model this as a problem of counting the number of strictly increasing functions with each term avoiding two positions.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, is there a way to compute this using inclusion-exclusion?
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, think recursively. Maybe construct the function step by step, making sure at each step that we don't jump into forbidden points.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, perhaps consider that for each n, f(n) must be chosen from \( C \setminus \{n, -n\} \), but in a strictly increasing manner.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, for the first element, n = -1005, f(-1005) cannot be -1005 or 1005. Similarly, for n = -1004, f(-1004) cannot be -1004 or 1004. Wait, hold on.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, if you think of n as both positive and negative, maybe even starting with n = 0.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m For n = 0, f(0) can't be 0 or 0, which effectively just means f(0) can't be 0. So it's like the usual strictly increasing function with 0 forbidden.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m For n > 0, f(n) can't be n or -n, but since n is positive, f(n) can't be n, so f(n) can be any number greater than f(n-1) and not equal to n or -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, hold on. Maybe re-indexing the domain.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, let's see:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Let’s define D as {-1005, ..., 1005} with 2011 elements, and C as {-2010, ..., 2010}, with 4021 elements. So, C is essentially just D circshifted twice.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, maybe an idea: because C is just D scaled by 2. So, each element in C is exactly twice the element in D.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, is that true? Let me see: If D is from -1005 to 1005, scaling by 2 gives: each element n maps to 2n. Wait, no, because 2n would go from -2010 to 2010, but scaling and shifting.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, in any case, perhaps I can model this as a graph where each node n in D is connected to all nodes m in C except m ≠ n and m ≠ -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But given that f must be strictly increasing, it's about choosing 2011 numbers from 4021 such that each f(n) is not equal to n or -n and the sequence is increasing.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, maybe the problem is equivalent to choosing an injective function from D to C with the two conditions. So, maybe counting the number of such functions is the number of injective, strictly increasing functions with forbidden images.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m This seems similar to inclusion-exclusion, but maybe Möbius inversion.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, since for each position n, we have 4021 - 2 = 4019 choices, but since the function has to satisfy a strict increasingness, it's not just a product of 4019 per position.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps the first term: For n = -1005, f(-1005) can be any number in C except -1005 and 1005, so 4021 - 2 = 4019 choices. Then, for the next n = -1004, f(-1004) can be any number in C except its n' and -n', which are -1004 and 1004, but also greater than f(-1005). So, for each step, we exclude two numbers, but also have to ensure that the number chosen is larger than the previous.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Hmm, actually, perhaps that's equivalent to arranging 4019 "slots" between C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But this seems messy.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps another approach. Maybe since the forbidden values are symmetric, for each n, f(n) can either be in the upper half of C or the lower half, or neither. But since 4021 is odd, and except for 0, each element n has a unique -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, 4021 is an odd number, yes, but in our case, \( C = \{-2010, -2009, \ldots, 0, \ldots, 2009, 2010\} \), size 4021, yes.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Similarly, D is size 2011.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, to avoid confusion, perhaps the problem reduces to a standard setting where n < m implies f(n) < f(m), but f(n) ≠ n and f(n) ≠ -n. So, for each n, we exclude f(n) = n or f(n) = -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, the problem is similar to counting the number of injective order-preserving maps with forbidden images.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Yes, so in that case, perhaps the answer is \( \frac{(4021)!}{(2011)!} \), but that can't be because 4021! /2011! is a gigantic number.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, no, because if each of the 2011 elements can be mapped to 4021 elements, with two forbidden choices each, but the increasing constraint.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps we can rearrange the problem: Let's consider an order-preserving bijection from D to its image. But in this case, the image is a subset of C with size 2011, so it's just picking 2011 elements from 4021 and arranging them in order, but with the linear constraints that for every element n in D, its image can't be n or -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, perhaps for each n, have two forbidden elements in the image, and also the images must be strictly increasing. So, the number is equal to the number of subsets of size 2011 from C where each element in the subset is not n or -n for any n in D. And arrange them in increasing order, so the count is equal to the number of such subsets.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, to model this, we can consider C as two copies: upper half and lower half. Lower half is { -1005, ..., 0 }, and upper half is {0, ..., 1005}. But scaled up, since 2010 is 2*1005.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but perhaps a better way: For each n in D, two forbidden images: n and -n. So, for each n, the image cannot be in {n, -n}, and for zero, the image cannot be zero.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, D includes zero as well, so in C, zero is only forbidden as f(n) for n=0, since f(0) cannot be zero. So, let's think about it:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m For n ≠ 0: f(n) can't be n or -n. For n = 0: f(0) can't be 0.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, essentially, zero is a special case because it can't map to itself, but for any other n, two forbidden mappings must be avoided.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, the total number would be the number of subsets of C, size 2011, with 2010 pairs {n, -n} where each pair contributes a constraint—f(n) can't be in a particular position.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But since f is strictly increasing, the images must be ordered, so each subset is uniquely determined by its elements in increasing order.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m This seems complex.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, maybe we can think of f as a function without fixed points (except for the second forbidden condition, which is not just fixed points but also inverses). So, it's similar to counting derangements with involution constraints, but not exactly.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps it's a kind of permutation with forbidden positions. Since for each n, f(n) cannot be n or -n, it's like a derangement with additional forbidden mappings.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Yes, so maybe the total number is equal to the number of derangements where each element cannot map to itself or its negative.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But derangements are permutations without fixed points. Here, the situation is slightly different, because f isn't a bijection—it's an injection from D to a subset of C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, perhaps considering that the number is equal to (number of injective functions) minus (those that fix any point or map to n or -n). So, Möbius inversion or inclusion-exclusion—maybe.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, the principle would be:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Total functions - functions where at least one n has f(n) = n or f(n) = -n for each n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But since multiple n's can't map to the same value, inclusion-exclusion is complicated.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, wait. Maybe considering that for each n, the forbidden mappings are two specific elements, so to count injective strictly increasing functions avoiding two specified consecutive elements. Hmm, but that's about derangements in permutations.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but in our case, n=0 cannot map to 0, and n ≠ 0 cannot map to n or -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, is it possible to represent this as a permutation?
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m No, it's not a permutation because f isn't necessarily surjective; the image has to be a subset of C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But given that |C| = 4021 and |D| = 2011, it's possible that f is not bijective, but strictly increasing.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but actually, since the domain and codomain are different sizes, it's impossible for f to be bijective, so it has to be a non-surjective injection.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But with the additional constraints.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, hold on. Given that f is a strictly increasing function from D to C, its image must be a set of 2011 distinct elements of C arranged in increasing order.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Thus, the number we seek is equal to the number of 2011-element increasing sequences in C with the condition that for each n in D, the image is not equal to n or -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, to find this, think of it as: For each position in the sequence (positions 1 to 2011), which corresponds to n from -1005 to 1005, the term must not be equal to n or -n. 
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, effectively, each term in the sequence is chosen from C \ {n, -n}.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m This sounds like a standard combinatorial problem: choosing 2011 elements from 4021 with 2 forbidden per position, such that the chosen elements form an increasing sequence.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but with the "forbidden" constraints on both ends and the strictly increasing condition.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, actually, yes, this is similar to a problem of choosing 2011 items from 4021 items, with two forbidden placements at each position.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But I can't think of an exact formula for that.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, note that 2011 = 2*1005 + 1, so each n corresponds to two forbidden elements in C. So, except for n=0, which only has one forbidden element (itself), which then effectively, each "positive" n has two forbidden elements, and in the sequence, we must pick one valid element.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, considering that, perhaps it's akin to counting the number of derangements where for each "object" n, its image can't be two things, not just once. So, without the exact formula, maybe the count is \( \binom{4021 - 2*2011}{2011} \), because each element can't choose 2 per position, but in terms of combinations.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, wait, let's think: each n (for n ≠ 0) has two forbidden numbers, so for n ≠ 0, you have 4021 - 2 elements left, and for n=0, 4021 - 1 elements left. However, since we are choosing 2011 elements with each step considering previous choices.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, it's more complicated; the initial forbidden restrictions for each n constrain the available choices when building the sequence, so perhaps using inclusion-exclusion is needed here.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But German phrases, inclusion-exclusion can become very messy here.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps another idea. Since each forbidden element is unique, and for n ≠ 0, we have to avoid two specific elements. So, as in, the forbidden options for each element are fixed.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, each position in the injective function must choose from C \ {n, -n}, and in a way that preserves the increasingness.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Given that, the problem might have a neat answer, namely \( \binom{4021 - 2*2011}{2011} \) or something along those lines.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, let's try: the total number of strictly increasing functions if there were no forbidden mappings is \( \binom{4021}{2011} \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But the forbidden mappings create 2011 conditions: each element n (from -1005 to 1005) cannot be mapped to two specific elements in C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, maybe, if we imagine each forbidden mapping is exclusion at a point, then the total number is \( \binom{4021 - 2*2011}{2011} \) starting from 4021. But wait, 2*2011=4022. 4021 - 4022= -1, which doesn't make sense. Hmmm.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, maybe that approach isn't right.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, maybe consider that each position in the function corresponds to n from -1005 to 1005. For each n, we have two forbidden options, each of which would decrease the number of available choices.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m In the absence of constraints, it's \( \binom{4021}{2011} \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But now, with each step, we lose two choices, except for n=0. But this is probably incorrect because the constraints are interdependent—they're on different elements.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, the count is likely \( \binom{4021 - 2*2011}{2011} \). But as I saw, 4021-2*2011= -1, which is impossible.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, so maybe negative numbers don't make sense. So that can't be.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, thinking like bipartite matching: we have 4021 vertices in C, and the function is a bijection. Wait, but in our case, it's an injection from D to C with forbidden images.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, if think of it as a graph with two copies: for each x in C, it's connected to the element n in D for which x not in {n, -n}. But straight injection seems difficult.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, hang on. Let's define g: D → C, strictly increasing. We need to count g such that for all n in D, g(n) not in {n, -n}.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, the forbidden assignments are for each n, g(n) ≠ n and g(n) ≠ -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Think about the bijections for each n in D. So, from n to C, the mapping is forbidden.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But given that, if we model this as a problem of derangements, since each n defines two forbidden values.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But in our case, it's not exactly a derangement because each n has two forbidden assignments, making it much more complicated.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, perhaps think of this as a matching problem where each element in D can be mapped to two specific elements in C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, actually, yes, it's a kind of a permutation with forbidden positions—each n cannot be mapped to two forbidden elements.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Which is similar to derangements but with multiple forbidden positions.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Perhaps the number is similar to the derangement formula generalized to multiple forbidden positions.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, for derangements with forbidden positions, inclusion-exclusion formula is:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m \( !n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!} \).
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But in our case, it's more of a problem where each element n has two forbidden images, so more complex.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but the key here is that each element has two forbidden images. So, more generally, if each n has two forbidden choices, then the number of mappings is equal to:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m \( \prod_{n \in D} (4021 - 2) \), divided by something. But that's not correct because of dependencies.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Because the forbidden options are specific to each n. For example, for n=0, forbidden is only 0, but for n≠0, forbidden is n and -n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, for each n, when selecting g(n), if n=0, we lose one element; for other n, we lose two elements.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Thus, as such, the number might be:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m \( \binom{4021 - \sum_{n= -1005}^{1005} |\{f^{-1}(n)\}| }{2011} \)
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, no, that's not helpful.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, each n in D can restrict the function's image in two or one ways.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, given up: Actually, considering that for each n in D, the function cannot map to n or -n. So, for D, these forbidden images are two per n except 0.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, the number of allowed functions is equal to the number of strictly increasing sequences of length 2011 in C where each term is not in {n, -n} for the corresponding n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But that's similar to arranging 2011 indistinct objects with certain forbidden positions—inclusion-exclusion.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, the formula for this is similar to arranging 2011 elements in 4021, each forbidden to choose two elements except the none, so deletion, but it's getting too abstract.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, hold on—if the forbidden conditions are overlapped in a certain way, perhaps the problem is equivalent to a derangement on a graph, where each node is deranged in a triangle.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, yeah, for example, n, -n, and 0 form a triangle in the forbidden graph. So, n is forbidden to map to n and -n, and -n is forbidden to map to n and n.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, it's a derangement problem on a circular graph.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Given that, for n=0, it's a singleton, and for other n, it's a triangle.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, so the number of derangements of these forbidden mappings can be complex.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But since it's a problem on a cycle graph, maybe with triangles.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m But in any case, perhaps the easiest way to think about this is that the number is \( \frac{(4021 - 2*2011)}{2011} \), but 4021 - 2*2011 = -1, which is negative, not possible.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, maybe the number is \( \binom{4021 - 2*1}{2011} \), but with 4021-4= 4017, no.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, if we think of it as a 0-1 matrix where except for two per row, etc.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, stepping back, actually, it might be the problem is equivalent to the number of triangular numbers.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, actually, another thought: considering that for each n, we eliminate two options, but it's actually for n from -1005 to 1005, each forbidding two images. But in reality, it's kind of a shifting of forbidden images.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, if we consider the mapping between each n and its forbidden elements, then perhaps the forbidden set per element in D is fixed.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, we need to count the number of injective maps from a 2011-element set (D) to a 4021-element set without mapping any n to {n, -n}.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Therefore, the count is the number of such injective maps with forbidden positions.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, this is similar to standard forbidden positions in injective functions.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, according to the principle in combinatorics, the number of injective functions from a set E with |E|=m to a set F with |F|=N, each element in E being excluded from t elements in F, and no two elements of E map to the same image in F.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m This is a fairly complex problem, but here, all forbidden positions are unique, and each forbidden per E has size 2, one for each n in E.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, in our case, elements in E are D=-1005,....,1005, each with exactly two forbidden images in C.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m So, in total, we have two forbidden options for 2011 elements, each in a set of size 4021.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m It's not exactly standard derangements because the forbidden positions are symmetric.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m However, for a more systematic analysis, the inclusion-exclusion formula for forbidden positions as follows:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m The total number of injective functions without forbidden images is:
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m \( \sum_{k=0}^{m} (-1)^k \binom{m}{k} \binom{N}{m} \) where perhaps N is 4021 and m is2011.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but it's not exactly correct, because in each step, certain positions are forbidden, and overlapping.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m However, perhaps since each forbidden position is separate, this is akin to inclusion-exclusion over forbidden pairs.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, but Fubini's theorem or something else?
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Alternatively, perhaps MAP-ğif or similar.
+[36m(TaskRunner pid=1209153)[0m 
+[36m(TaskRunner pid=1209153)[0m Wait, honestly, this problem is more complicated than I expected, so maybe I should check if it
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:20:11,156:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  21%|██▏       | 102/480 [3:22:35<12:42:03, 120.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  21%|██▏       | 103/480 [3:24:16<12:02:29, 114.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  22%|██▏       | 104/480 [3:25:58<11:36:27, 111.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  22%|██▏       | 105/480 [3:27:47<11:30:06, 110.42s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  22%|██▏       | 106/480 [3:29:29<11:12:32, 107.90s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  22%|██▏       | 107/480 [3:31:18<11:12:31, 108.18s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  22%|██▎       | 108/480 [3:32:58<10:56:32, 105.89s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  23%|██▎       | 109/480 [3:34:55<11:14:43, 109.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  23%|██▎       | 110/480 [3:37:54<13:21:59, 130.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  23%|██▎       | 111/480 [3:39:40<12:36:21, 122.98s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  23%|██▎       | 112/480 [3:41:20<11:51:49, 116.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  24%|██▎       | 113/480 [3:43:06<11:31:44, 113.09s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  24%|██▍       | 114/480 [3:44:55<11:21:09, 111.66s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  24%|██▍       | 115/480 [3:46:33<10:54:30, 107.59s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  24%|██▍       | 116/480 [3:48:15<10:43:05, 106.00s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  24%|██▍       | 117/480 [3:49:59<10:37:25, 105.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  25%|██▍       | 118/480 [3:51:44<10:35:21, 105.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  25%|██▍       | 119/480 [3:53:27<10:28:20, 104.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  25%|██▌       | 120/480 [3:56:25<12:39:34, 126.60s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  25%|██▌       | 121/480 [3:58:03<11:46:13, 118.03s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  25%|██▌       | 122/480 [3:59:52<11:28:30, 115.39s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 19:59:14,969:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  26%|██▌       | 123/480 [4:01:41<11:14:14, 113.32s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  26%|██▌       | 124/480 [4:03:35<11:14:04, 113.61s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  26%|██▌       | 125/480 [4:05:17<10:51:24, 110.10s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  26%|██▋       | 126/480 [4:07:00<10:37:30, 108.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  26%|██▋       | 127/480 [4:08:39<10:19:10, 105.24s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  27%|██▋       | 128/480 [4:10:23<10:16:12, 105.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  27%|██▋       | 129/480 [4:12:07<10:11:49, 104.59s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  27%|██▋       | 130/480 [4:14:59<12:07:34, 124.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  27%|██▋       | 131/480 [4:16:43<11:29:11, 118.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  28%|██▊       | 132/480 [4:18:19<10:48:39, 111.84s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  28%|██▊       | 133/480 [4:20:02<10:32:05, 109.30s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  28%|██▊       | 134/480 [4:21:46<10:20:58, 107.68s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  28%|██▊       | 135/480 [4:23:30<10:12:22, 106.50s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  28%|██▊       | 136/480 [4:25:12<10:02:40, 105.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  29%|██▊       | 137/480 [4:26:54<9:55:08, 104.11s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  29%|██▉       | 138/480 [4:28:37<9:52:20, 103.92s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  29%|██▉       | 139/480 [4:30:19<9:47:09, 103.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  29%|██▉       | 140/480 [4:33:08<11:37:14, 123.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  29%|██▉       | 141/480 [4:34:48<10:55:57, 116.10s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  30%|██▉       | 142/480 [4:36:26<10:23:55, 110.76s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  30%|██▉       | 143/480 [4:38:09<10:08:07, 108.27s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  30%|███       | 144/480 [4:39:48<9:50:42, 105.48s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  30%|███       | 145/480 [4:41:27<9:39:25, 103.78s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  30%|███       | 146/480 [4:43:03<9:24:00, 101.32s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  31%|███       | 147/480 [4:44:39<9:13:07, 99.66s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  31%|███       | 148/480 [4:46:17<9:09:10, 99.25s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  31%|███       | 149/480 [4:48:00<9:14:14, 100.47s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  31%|███▏      | 150/480 [4:51:08<11:35:41, 126.49s/it]
+[36m(WorkerDict pid=1212921)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212921)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  31%|███▏      | 151/480 [4:52:50<10:54:12, 119.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  32%|███▏      | 152/480 [4:54:38<10:34:04, 115.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  32%|███▏      | 153/480 [4:56:20<10:07:55, 111.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  32%|███▏      | 154/480 [4:58:02<9:50:53, 108.75s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  32%|███▏      | 155/480 [4:59:43<9:37:28, 106.61s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  32%|███▎      | 156/480 [5:01:20<9:19:33, 103.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  33%|███▎      | 157/480 [5:02:59<9:10:55, 102.34s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  33%|███▎      | 158/480 [5:04:43<9:11:35, 102.78s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  33%|███▎      | 159/480 [5:06:26<9:09:17, 102.67s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  33%|███▎      | 160/480 [5:09:19<11:00:20, 123.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  34%|███▎      | 161/480 [5:11:07<10:33:10, 119.09s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  34%|███▍      | 162/480 [5:12:52<10:09:03, 114.92s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  34%|███▍      | 163/480 [5:14:31<9:41:14, 110.01s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  34%|███▍      | 164/480 [5:16:10<9:22:33, 106.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  34%|███▍      | 165/480 [5:17:49<9:08:20, 104.44s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  35%|███▍      | 166/480 [5:19:32<9:04:18, 104.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  35%|███▍      | 167/480 [5:21:10<8:52:39, 102.11s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  35%|███▌      | 168/480 [5:22:57<8:58:36, 103.58s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  35%|███▌      | 169/480 [5:24:44<9:02:03, 104.58s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  35%|███▌      | 170/480 [5:27:39<10:50:13, 125.85s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  36%|███▌      | 171/480 [5:29:19<10:08:12, 118.10s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  36%|███▌      | 172/480 [5:31:00<9:39:06, 112.81s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  36%|███▌      | 173/480 [5:32:40<9:18:02, 109.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  36%|███▋      | 174/480 [5:34:19<9:00:41, 106.02s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  36%|███▋      | 175/480 [5:36:04<8:57:22, 105.71s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  37%|███▋      | 176/480 [5:37:47<8:52:16, 105.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  37%|███▋      | 177/480 [5:39:28<8:43:24, 103.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  37%|███▋      | 178/480 [5:41:12<8:42:07, 103.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  37%|███▋      | 179/480 [5:42:52<8:36:02, 102.87s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  38%|███▊      | 180/480 [5:45:48<10:23:13, 124.64s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 21:45:12,252:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  38%|███▊      | 181/480 [5:47:36<9:56:44, 119.75s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  38%|███▊      | 182/480 [5:49:17<9:25:58, 113.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  38%|███▊      | 183/480 [5:50:59<9:06:58, 110.50s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  38%|███▊      | 184/480 [5:52:40<8:50:29, 107.53s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  39%|███▊      | 185/480 [5:54:31<8:53:57, 108.60s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  39%|███▉      | 186/480 [5:56:15<8:46:01, 107.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  39%|███▉      | 187/480 [5:57:55<8:33:54, 105.24s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  39%|███▉      | 188/480 [5:59:41<8:32:19, 105.27s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  39%|███▉      | 189/480 [6:01:28<8:33:55, 105.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  40%|███▉      | 190/480 [6:04:21<10:09:19, 126.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  40%|███▉      | 191/480 [6:06:01<9:29:22, 118.21s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  40%|████      | 192/480 [6:07:44<9:04:27, 113.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  40%|████      | 193/480 [6:09:27<8:47:50, 110.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  40%|████      | 194/480 [6:11:13<8:40:02, 109.10s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  41%|████      | 195/480 [6:12:53<8:25:47, 106.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  41%|████      | 196/480 [6:14:37<8:20:01, 105.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  41%|████      | 197/480 [6:16:15<8:07:50, 103.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  41%|████▏     | 198/480 [6:17:58<8:05:31, 103.30s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  41%|████▏     | 199/480 [6:19:38<7:58:47, 102.23s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  42%|████▏     | 200/480 [6:22:51<10:04:00, 129.43s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  42%|████▏     | 201/480 [6:24:33<9:23:20, 121.15s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  42%|████▏     | 202/480 [6:26:15<8:54:30, 115.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  42%|████▏     | 203/480 [6:27:56<8:33:11, 111.16s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  42%|████▎     | 204/480 [6:29:38<8:18:41, 108.41s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  43%|████▎     | 205/480 [6:31:22<8:10:58, 107.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  43%|████▎     | 206/480 [6:33:09<8:08:57, 107.07s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 22:32:36,125:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  43%|████▎     | 207/480 [6:35:04<8:18:08, 109.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  43%|████▎     | 208/480 [6:36:43<8:01:41, 106.26s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  44%|████▎     | 209/480 [6:38:24<7:53:23, 104.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  44%|████▍     | 210/480 [6:41:23<9:32:01, 127.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  44%|████▍     | 211/480 [6:43:05<8:55:08, 119.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  44%|████▍     | 212/480 [6:44:47<8:30:10, 114.22s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  44%|████▍     | 213/480 [6:46:32<8:16:13, 111.51s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  45%|████▍     | 214/480 [6:48:18<8:06:32, 109.75s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  45%|████▍     | 215/480 [6:49:58<7:51:45, 106.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  45%|████▌     | 216/480 [6:51:40<7:44:01, 105.46s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  45%|████▌     | 217/480 [6:53:22<7:37:51, 104.46s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  45%|████▌     | 218/480 [6:55:00<7:27:43, 102.53s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  46%|████▌     | 219/480 [6:56:50<7:35:33, 104.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  46%|████▌     | 220/480 [6:59:44<9:04:21, 125.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  46%|████▌     | 221/480 [7:01:27<8:32:36, 118.75s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  46%|████▋     | 222/480 [7:03:11<8:11:02, 114.20s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  46%|████▋     | 223/480 [7:08:19<12:18:10, 172.34s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  47%|████▋     | 224/480 [7:10:02<10:46:56, 151.63s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  47%|████▋     | 225/480 [7:11:44<9:41:23, 136.80s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  47%|████▋     | 226/480 [7:13:25<8:53:09, 125.94s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-13 23:12:44,935:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  47%|████▋     | 227/480 [7:15:20<8:37:45, 122.79s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  48%|████▊     | 228/480 [7:17:03<8:10:32, 116.80s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  48%|████▊     | 229/480 [7:18:45<7:50:00, 112.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  48%|████▊     | 230/480 [7:21:38<9:04:00, 130.56s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  48%|████▊     | 231/480 [7:23:17<8:22:55, 121.19s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  48%|████▊     | 232/480 [7:24:58<7:55:28, 115.03s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  49%|████▊     | 233/480 [7:26:39<7:36:43, 110.95s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  49%|████▉     | 234/480 [7:28:18<7:19:10, 107.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  49%|████▉     | 235/480 [7:29:59<7:10:14, 105.37s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  49%|████▉     | 236/480 [7:31:38<7:00:33, 103.42s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  49%|████▉     | 237/480 [7:33:17<6:53:20, 102.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  50%|████▉     | 238/480 [7:35:03<6:56:31, 103.27s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  50%|████▉     | 239/480 [7:36:43<6:50:43, 102.25s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  50%|█████     | 240/480 [7:39:40<8:18:34, 124.64s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  50%|█████     | 241/480 [7:41:25<7:53:56, 118.98s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  50%|█████     | 242/480 [7:43:07<7:31:04, 113.72s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  51%|█████     | 243/480 [7:44:50<7:16:21, 110.47s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  51%|█████     | 244/480 [7:46:32<7:04:51, 108.02s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  51%|█████     | 245/480 [7:48:15<6:57:00, 106.47s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  51%|█████▏    | 246/480 [7:49:54<6:47:03, 104.38s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  51%|█████▏    | 247/480 [7:51:35<6:41:20, 103.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  52%|█████▏    | 248/480 [7:53:18<6:38:25, 103.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  52%|█████▏    | 249/480 [7:55:00<6:35:50, 102.82s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  52%|█████▏    | 250/480 [7:58:11<8:15:14, 129.19s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  52%|█████▏    | 251/480 [7:59:49<7:37:38, 119.91s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  52%|█████▎    | 252/480 [8:01:27<7:10:52, 113.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  53%|█████▎    | 253/480 [8:03:06<6:53:09, 109.20s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  53%|█████▎    | 254/480 [8:04:44<6:37:59, 105.66s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  53%|█████▎    | 255/480 [8:06:21<6:26:24, 103.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  53%|█████▎    | 256/480 [8:08:01<6:21:57, 102.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  54%|█████▎    | 257/480 [8:09:38<6:14:22, 100.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  54%|█████▍    | 258/480 [8:11:21<6:14:14, 101.15s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  54%|█████▍    | 259/480 [8:12:59<6:09:14, 100.25s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  54%|█████▍    | 260/480 [8:15:47<7:22:32, 120.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  54%|█████▍    | 261/480 [8:17:29<6:59:30, 114.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  55%|█████▍    | 262/480 [8:19:09<6:42:04, 110.66s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  55%|█████▍    | 263/480 [8:20:50<6:29:38, 107.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  55%|█████▌    | 264/480 [8:22:34<6:23:40, 106.58s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  55%|█████▌    | 265/480 [8:24:12<6:12:54, 104.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  55%|█████▌    | 266/480 [8:25:54<6:08:55, 103.44s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  56%|█████▌    | 267/480 [8:27:34<6:02:54, 102.23s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  56%|█████▌    | 268/480 [8:29:09<5:54:28, 100.33s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  56%|█████▌    | 269/480 [8:30:50<5:52:37, 100.27s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 00:30:11,637:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 00:30:17,455:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  56%|█████▋    | 270/480 [8:33:54<7:19:39, 125.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  56%|█████▋    | 271/480 [8:35:35<6:51:13, 118.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  57%|█████▋    | 272/480 [8:37:12<6:28:02, 111.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  57%|█████▋    | 273/480 [8:38:52<6:13:04, 108.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  57%|█████▋    | 274/480 [8:40:34<6:05:32, 106.47s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  57%|█████▋    | 275/480 [8:42:13<5:55:39, 104.09s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  57%|█████▊    | 276/480 [8:43:57<5:53:50, 104.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  58%|█████▊    | 277/480 [8:45:41<5:52:08, 104.08s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  58%|█████▊    | 278/480 [8:47:22<5:47:23, 103.18s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  58%|█████▊    | 279/480 [8:49:04<5:44:14, 102.76s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 00:49:57,654:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  58%|█████▊    | 280/480 [8:52:03<6:58:43, 125.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  59%|█████▊    | 281/480 [8:53:36<6:24:41, 115.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  59%|█████▉    | 282/480 [8:55:16<6:06:13, 110.98s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  59%|█████▉    | 283/480 [8:56:58<5:55:44, 108.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  59%|█████▉    | 284/480 [8:58:48<5:55:26, 108.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  59%|█████▉    | 285/480 [9:00:33<5:50:25, 107.82s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  60%|█████▉    | 286/480 [9:02:14<5:41:41, 105.68s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  60%|█████▉    | 287/480 [9:03:57<5:37:17, 104.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  60%|██████    | 288/480 [9:05:40<5:33:41, 104.28s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  60%|██████    | 289/480 [9:07:21<5:28:54, 103.32s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  60%|██████    | 290/480 [9:10:23<6:41:51, 126.90s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  61%|██████    | 291/480 [9:12:05<6:16:00, 119.37s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  61%|██████    | 292/480 [9:13:45<5:56:40, 113.83s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  61%|██████    | 293/480 [9:15:26<5:42:25, 109.87s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  61%|██████▏   | 294/480 [9:17:10<5:35:03, 108.08s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  61%|██████▏   | 295/480 [9:18:55<5:30:06, 107.06s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 01:18:17,800:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  62%|██████▏   | 296/480 [9:20:47<5:32:57, 108.57s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  62%|██████▏   | 297/480 [9:22:27<5:23:41, 106.13s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  62%|██████▏   | 298/480 [9:24:14<5:22:13, 106.23s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  62%|██████▏   | 299/480 [9:25:54<5:14:49, 104.36s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 01:25:16,506:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 01:25:22,192:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 01:25:27,280:Timeout during comparison
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  62%|██████▎   | 300/480 [9:29:22<6:46:14, 135.41s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  63%|██████▎   | 301/480 [9:31:07<6:16:45, 126.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  63%|██████▎   | 302/480 [9:32:50<5:54:11, 119.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  63%|██████▎   | 303/480 [9:34:36<5:40:06, 115.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  63%|██████▎   | 304/480 [9:36:22<5:29:56, 112.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  64%|██████▎   | 305/480 [9:38:02<5:17:53, 108.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  64%|██████▍   | 306/480 [9:39:46<5:11:21, 107.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  64%|██████▍   | 307/480 [9:41:25<5:02:43, 104.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  64%|██████▍   | 308/480 [9:43:09<4:59:34, 104.51s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  64%|██████▍   | 309/480 [9:44:56<5:00:15, 105.35s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  65%|██████▍   | 310/480 [9:47:55<6:00:59, 127.41s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  65%|██████▍   | 311/480 [9:49:37<5:37:30, 119.83s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  65%|██████▌   | 312/480 [9:51:22<5:23:00, 115.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  65%|██████▌   | 313/480 [9:53:04<5:09:45, 111.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  65%|██████▌   | 314/480 [9:54:46<5:00:44, 108.70s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  66%|██████▌   | 315/480 [9:56:33<4:57:19, 108.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  66%|██████▌   | 316/480 [9:58:24<4:57:29, 108.84s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  66%|██████▌   | 317/480 [10:00:03<4:47:38, 105.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  66%|██████▋   | 318/480 [10:01:47<4:44:22, 105.33s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 02:01:09,467:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  66%|██████▋   | 319/480 [10:03:38<4:47:09, 107.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  67%|██████▋   | 320/480 [10:06:37<5:43:18, 128.74s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  67%|██████▋   | 321/480 [10:08:19<5:19:56, 120.73s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 02:07:40,645:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 02:07:46,986:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  67%|██████▋   | 322/480 [10:10:10<5:10:11, 117.79s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  67%|██████▋   | 323/480 [10:11:51<4:54:34, 112.57s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  68%|██████▊   | 324/480 [10:13:37<4:47:50, 110.71s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  68%|██████▊   | 325/480 [10:15:18<4:38:48, 107.92s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  68%|██████▊   | 326/480 [10:17:03<4:34:16, 106.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  68%|██████▊   | 327/480 [10:18:47<4:30:42, 106.16s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  68%|██████▊   | 328/480 [10:20:33<4:28:59, 106.18s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  69%|██████▊   | 329/480 [10:22:14<4:23:19, 104.63s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  69%|██████▉   | 330/480 [10:25:12<5:16:02, 126.42s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  69%|██████▉   | 331/480 [10:26:51<4:53:34, 118.22s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  69%|██████▉   | 332/480 [10:28:31<4:38:25, 112.87s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  69%|██████▉   | 333/480 [10:30:18<4:31:58, 111.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  70%|██████▉   | 334/480 [10:32:00<4:23:27, 108.27s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  70%|██████▉   | 335/480 [10:33:39<4:15:10, 105.59s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  70%|███████   | 336/480 [10:35:22<4:11:22, 104.74s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  70%|███████   | 337/480 [10:37:04<4:07:49, 103.98s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  70%|███████   | 338/480 [10:38:47<4:05:29, 103.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  71%|███████   | 339/480 [10:40:27<4:00:59, 102.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  71%|███████   | 340/480 [10:43:23<4:50:43, 124.60s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  71%|███████   | 341/480 [10:45:06<4:33:39, 118.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  71%|███████▏  | 342/480 [10:46:47<4:19:34, 112.86s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  71%|███████▏  | 343/480 [10:48:29<4:10:32, 109.73s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  72%|███████▏  | 344/480 [10:50:08<4:01:37, 106.60s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  72%|███████▏  | 345/480 [10:51:51<3:57:27, 105.53s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  72%|███████▏  | 346/480 [10:53:33<3:53:00, 104.33s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  72%|███████▏  | 347/480 [10:55:13<3:48:19, 103.00s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 02:54:32,972:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  72%|███████▎  | 348/480 [10:57:00<3:49:39, 104.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  73%|███████▎  | 349/480 [10:58:38<3:43:10, 102.22s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  73%|███████▎  | 350/480 [11:01:50<4:40:11, 129.32s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  73%|███████▎  | 351/480 [11:03:34<4:21:29, 121.62s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  73%|███████▎  | 352/480 [11:05:16<4:07:08, 115.85s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  74%|███████▎  | 353/480 [11:07:01<3:57:54, 112.40s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  74%|███████▍  | 354/480 [11:08:47<3:52:27, 110.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  74%|███████▍  | 355/480 [11:10:29<3:44:49, 107.91s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  74%|███████▍  | 356/480 [11:12:06<3:36:40, 104.84s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  74%|███████▍  | 357/480 [11:13:48<3:33:00, 103.91s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  75%|███████▍  | 358/480 [11:15:26<3:27:28, 102.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  75%|███████▍  | 359/480 [11:17:13<3:29:10, 103.72s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  75%|███████▌  | 360/480 [11:20:02<4:06:06, 123.05s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  75%|███████▌  | 361/480 [11:21:41<3:50:04, 116.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  75%|███████▌  | 362/480 [11:23:24<3:40:16, 112.00s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  76%|███████▌  | 363/480 [11:25:04<3:31:14, 108.33s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  76%|███████▌  | 364/480 [11:26:39<3:22:15, 104.61s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  76%|███████▌  | 365/480 [11:28:17<3:16:32, 102.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  76%|███████▋  | 366/480 [11:29:54<3:11:31, 100.80s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  76%|███████▋  | 367/480 [11:31:32<3:08:02, 99.84s/it] 
+[36m(TaskRunner pid=1209153)[0m Training Progress:  77%|███████▋  | 368/480 [11:33:12<3:06:57, 100.16s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 03:32:32,359:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  77%|███████▋  | 369/480 [11:34:54<3:06:11, 100.65s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  77%|███████▋  | 370/480 [11:37:50<3:45:45, 123.14s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  77%|███████▋  | 371/480 [11:39:30<3:31:12, 116.26s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  78%|███████▊  | 372/480 [11:41:12<3:21:31, 111.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  78%|███████▊  | 373/480 [11:42:56<3:15:27, 109.60s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  78%|███████▊  | 374/480 [11:44:33<3:06:49, 105.75s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  78%|███████▊  | 375/480 [11:46:14<3:02:30, 104.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  78%|███████▊  | 376/480 [11:47:54<2:58:30, 102.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  79%|███████▊  | 377/480 [11:49:35<2:55:46, 102.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  79%|███████▉  | 378/480 [11:51:13<2:52:11, 101.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  79%|███████▉  | 379/480 [11:52:50<2:48:20, 100.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  79%|███████▉  | 380/480 [11:55:41<3:21:43, 121.04s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  79%|███████▉  | 381/480 [11:57:22<3:10:04, 115.20s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 03:56:42,399:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 03:56:50,212:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  80%|███████▉  | 382/480 [11:59:13<3:06:06, 113.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  80%|███████▉  | 383/480 [12:00:55<2:58:10, 110.21s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  80%|████████  | 384/480 [12:02:42<2:54:59, 109.37s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  80%|████████  | 385/480 [12:04:22<2:48:32, 106.45s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  80%|████████  | 386/480 [12:06:01<2:43:19, 104.25s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  81%|████████  | 387/480 [12:07:44<2:41:11, 103.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  81%|████████  | 388/480 [12:09:23<2:37:18, 102.59s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  81%|████████  | 389/480 [12:11:06<2:35:31, 102.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  81%|████████▏ | 390/480 [12:14:01<3:06:15, 124.17s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  81%|████████▏ | 391/480 [12:15:43<2:54:34, 117.70s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  82%|████████▏ | 392/480 [12:17:21<2:44:00, 111.82s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  82%|████████▏ | 393/480 [12:18:57<2:35:14, 107.06s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  82%|████████▏ | 394/480 [12:20:37<2:30:25, 104.94s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  82%|████████▏ | 395/480 [12:22:24<2:29:27, 105.50s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  82%|████████▎ | 396/480 [12:23:59<2:23:22, 102.41s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  83%|████████▎ | 397/480 [12:25:39<2:20:33, 101.61s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  83%|████████▎ | 398/480 [12:27:19<2:18:11, 101.11s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  83%|████████▎ | 399/480 [12:28:59<2:16:01, 100.76s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  83%|████████▎ | 400/480 [12:32:10<2:50:37, 127.97s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  84%|████████▎ | 401/480 [12:33:50<2:37:13, 119.41s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  84%|████████▍ | 402/480 [12:35:35<2:29:48, 115.24s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  84%|████████▍ | 403/480 [12:37:16<2:22:27, 111.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  84%|████████▍ | 404/480 [12:38:56<2:16:16, 107.58s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  84%|████████▍ | 405/480 [12:40:34<2:11:01, 104.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  85%|████████▍ | 406/480 [12:42:16<2:08:03, 103.83s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  85%|████████▍ | 407/480 [12:43:59<2:06:14, 103.76s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  85%|████████▌ | 408/480 [12:45:41<2:03:33, 102.96s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  85%|████████▌ | 409/480 [12:47:22<2:01:12, 102.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  85%|████████▌ | 410/480 [12:50:21<2:26:20, 125.43s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  86%|████████▌ | 411/480 [12:52:01<2:15:28, 117.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  86%|████████▌ | 412/480 [12:53:41<2:07:23, 112.40s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  86%|████████▌ | 413/480 [12:55:22<2:01:49, 109.10s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  86%|████████▋ | 414/480 [12:57:05<1:57:54, 107.18s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  86%|████████▋ | 415/480 [12:58:39<1:51:52, 103.28s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  87%|████████▋ | 416/480 [13:00:21<1:49:39, 102.81s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  87%|████████▋ | 417/480 [13:02:06<1:48:36, 103.44s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  87%|████████▋ | 418/480 [13:03:46<1:45:55, 102.51s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  87%|████████▋ | 419/480 [13:05:26<1:43:35, 101.90s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  88%|████████▊ | 420/480 [13:08:21<2:03:50, 123.85s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  88%|████████▊ | 421/480 [13:10:03<1:55:13, 117.17s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  88%|████████▊ | 422/480 [13:11:50<1:50:16, 114.07s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  88%|████████▊ | 423/480 [13:13:30<1:44:23, 109.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  88%|████████▊ | 424/480 [13:15:10<1:39:52, 107.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  89%|████████▊ | 425/480 [13:16:52<1:36:42, 105.49s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  89%|████████▉ | 426/480 [13:18:39<1:35:10, 105.75s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  89%|████████▉ | 427/480 [13:20:18<1:31:46, 103.89s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  89%|████████▉ | 428/480 [13:22:02<1:29:57, 103.79s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  89%|████████▉ | 429/480 [13:23:42<1:27:17, 102.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  90%|████████▉ | 430/480 [13:26:33<1:42:42, 123.24s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  90%|████████▉ | 431/480 [13:28:15<1:35:27, 116.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  90%|█████████ | 432/480 [13:29:54<1:29:06, 111.38s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 05:29:18,484:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  90%|█████████ | 433/480 [13:31:45<1:27:12, 111.33s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  90%|█████████ | 434/480 [13:33:24<1:22:35, 107.74s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  91%|█████████ | 435/480 [13:35:00<1:18:10, 104.23s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  91%|█████████ | 436/480 [13:36:41<1:15:43, 103.27s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  91%|█████████ | 437/480 [13:38:22<1:13:26, 102.49s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  91%|█████████▏| 438/480 [13:40:02<1:11:11, 101.70s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  91%|█████████▏| 439/480 [13:41:42<1:09:06, 101.13s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  92%|█████████▏| 440/480 [13:44:34<1:21:36, 122.41s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  92%|█████████▏| 441/480 [13:46:14<1:15:19, 115.88s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  92%|█████████▏| 442/480 [13:47:56<1:10:38, 111.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  92%|█████████▏| 443/480 [13:49:35<1:06:36, 108.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  92%|█████████▎| 444/480 [13:51:16<1:03:30, 105.85s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  93%|█████████▎| 445/480 [13:52:58<1:00:59, 104.56s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  93%|█████████▎| 446/480 [13:54:37<58:15, 102.82s/it]  
+[36m(TaskRunner pid=1209153)[0m Training Progress:  93%|█████████▎| 447/480 [13:56:14<55:43, 101.30s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  93%|█████████▎| 448/480 [13:57:53<53:32, 100.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  94%|█████████▎| 449/480 [13:59:34<51:59, 100.63s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress:  94%|█████████▍| 450/480 [14:02:42<1:03:22, 126.76s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=1209153)[0m Training Progress:  94%|█████████▍| 451/480 [14:04:21<57:19, 118.60s/it]  
+[36m(TaskRunner pid=1209153)[0m Training Progress:  94%|█████████▍| 452/480 [14:05:57<52:10, 111.80s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  94%|█████████▍| 453/480 [14:07:39<48:55, 108.72s/it]
+[36m(TaskRunner pid=1209153)[0m WARNING:2025-11-14 06:07:01,480:Timeout during comparison
+[36m(TaskRunner pid=1209153)[0m Training Progress:  95%|█████████▍| 454/480 [14:09:25<46:52, 108.19s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  95%|█████████▍| 455/480 [14:11:01<43:25, 104.23s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  95%|█████████▌| 456/480 [14:12:38<40:50, 102.11s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  95%|█████████▌| 457/480 [14:14:24<39:36, 103.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  95%|█████████▌| 458/480 [14:16:07<37:52, 103.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  96%|█████████▌| 459/480 [14:17:46<35:44, 102.12s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  96%|█████████▌| 460/480 [14:20:40<41:13, 123.69s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  96%|█████████▌| 461/480 [14:22:23<37:10, 117.39s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  96%|█████████▋| 462/480 [14:24:01<33:26, 111.48s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  96%|█████████▋| 463/480 [14:25:42<30:40, 108.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  97%|█████████▋| 464/480 [14:27:22<28:15, 105.99s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  97%|█████████▋| 465/480 [14:29:04<26:11, 104.79s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  97%|█████████▋| 466/480 [14:30:47<24:16, 104.02s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  97%|█████████▋| 467/480 [14:32:30<22:28, 103.77s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  98%|█████████▊| 468/480 [14:34:13<20:44, 103.71s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  98%|█████████▊| 469/480 [14:35:54<18:50, 102.77s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  98%|█████████▊| 470/480 [14:38:53<20:57, 125.77s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  98%|█████████▊| 471/480 [14:40:33<17:42, 118.01s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  98%|█████████▊| 472/480 [14:42:15<15:04, 113.09s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  99%|█████████▊| 473/480 [14:43:57<12:48, 109.85s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  99%|█████████▉| 474/480 [14:45:37<10:41, 106.95s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  99%|█████████▉| 475/480 [14:47:15<08:41, 104.31s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  99%|█████████▉| 476/480 [14:48:57<06:53, 103.36s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress:  99%|█████████▉| 477/480 [14:50:36<05:06, 102.29s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress: 100%|█████████▉| 478/480 [14:52:23<03:27, 103.55s/it]
+[36m(TaskRunner pid=1209153)[0m Training Progress: 100%|█████████▉| 479/480 [14:54:11<01:45, 105.01s/it]
+[36m(WorkerDict pid=1212744)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=1212744)[0m   warnings.warn(
+[36m(TaskRunner pid=1209153)[0m Training Progress: 100%|█████████▉| 479/480 [14:57:28<01:52, 112.42s/it]
+[36m(WorkerDict pid=1212920)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=1212920)[0m   warnings.warn([32m [repeated 3x across cluster][0m

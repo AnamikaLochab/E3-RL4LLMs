@@ -317,7 +317,7 @@ class ActorRolloutRefWorker(Worker):
 
         elif rollout_name == 'vllm':
             from verl.workers.rollout.vllm_rollout import vLLMRollout, vllm_mode
-            from verl.workers.sharding_manager import FSDPVLLMShardingManager
+            from verl.workers.sharding_manager.fsdp_vllm import FSDPVLLMShardingManager
             log_gpu_memory_usage(f'Before building {rollout_name} rollout', logger=None)
             local_path = copy_to_local(self.config.model.path)
             if vllm_mode == 'customized':
@@ -479,12 +479,20 @@ class ActorRolloutRefWorker(Worker):
 
             # TODO: here, we should return all metrics
             metrics['actor/tp'] = self.temperature_scheduler.get_temperature()
+            #change start
+            print("Metrics: ", metrics)
+            #change end
             output = DataProto(meta_info={'metrics': metrics})
 
             output = self.ulysses_sharding_manager.postprocess_data(data=output)
             output = output.to('cpu')
-            
-            self.temperature_scheduler.step(metrics['actor/entropy_loss'])
+            #original self.temperature_scheduler.step(metrics['actor/entropy_loss'])
+            #change start
+            if 'actor/entropy_loss' in metrics:        
+                self.temperature_scheduler.step(metrics['actor/entropy_loss'])
+            else:
+                self.temperature_scheduler.step(0)
+            #change end
 
 
         if self._is_offload_param:
@@ -554,6 +562,21 @@ class ActorRolloutRefWorker(Worker):
         with self.ulysses_sharding_manager:
             data = self.ulysses_sharding_manager.preprocess_data(data)
             output = self.actor.compute_log_prob(data=data)
+            #change start
+            if isinstance(output, (tuple, list)):
+                output = output[0]  # expect (log_probs, meta/extra)
+            elif isinstance(output, dict):
+                output = (
+                    output.get("log_probs")
+                    or output.get("old_log_probs")
+                    or next((v for k, v in output.items() if "log_prob" in k and hasattr(v, "shape")), None)
+                )
+            if not hasattr(output, "shape"):
+                raise TypeError(f"compute_log_prob must return a Tensor; got {type(output)}")
+
+            print(output)
+            print(len(output))
+            #change end
             output = DataProto.from_dict(tensors={'old_log_probs': output},
                                          meta_info={'temperature': self.temperature_scheduler.get_temperature()})
             output = self.ulysses_sharding_manager.postprocess_data(output)
@@ -586,6 +609,21 @@ class ActorRolloutRefWorker(Worker):
         with self.ulysses_sharding_manager:
             data = self.ulysses_sharding_manager.preprocess_data(data)
             output = self.ref_policy.compute_log_prob(data=data)
+            #change start
+            if isinstance(output, (tuple, list)):
+                output = output[0]  # expect (log_probs, meta/extra)
+            elif isinstance(output, dict):
+                output = (
+                    output.get("log_probs")
+                    or output.get("old_log_probs")
+                    or next((v for k, v in output.items() if "log_prob" in k and hasattr(v, "shape")), None)
+                )
+            if not hasattr(output, "shape"):
+                raise TypeError(f"compute_log_prob must return a Tensor; got {type(output)}")
+
+            print(output)
+            print(len(output))
+            #change end
             output = DataProto.from_dict(tensors={'ref_log_prob': output})
             output = self.ulysses_sharding_manager.postprocess_data(output)
 

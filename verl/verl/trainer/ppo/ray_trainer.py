@@ -89,6 +89,8 @@ class AdvantageEstimator(str, Enum):
     REINFORCE_PLUS_PLUS_BASELINE = "reinforce_plus_plus_baseline"
     REMAX = "remax"
     RLOO = "rloo"
+    COVVAR = "covvar"
+    DivGRPO = 'divgrpo'
 
 
 @dataclass
@@ -315,6 +317,8 @@ class RayPPOTrainer:
             self.use_critic = True
         elif self.config.algorithm.adv_estimator in [
             AdvantageEstimator.GRPO,
+            AdvantageEstimator.COVVAR,
+            AdvantageEstimator.DivGRPO,
             AdvantageEstimator.REINFORCE_PLUS_PLUS,
             AdvantageEstimator.REMAX,
             AdvantageEstimator.RLOO,
@@ -902,16 +906,24 @@ class RayPPOTrainer:
                 )
 
                 is_last_step = self.global_steps >= self.total_training_steps
+                # print("Batch keys:", batch.batch.keys())
+                # for k, v in batch.batch.items():
+                #     print(f"{k}: {tuple(v.shape)}")
 
                 with _timer("step", timing_raw):
                     # generate a batch
                     with _timer("gen", timing_raw):
                         if not self.async_rollout_mode:
                             gen_batch_output = self.actor_rollout_wg.generate_sequences(gen_batch)
+                            # print("Not async")
                         else:
                             self.async_rollout_manager.wake_up()
                             gen_batch_output = self.async_rollout_manager.generate_sequences(gen_batch)
                             self.async_rollout_manager.sleep()
+                            # print("Using async")
+                        # print("Shape of gens:")
+                        # for k, v in gen_batch_output.batch.items():
+                        #     print(f"{k}: {tuple(v.shape)}")
 
                     if self.config.algorithm.adv_estimator == AdvantageEstimator.REMAX:
                         with _timer("gen_max", timing_raw):
@@ -930,9 +942,23 @@ class RayPPOTrainer:
                             del gen_baseline_batch, gen_baseline_output
 
                     batch.non_tensor_batch["uid"] = np.array([str(uuid.uuid4()) for _ in range(len(batch.batch))], dtype=object)
+                    # print("After uid Shape of batch:")
+                    # for k, v in batch.batch.items():
+                    #     print(f"{k}: {tuple(v.shape)}")
+                    # print("After uid Shape of batch for non-tensor stuff:")
+                    # print("Non-tensor batch keys:", batch.non_tensor_batch.keys())
+                    # for k, v in batch.non_tensor_batch.items():
+                    #     print(f"{k}: {type(v)} {np.shape(v)}")
                     # repeat to align with repeated responses in rollout
                     batch = batch.repeat(repeat_times=self.config.actor_rollout_ref.rollout.n, interleave=True)
+                    print("After repeat Shape of batch:")
+                    print("Batch keys:", batch.batch.keys())
+                    for k, v in batch.batch.items():
+                        print(f"{k}: {tuple(v.shape)}")
                     batch = batch.union(gen_batch_output)
+                    print("After union Shape of batch:")
+                    for k, v in batch.batch.items():
+                        print(f"{k}: {tuple(v.shape)}")
 
                     batch.batch["response_mask"] = compute_response_mask(batch)
                     # balance the number of valid tokens on each dp rank.

@@ -18,7 +18,7 @@ TRAIN_DATADIR=./dataset/train_data_10k.parquet
 VAL_DATADIR=./dataset/valid_data.parquet
 MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
 
-SAVE_DIR=../checkpoint/e3_7b/
+SAVE_DIR=../checkpoint/e3_7b_e3/
 TENSORBOARD_PATH=$SAVE_DIR/tensorboard
 
 export TENSORBOARD_DIR=$TENSORBOARD_PATH

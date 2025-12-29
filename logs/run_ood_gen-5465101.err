@@ -1,0 +1,93 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) xalt/3.1.4
++ NUM_EPISODES=3
++ n_samples_per_prompt=8
++ n_rollout_max=8
++ n_rollout_min=8
++ LR_ACTOR=5e-6
++ entropy_coeff=0
++ n_rollout_update=0
++ enable_temperature_scheduler=False
++ enable_annealing=False
++ TRAIN_DATADIR=./dataset/train_data_10k.parquet
++ VAL_DATADIR=./dataset/valid_data.parquet
++ MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ PRETRAIN_DIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ SAVE_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14/
++ TENSORBOARD_PATH=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ export TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ export HYDRA_FULL_ERROR=1
++ HYDRA_FULL_ERROR=1
++ python3 -m e3.main_e3 algorithm.adv_estimator=divgrpo data.train_files=./dataset/train_data_10k.parquet data.val_files=./dataset/valid_data.parquet data.train_batch_size=64 data.max_prompt_length=2048 data.max_response_length=6144 data.filter_overlong_prompts=True data.truncation=error actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B actor_rollout_ref.actor.optim.lr=5e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=512 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.gpu_memory_utilization=0.8 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_low=8 actor_rollout_ref.rollout.n_high=8 actor_rollout_ref.rollout.n_update=0 actor_rollout_ref.rollout.temperature=1 actor_rollout_ref.rollout.enable_temperature_scheduler=False actor_rollout_ref.rollout.enable_annealing=False actor_rollout_ref.rollout.max_steps=4 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.use_kl_in_reward=False trainer.critic_warmup=0 'trainer.logger=[console,tensorboard]' trainer.project_name=GRPO trainer.experiment_name=Qwen trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_1.0_a14/ trainer.save_freq=50 trainer.test_freq=10 trainer.total_epochs=3
+2025-12-23 00:42:20,451	INFO worker.py:2003 -- Started a local Ray instance. View the dashboard at [1m[32m127.0.0.1:8265 [39m[22m
+/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[36m(TaskRunner pid=1436536)[0m DeprecationWarning: `ray.state.available_resources_per_node` is a private attribute and access will be removed in a future Ray version.
+[36m(TaskRunner pid=1436536)[0m WARNING:2025-12-23 00:43:02,032:Waiting for register center actor 1TD9Bu_register_center to be ready. Elapsed time: 0 seconds out of 300 seconds.
+Error executing job with overrides: ['algorithm.adv_estimator=divgrpo', 'data.train_files=./dataset/train_data_10k.parquet', 'data.val_files=./dataset/valid_data.parquet', 'data.train_batch_size=64', 'data.max_prompt_length=2048', 'data.max_response_length=6144', 'data.filter_overlong_prompts=True', 'data.truncation=error', 'actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B', 'actor_rollout_ref.actor.optim.lr=5e-6', 'actor_rollout_ref.model.use_remove_padding=True', 'actor_rollout_ref.actor.ppo_mini_batch_size=512', 'actor_rollout_ref.actor.use_dynamic_bsz=True', 'actor_rollout_ref.actor.use_kl_loss=True', 'actor_rollout_ref.actor.kl_loss_coef=0', 'actor_rollout_ref.actor.kl_loss_type=low_var_kl', 'actor_rollout_ref.actor.entropy_coeff=0', 'actor_rollout_ref.model.enable_gradient_checkpointing=True', 'actor_rollout_ref.actor.fsdp_config.param_offload=False', 'actor_rollout_ref.actor.fsdp_config.optimizer_offload=False', 'actor_rollout_ref.rollout.tensor_model_parallel_size=1', 'actor_rollout_ref.rollout.name=vllm', 'actor_rollout_ref.rollout.gpu_memory_utilization=0.8', 'actor_rollout_ref.rollout.n=8', 'actor_rollout_ref.rollout.n_low=8', 'actor_rollout_ref.rollout.n_high=8', 'actor_rollout_ref.rollout.n_update=0', 'actor_rollout_ref.rollout.temperature=1', 'actor_rollout_ref.rollout.enable_temperature_scheduler=False', 'actor_rollout_ref.rollout.enable_annealing=False', 'actor_rollout_ref.rollout.max_steps=4', 'actor_rollout_ref.ref.fsdp_config.param_offload=True', 'algorithm.use_kl_in_reward=False', 'trainer.critic_warmup=0', 'trainer.logger=[console,tensorboard]', 'trainer.project_name=GRPO', 'trainer.experiment_name=Qwen', 'trainer.n_gpus_per_node=4', 'trainer.nnodes=1', 'trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_1.0_a14/', 'trainer.save_freq=50', 'trainer.test_freq=10', 'trainer.total_epochs=3']
+Traceback (most recent call last):
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_e3.py", line 183, in <module>
+    main()
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_e3.py", line 57, in main
+    run_ppo(config)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_e3.py", line 75, in run_ppo
+    ray.get(runner.run.remote(config))
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py", line 2961, in get
+    values, debugger_breakpoint = worker.get_objects(
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py", line 1026, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(AcceleratorError): [36mray::TaskRunner.run()[39m (pid=1436536, ip=172.18.49.210, actor_id=fde747a2a3643ae1418f6a5c01000000, repr=<main_e3.TaskRunner object at 0x143fe17456c0>)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_e3.py", line 178, in run
+    trainer.init_workers()
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/trainer/ray_trainer_cov_base.py", line 1101, in init_workers
+    self.ref_policy_wg.init_model()
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/single_controller/ray/base.py", line 49, in func
+    output = ray.get(output)
+ray.exceptions.RayTaskError(AcceleratorError): [36mray::WorkerDict.ref_init_model()[39m (pid=1440615, ip=172.18.49.210, actor_id=b4aa14b794ded8e31c6ff88101000000, repr=<verl.single_controller.ray.base.WorkerDict object at 0x14f30165ee60>)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/single_controller/ray/base.py", line 466, in func
+    return getattr(self.worker_dict[key], name)(*args, **kwargs)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/single_controller/base/decorator.py", line 501, in inner
+    return func(*args, **kwargs)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/worker/fsdp_work.py", line 423, in init_model
+    self.ref_module_fsdp = self._build_model_optimizer(model_path=self.config.model.path,
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/worker/fsdp_work.py", line 166, in _build_model_optimizer
+    log_gpu_memory_usage('Before init from HF AutoModel', logger=logger)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/utils/debug/performance.py", line 44, in log_gpu_memory_usage
+    mem_allocated, mem_reserved, mem_used, mem_total = _get_current_mem_info()
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/utils/debug/performance.py", line 33, in _get_current_mem_info
+    mem_free, mem_total = torch.cuda.mem_get_info()
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/cuda/memory.py", line 838, in mem_get_info
+    return torch.cuda.cudart().cudaMemGetInfo(device)
+torch.AcceleratorError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.

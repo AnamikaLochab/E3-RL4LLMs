@@ -1,0 +1,32 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) xalt/3.1.4
+Could not find platform independent libraries <prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+Python path configuration:
+  PYTHONHOME = (not set)
+  PYTHONPATH = (not set)
+  program name = 'python'
+  isolated = 0
+  environment = 1
+  user site = 0
+  import site = 1
+  sys._base_executable = '/scratch/gautschi/alochab/conda_envs/e3/bin/python'
+  sys.base_prefix = '/scratch/gautschi/alochab/conda_envs/e3'
+  sys.base_exec_prefix = '/scratch/gautschi/alochab/conda_envs/e3'
+  sys.platlibdir = 'lib'
+  sys.executable = '/scratch/gautschi/alochab/conda_envs/e3/bin/python'
+  sys.prefix = '/scratch/gautschi/alochab/conda_envs/e3'
+  sys.exec_prefix = '/scratch/gautschi/alochab/conda_envs/e3'
+  sys.path = [
+    '/scratch/gautschi/alochab/conda_envs/e3/lib/python310.zip',
+    '/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10',
+    '/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/lib-dynload',
+  ]
+Fatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding
+Python runtime state: core initialized
+LookupError: no codec search functions registered: can't find encoding
+
+Current thread 0x00001474ad839740 (most recent call first):
+  <no Python frame>

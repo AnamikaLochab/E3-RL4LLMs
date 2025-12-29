@@ -39,27 +39,27 @@ class TemperatureScheduler:
         self.factor = np.log(self.vocab_size) + np.log(np.log(self.vocab_size))
 
     def step(self, entropy: Union[float, List[float]]):
-        if self.steps <= self.init_steps:
-            if isinstance(entropy, float):
-                self.init_entropy.append(entropy)
-            else:
-                self.init_entropy.extend(entropy)
-        elif self.enable_temperature_scheduler:
-            if self.target_entropy is None:
-                self.target_entropy = sum(self.init_entropy) / len(self.init_entropy)
-                self.initial_target_entropy = self.target_entropy
-            if isinstance(entropy, float):
-                current_entropy = entropy
-            elif isinstance(entropy, list):
-                current_entropy = sum(entropy) / len(entropy)
-            else:
-                raise ValueError(f"Invalid entropy type: {type(entropy)}")
-            alpha = self.target_entropy / current_entropy
-            self.current_temperature = self.current_temperature * (
-                1 + self.current_temperature * np.log(alpha) / self.factor
-            )
-            if self.enable_annealing and self.steps >= self.annealing_step:
-                self.annealing()
+        # if self.steps <= self.init_steps:
+        #     if isinstance(entropy, float):
+        #         self.init_entropy.append(entropy)
+        #     else:
+        #         self.init_entropy.extend(entropy)
+        # elif self.enable_temperature_scheduler:
+        #     if self.target_entropy is None:
+        #         self.target_entropy = sum(self.init_entropy) / len(self.init_entropy)
+        #         self.initial_target_entropy = self.target_entropy
+        #     if isinstance(entropy, float):
+        #         current_entropy = entropy
+        #     elif isinstance(entropy, list):
+        #         current_entropy = sum(entropy) / len(entropy)
+        #     else:
+        #         raise ValueError(f"Invalid entropy type: {type(entropy)}")
+        #     alpha = self.target_entropy / current_entropy
+        #     self.current_temperature = self.current_temperature * (
+        #         1 + self.current_temperature * np.log(alpha) / self.factor
+        #     )
+        #     if self.enable_annealing and self.steps >= self.annealing_step:
+        #         self.annealing()
         self.steps += 1
 
     def get_temperature(self):

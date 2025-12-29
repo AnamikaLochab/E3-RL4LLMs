@@ -1,0 +1,17 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
+The following have been reloaded with a version change:
+  1) gcc/14.1.0 => gcc/11.4.1
+
+Traceback (most recent call last):
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_metric.py", line 41, in <module>
+    per_run_pass, per_run_length = compute_metric(
+  File "/scratch/gautschi/alochab/E3-RL4LLMs/e3/main_metric.py", line 28, in compute_metric
+    with open(file, "r", encoding="utf-8") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './metrics/tw_covvar_grpo_1_5b_0.005_s16_1_metrics.json'

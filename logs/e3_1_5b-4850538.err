@@ -1,0 +1,1313 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
+The following have been reloaded with a version change:
+  1) gcc/14.1.0 => gcc/11.4.1
+
++ NUM_EPISODES=3
++ n_samples_per_prompt=8
++ n_rollout_max=8
++ n_rollout_min=8
++ LR_ACTOR=5e-6
++ entropy_coeff=0
++ n_rollout_update=0
++ enable_temperature_scheduler=False
++ enable_annealing=False
++ TRAIN_DATADIR=./dataset/train_data_10k.parquet
++ VAL_DATADIR=./dataset/valid_data.parquet
++ MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ PRETRAIN_DIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ SAVE_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001/
++ TENSORBOARD_PATH=../checkpoint/e3_1_5b_dGRPO_0.00001//tensorboard
++ export TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001//tensorboard
++ TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_0.00001//tensorboard
++ export HYDRA_FULL_ERROR=1
++ HYDRA_FULL_ERROR=1
++ python3 -m e3.main_e3 algorithm.adv_estimator=divgrpo data.train_files=./dataset/train_data_10k.parquet data.val_files=./dataset/valid_data.parquet data.train_batch_size=64 data.max_prompt_length=2048 data.max_response_length=6144 data.filter_overlong_prompts=True data.truncation=error actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B actor_rollout_ref.actor.optim.lr=5e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=512 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.gpu_memory_utilization=0.8 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_low=8 actor_rollout_ref.rollout.n_high=8 actor_rollout_ref.rollout.n_update=0 actor_rollout_ref.rollout.temperature=1 actor_rollout_ref.rollout.enable_temperature_scheduler=False actor_rollout_ref.rollout.enable_annealing=False actor_rollout_ref.rollout.max_steps=4 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.use_kl_in_reward=False trainer.critic_warmup=0 'trainer.logger=[console,tensorboard]' trainer.project_name=GRPO trainer.experiment_name=Qwen trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_0.00001/ trainer.save_freq=50 trainer.test_freq=10 trainer.total_epochs=3
+2025-11-16 21:57:22,952	INFO worker.py:2003 -- Started a local Ray instance. View the dashboard at [1m[32m127.0.0.1:8265 [39m[22m
+/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[36m(TaskRunner pid=4052094)[0m DeprecationWarning: `ray.state.available_resources_per_node` is a private attribute and access will be removed in a future Ray version.
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-16 21:57:43,216:Waiting for register center actor Hz8E9F_register_center to be ready. Elapsed time: 0 seconds out of 300 seconds.
+[36m(WorkerDict pid=4055932)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=4055931)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+[36m(WorkerDict pid=4055931)[0m   warnings.warn(  # warn only once
+[36m(WorkerDict pid=4055732)[0m [rank0]:[W1116 21:58:00.219561249 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[36m(WorkerDict pid=4055732)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=4055732)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=4055732)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(  # warn only once[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m [rank1]:[W1116 21:58:01.544555730 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 1]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`[32m [repeated 6x across cluster][0m
+[36m(WorkerDict pid=4055931)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(  # warn only once[32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=4055932)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=4055932)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055932)[0m   warnings.warn(
+[36m(WorkerDict pid=4055930)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 2x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:   0%|          | 0/480 [00:00<?, ?it/s]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:   0%|          | 1/480 [01:58<15:47:05, 118.63s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   0%|          | 2/480 [03:57<15:46:30, 118.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   1%|          | 3/480 [06:00<15:59:29, 120.69s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   1%|          | 4/480 [07:57<15:45:11, 119.14s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   1%|          | 5/480 [09:55<15:41:29, 118.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   1%|▏         | 6/480 [11:56<15:43:25, 119.42s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   1%|▏         | 7/480 [13:58<15:50:10, 120.53s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   2%|▏         | 8/480 [15:58<15:45:14, 120.16s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   2%|▏         | 9/480 [17:57<15:39:46, 119.72s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   2%|▏         | 10/480 [21:17<18:54:00, 144.77s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   2%|▏         | 11/480 [23:14<17:45:00, 136.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   2%|▎         | 12/480 [25:11<16:56:02, 130.26s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   3%|▎         | 13/480 [27:09<16:25:54, 126.67s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   3%|▎         | 14/480 [29:07<16:02:31, 123.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   3%|▎         | 15/480 [31:01<15:36:23, 120.82s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   3%|▎         | 16/480 [32:56<15:22:29, 119.29s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   4%|▎         | 17/480 [34:54<15:17:43, 118.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   4%|▍         | 18/480 [36:50<15:07:47, 117.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   4%|▍         | 19/480 [38:46<15:01:02, 117.27s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   4%|▍         | 20/480 [42:04<18:05:12, 141.55s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   4%|▍         | 21/480 [44:02<17:09:00, 134.51s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   5%|▍         | 22/480 [46:00<16:28:42, 129.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   5%|▍         | 23/480 [47:56<15:56:02, 125.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   5%|▌         | 24/480 [49:53<15:35:14, 123.06s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   5%|▌         | 25/480 [51:48<15:14:43, 120.62s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   5%|▌         | 26/480 [53:41<14:55:49, 118.39s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   6%|▌         | 27/480 [55:40<14:55:02, 118.55s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   6%|▌         | 28/480 [57:30<14:32:38, 115.84s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   6%|▌         | 29/480 [59:27<14:34:35, 116.35s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   6%|▋         | 30/480 [1:02:33<17:08:58, 137.20s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   6%|▋         | 31/480 [1:04:17<15:50:35, 127.03s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   7%|▋         | 32/480 [1:06:00<14:54:54, 119.85s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   7%|▋         | 33/480 [1:07:54<14:40:23, 118.17s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   7%|▋         | 34/480 [1:09:48<14:28:17, 116.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   7%|▋         | 35/480 [1:11:36<14:06:55, 114.19s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   8%|▊         | 36/480 [1:13:22<13:47:20, 111.80s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   8%|▊         | 37/480 [1:15:10<13:38:11, 110.82s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   8%|▊         | 38/480 [1:17:03<13:39:41, 111.27s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   8%|▊         | 39/480 [1:18:48<13:24:17, 109.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   8%|▊         | 40/480 [1:21:55<16:14:24, 132.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   9%|▊         | 41/480 [1:23:41<15:11:45, 124.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   9%|▉         | 42/480 [1:25:34<14:43:43, 121.06s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   9%|▉         | 43/480 [1:27:18<14:05:11, 116.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   9%|▉         | 44/480 [1:29:04<13:41:02, 112.99s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:   9%|▉         | 45/480 [1:30:46<13:16:40, 109.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  10%|▉         | 46/480 [1:32:36<13:14:13, 109.80s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  10%|▉         | 47/480 [1:34:19<12:57:20, 107.71s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  10%|█         | 48/480 [1:36:08<12:58:27, 108.12s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  10%|█         | 49/480 [1:37:56<12:56:56, 108.16s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  10%|█         | 50/480 [1:41:09<15:57:43, 133.64s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  11%|█         | 51/480 [1:42:53<14:51:16, 124.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  11%|█         | 52/480 [1:44:37<14:05:18, 118.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  11%|█         | 53/480 [1:46:19<13:27:44, 113.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  11%|█▏        | 54/480 [1:48:05<13:09:06, 111.14s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  11%|█▏        | 55/480 [1:49:48<12:50:36, 108.79s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  12%|█▏        | 56/480 [1:51:31<12:37:20, 107.17s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  12%|█▏        | 57/480 [1:53:16<12:29:27, 106.31s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  12%|█▏        | 58/480 [1:54:57<12:16:34, 104.73s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-16 23:56:12,652:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-16 23:56:19,318:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  12%|█▏        | 59/480 [1:56:48<12:28:03, 106.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  12%|█▎        | 60/480 [1:59:41<14:45:37, 126.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  13%|█▎        | 61/480 [2:01:25<13:57:05, 119.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  13%|█▎        | 62/480 [2:03:08<13:20:34, 114.92s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  13%|█▎        | 63/480 [2:04:51<12:52:53, 111.21s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  13%|█▎        | 64/480 [2:06:40<12:47:30, 110.70s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  14%|█▎        | 65/480 [2:08:20<12:22:40, 107.37s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  14%|█▍        | 66/480 [2:10:08<12:23:03, 107.69s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  14%|█▍        | 67/480 [2:11:51<12:10:31, 106.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  14%|█▍        | 68/480 [2:13:32<11:59:20, 104.76s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 00:14:52,601:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  14%|█▍        | 69/480 [2:15:23<12:09:08, 106.44s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  15%|█▍        | 70/480 [2:18:19<14:31:10, 127.49s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 00:19:36,929:Timeout during parsing: Alright, I need to solve the functional equation:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m $$
+[36m(TaskRunner pid=4052094)[0m f(xy + f(x^2)) = x f(x + y)
+[36m(TaskRunner pid=4052094)[0m $$
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m for all real numbers \(x\) and \(y\), with the function \(f: \mathbb{R} \rightarrow \mathbb{R}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Hmm, functional equations can be tricky, but often plugging in specific values for x and y can give useful information. Let me go through this step by step.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Step 1: Check for possible constant functions.**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m First, let me think if a constant function could satisfy the equation. Suppose that \(f(x) = c\) for all \(x\), where \(c\) is some constant. Then, the left-hand side (LHS) becomes \(c\), and the right-hand side (RHS) is \(x \cdot c\). So, we have \(c = x c\) for all \(x\). This implies that either \(c = 0\) or \(c = x\) for all \(x\), but \(c\) cannot depend on \(x\) unless it's 0. So, the only constant solution is \(f(x) = 0\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m I should note this candidate, \(f(x) = 0\), and see if there are other possible solutions.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Step 2: Check if linear functions might satisfy the equation.**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Assume that \(f(x)\) is linear, so let me consider \(f(x) = kx\), where \(k\) is a constant. Let me plug this into the equation and see if it works.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m LHS: \(f(xy + f(x^2)) = f(xy + kx^2) = k(xy + kx^2) = kxy + k^2x^2\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m RHS: \(x f(x + y) = x \cdot k(x + y) = kx^2 + kxy\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Compare LHS and RHS:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(kxy + k^2x^2 = kx^2 + kxy\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Subtracting \(kxy\) from both sides:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(k^2x^2 = kx^2\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, \(k^2 = k\) which implies \(k(k - 1) = 0\), so \(k = 0\) or \(k = 1\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Thus, two possible solutions:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m 1. \(f(x) = 0\) as a constant function.
+[36m(TaskRunner pid=4052094)[0m 2. \(f(x) = x\) which is linear.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, so both \(0\) and identity functions might satisfy the equation.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Hmm, that's promising. I need to explore both possibilities.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Step 3: Test \(f(x) = 0\).**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m If \(f(x) = 0\) for all \(x\), substitute back into the original equation:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m LHS: \(f(xy + f(x^2)) = f(xy + 0) = f(xy) = 0\)
+[36m(TaskRunner pid=4052094)[0m RHS: \(x f(x + y) = x \cdot 0 = 0\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, it works. Identity function works as well.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Step 4: Suppose \(f\) is linear, so \(f(x) = kx\), as above, then k can be 0 or 1.**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Therefore, so far, our candidates are the zero function and identity function. I need to check if more solutions exist or if these are the only ones.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Step 5: Check injectivity or surjectivity.**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Maybe I can try to find more properties of the function.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m First, let's check if the function is injective (one-to-one) or surjective (onto).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose I set \(y = 0\). Then,
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Equation becomes:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(0 + f(x^2)) = x f(x + 0)\)  
+[36m(TaskRunner pid=4052094)[0m Simplify:  
+[36m(TaskRunner pid=4052094)[0m \(f(f(x^2)) = x f(x)\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m If the function \(f\) is injective, then this equality might give some insight.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m But I don't know if \(f\) is injective yet. Let me assume for a moment.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, set \(y = -\frac{x^2 + t}{x}\) for some \(t\) to perhaps solve for relations. Wait, that might be messy.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, let me try to see if substitution can help.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose I pick \(x = 0\). Then,
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Equation becomes:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(0 + f(0)) = 0 \cdot f(0 + y)\)  
+[36m(TaskRunner pid=4052094)[0m Simplify:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(f(0)) = 0\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, \(f\) evaluated at \(f(0)\) is zero. That is, \(c = f(f(0)) = 0\), where \(c = f(0)\). So, \(f(c) = 0\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Hmm, perhaps we can determine \(f(0)\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m If let \(x = 0\), then \(f(c) = 0\) where \(c = f(0)\). Therefore, if \(f\) is injective, then \(f(f(0)) = 0\) implies \(f(0) = 0\), since f is injective. But I don't know if f is injective yet.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, maybe we can to somehow show that f is injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that \(f(a) = f(b)\), but perhaps it's challenging without knowing more about the function.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, maybe suppose that \(f\) is zero function, then yes, it's surjective as well as injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, maybe explore for injectivity or surjectivity.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, setting \(y\) to some function of \(x\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Let me try to set \(y = t - x\), letting \(t\) be another variable. Maybe substitution helps.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, replace \(y\) with \(t - x\), then:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(x(t - x) + f(x^2)) = x f(x + (t - x)) = x f(t)\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Simplify inside f:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(xt - x^2 + f(x^2)) = x f(t)\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Not sure where that leads yet.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, set y = something else.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, set x arbitrary and try to find f of something in terms of f.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Maybe fix x, let me consider the image.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that x is not zero. Then, for a fixed x ≠ 0, if I vary y, I can get different outputs?
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, suppose that f is linear, which it is in the possible cases, so maybe f is linear, then perhaps these two are the only solutions.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m But to know if they are the only solutions, perhaps need to see if no other functions satisfy.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, suppose that f is injective. We don't know yet.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, from \(f(c) = 0\), if c = 0, then f(0) = 0. Otherwise, c is non-zero, so f(c) = 0, but if c ≠ 0, then that might complicate the situation.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, Let me assume that c ≠ 0, then f(c) = 0. If I can then express variables in terms of c.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, try y = 1.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Set y = 1, so:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \(f(x \cdot 1 + f(x^2)) = x f(x + 1)\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Simplify:  
+[36m(TaskRunner pid=4052094)[0m \(f(x + f(x^2)) = x f(x + 1)\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Hmm, that might relate f at some points to other points.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m But maybe challenging without more info.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, what if we assume f is injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that f is injective. Then, from \(f(f(x^2)) = x f(x)\), we can equate:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m If \(f\) is injective, then \(f(x^2)\) is injective, but no, that's not the point.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, we can use that f(f(x²)) = x f(x).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that f is injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Let me denote \(g(x) = f(x)\). Then:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m g(g(x²)) = x g(x)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Assuming injectivity, if \(g(g(x²)) = x g(x)\), maybe we can reach a conclusion.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that x ≠ 0, so we can write \( g(g(x²)) = x g(x) \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, f(f(x²)) = x f(x). If f is injective, then for certain x, this reduces some cases, perhaps leading to f being linear.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, maybe we can reflect on inverse functions.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, if f is linear, then we have f(f(x²)) = f(kx²) = k^2 x^2, and on the other hand, x f(x) = k x^2.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Thus, for f to be linear, k^2 x² = x k x which gives k² = k, so k = 0 or 1.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Thus, f(x) = 0 or f(x) = x.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, but I don't know if f is injective yet, so maybe work using this premise.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, proceeding without the assumption:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose f is injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m From f being injective, if I get recursive relations, maybe deduce f is linear.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, let me see. If f(f(x²)) =x f(x), injective function. So, assuming injectivity, then I can say, if f(f(x²)) = x f(x), then unless I have more info.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, suppose we let x equal to something specific.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose set y = z - x².
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Wait, but that leads back to previous substitution.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, since figuring out f is injective would require proof, maybe it's hard.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, perhaps test if f is surjective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose that f is surjective. Let's see.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Since f : R -> R, in order for f to be surjective, for every z in R, there exists an x such that f(x) = z.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Let me test for z in R.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m But from the original equation, if f is such that f(xy + f(x²)) = x f(x + y).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose x is fixed, then the RHS is x f(x + y), so if z is in R, for some x and y, maybe allows me to get z as the image of something.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m But seems abstract.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, if f is surjective, then for any z, there's an x such that z = f(x). Then, for each z, in the original equation:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m f(xy + z) = x f(x + y)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, for any z, x, y, f(xy + z) = x f(x + y).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Hmm, but whether that's useful? Not immediately.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, perhaps try specific y.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Let me set y = 1.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Then:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m f(x + f(x²)) = x f(x + 1)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Not sure.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, set y = t - x in the original equation.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m As I did before:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m f(x(t - x) + f(x²)) = x f(t)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Maybe that substitution suggests that f is compatible with linear functions.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, take x=1:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m f(y + f(1)) = 1*f(1 + y) = f(y + 1)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So f(y + f(1)) = f(y + 1)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m This holds for all y, so if f is injective, then we can conclude f(1) = 1, but at this point, I don't know if f is injective.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, plug in y = k -x, some manipulate.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, let x = sqrt(something) to have f work in something nice.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, note that I found two potential solutions, perhaps the only ones.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Therefore, considering the two possibilities, the possible solutions are f(x) = 0 or f(x) = x.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Since I can derive that from assuming linearity, perhaps these are the only solutions.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Moreover, for non-linear functions, if they satisfy the original equation, perhaps they won't satisfy f(f(x²))=x f(x). For example, quadratic functions may not satisfy.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Suppose f(x) = x², plug into LHS:
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m f(xy + f(x²)) = (xy + (x²)²)^2
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Which is way more complex than RHS.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Alternatively, suppose f is a constant multiple, but likely f(x) linear is the only solution as others go astray.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Thus, overall, the only solutions are f(x) = 0 and f(x) = x.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are the zero function and the identity function. Thus, the solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{f(x) = 0} and \boxed{f(x) = x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are the constant zero function and the identity function, so the answers are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The function(s) are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are the zero function and the identity function, which are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The function is either the zero function or the identity function: \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are the zero function and the identity function, which are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are the zero function and the identity function: \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are the zero function and the identity function. Therefore, the solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions \( f \) satisfying the equation are the zero function and the identity function, so they are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \(\boxed{0}\) and \(\boxed{x}\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \(\boxed{0}\) and \(\boxed{x}\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Final Answer
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m Finally, the functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are the zero function and the identity function, thereby the solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are the zero function and the identity function, which are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \(\boxed{0}\) and \(\boxed{x}\)
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions \( f \) satisfying the equation are the zero function and the identity function. Therefore, the solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are the zero function and the identity function: \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \(\boxed{0}\) and \(\boxed{x}\).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions \( f(x) \) satisfying the equation are the zero function and the identity function: \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are the trivial solution \( \boxed{0} \) and the identity function \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}。
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}.
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are the zero function \( \boxed{0} \) and the identity function \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions \( f \) satisfying the equation are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions satisfying the equation are the zero function, which is \( \boxed{0} \), and the identity function, which is \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m All solutions are provided by \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m So, after this extensive thought process, the functions that satisfy the equation are \( f(x) = 0 \) and \( f(x) = x \). Therefore, the solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The only solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are the zero function and the identity function, which are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The solutions are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions fitting the equation are \( \boxed{0} \) and \( \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m The functions \( f \) that satisfy the equation are the constant zero function and the identity function, so \( f(x) = \boxed{0} \) and \( f(x) = \boxed{x} \).
+[36m(TaskRunner pid=4052094)[0m 
+[36m(TaskRunner pid=4052094)[0m **Final Answer**
+[36m(TaskRunner pid=4052094)[0m \boxed{0} and \boxed{x}
+[36m(TaskRunner pid=4052094)[0m Training Progress:  15%|█▍        | 71/480 [2:20:07<13:48:20, 121.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  15%|█▌        | 72/480 [2:21:50<13:09:16, 116.07s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  15%|█▌        | 73/480 [2:23:33<12:40:16, 112.08s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  15%|█▌        | 74/480 [2:25:20<12:26:52, 110.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  16%|█▌        | 75/480 [2:27:01<12:07:48, 107.82s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  16%|█▌        | 76/480 [2:28:49<12:05:36, 107.76s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  16%|█▌        | 77/480 [2:30:34<11:57:50, 106.88s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  16%|█▋        | 78/480 [2:32:18<11:50:52, 106.10s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  16%|█▋        | 79/480 [2:34:04<11:48:02, 105.94s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  17%|█▋        | 80/480 [2:36:57<14:01:21, 126.20s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  17%|█▋        | 81/480 [2:38:40<13:13:01, 119.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  17%|█▋        | 82/480 [2:40:24<12:40:49, 114.70s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  17%|█▋        | 83/480 [2:42:09<12:19:11, 111.72s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  18%|█▊        | 84/480 [2:43:53<12:01:11, 109.27s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  18%|█▊        | 85/480 [2:45:36<11:47:44, 107.50s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 00:46:54,052:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  18%|█▊        | 86/480 [2:47:24<11:47:21, 107.72s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  18%|█▊        | 87/480 [2:49:09<11:39:58, 106.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  18%|█▊        | 88/480 [2:50:55<11:36:44, 106.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  19%|█▊        | 89/480 [2:52:35<11:21:37, 104.60s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  19%|█▉        | 90/480 [2:55:28<13:33:04, 125.09s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  19%|█▉        | 91/480 [2:57:07<12:39:33, 117.15s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 00:58:20,694:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  19%|█▉        | 92/480 [2:58:51<12:12:21, 113.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  19%|█▉        | 93/480 [3:00:32<11:47:51, 109.74s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  20%|█▉        | 94/480 [3:02:17<11:36:08, 108.21s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  20%|█▉        | 95/480 [3:03:56<11:16:11, 105.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  20%|██        | 96/480 [3:05:42<11:16:19, 105.68s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  20%|██        | 97/480 [3:07:20<11:00:22, 103.45s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  20%|██        | 98/480 [3:08:54<10:39:13, 100.40s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  21%|██        | 99/480 [3:10:42<10:52:00, 102.68s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 01:13:27,289:Timeout during comparison
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(WorkerDict pid=4055732)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=4055732)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(TaskRunner pid=4052094)[0m Training Progress:  21%|██        | 100/480 [3:13:56<13:44:17, 130.15s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  21%|██        | 101/480 [3:15:34<12:40:46, 120.44s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 01:16:49,975:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  21%|██▏       | 102/480 [3:17:21<12:13:55, 116.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  21%|██▏       | 103/480 [3:19:00<11:39:25, 111.31s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  22%|██▏       | 104/480 [3:20:40<11:15:36, 107.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  22%|██▏       | 105/480 [3:22:24<11:06:21, 106.62s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  22%|██▏       | 106/480 [3:24:02<10:50:08, 104.30s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 01:25:25,385:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  22%|██▏       | 107/480 [3:25:59<11:11:07, 107.96s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  22%|██▎       | 108/480 [3:27:37<10:51:06, 105.02s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  23%|██▎       | 109/480 [3:29:31<11:05:22, 107.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  23%|██▎       | 110/480 [3:32:30<13:15:18, 128.97s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  23%|██▎       | 111/480 [3:34:13<12:25:34, 121.23s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  23%|██▎       | 112/480 [3:35:51<11:41:10, 114.32s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  24%|██▎       | 113/480 [3:37:36<11:21:21, 111.39s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  24%|██▍       | 114/480 [3:39:23<11:12:35, 110.26s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  24%|██▍       | 115/480 [3:40:57<10:41:42, 105.49s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 01:42:12,512:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  24%|██▍       | 116/480 [3:42:43<10:39:59, 105.49s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  24%|██▍       | 117/480 [3:44:26<10:33:55, 104.78s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  25%|██▍       | 118/480 [3:46:11<10:33:12, 104.95s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  25%|██▍       | 119/480 [3:47:53<10:25:36, 103.98s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  25%|██▌       | 120/480 [3:50:54<12:41:57, 126.99s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  25%|██▌       | 121/480 [3:52:31<11:46:18, 118.05s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  25%|██▌       | 122/480 [3:54:19<11:26:08, 114.99s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  26%|██▌       | 123/480 [3:56:03<11:04:22, 111.66s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 01:57:26,052:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  26%|██▌       | 124/480 [3:58:01<11:13:41, 113.54s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  26%|██▌       | 125/480 [3:59:41<10:48:36, 109.62s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  26%|██▋       | 126/480 [4:01:26<10:38:18, 108.19s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  26%|██▋       | 127/480 [4:03:05<10:19:37, 105.32s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  27%|██▋       | 128/480 [4:04:46<10:11:15, 104.19s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  27%|██▋       | 129/480 [4:06:29<10:06:16, 103.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  27%|██▋       | 130/480 [4:09:23<12:09:01, 124.98s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  27%|██▋       | 131/480 [4:11:09<11:32:24, 119.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  28%|██▊       | 132/480 [4:12:46<10:52:07, 112.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  28%|██▊       | 133/480 [4:14:29<10:34:13, 109.66s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  28%|██▊       | 134/480 [4:16:12<10:21:48, 107.83s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  28%|██▊       | 135/480 [4:17:57<10:14:15, 106.83s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  28%|██▊       | 136/480 [4:19:40<10:06:28, 105.78s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  29%|██▊       | 137/480 [4:21:21<9:55:36, 104.19s/it] 
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 02:22:37,578:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  29%|██▉       | 138/480 [4:23:10<10:02:00, 105.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  29%|██▉       | 139/480 [4:24:51<9:52:54, 104.32s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  29%|██▉       | 140/480 [4:27:47<11:54:05, 126.02s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  29%|██▉       | 141/480 [4:29:31<11:13:45, 119.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  30%|██▉       | 142/480 [4:31:08<10:33:39, 112.48s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  30%|██▉       | 143/480 [4:32:51<10:16:57, 109.84s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  30%|███       | 144/480 [4:34:30<9:56:13, 106.47s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  30%|███       | 145/480 [4:36:11<9:45:38, 104.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  30%|███       | 146/480 [4:37:45<9:25:35, 101.60s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  31%|███       | 147/480 [4:39:21<9:13:51, 99.79s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  31%|███       | 148/480 [4:41:01<9:13:13, 99.98s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  31%|███       | 149/480 [4:42:45<9:17:46, 101.11s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  31%|███▏      | 150/480 [4:45:52<11:38:12, 126.95s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  31%|███▏      | 151/480 [4:47:32<10:51:54, 118.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  32%|███▏      | 152/480 [4:49:12<10:18:39, 113.17s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  32%|███▏      | 153/480 [4:50:51<9:53:42, 108.94s/it] 
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 02:52:04,358:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  32%|███▏      | 154/480 [4:52:37<9:47:25, 108.12s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  32%|███▏      | 155/480 [4:54:16<9:30:31, 105.33s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  32%|███▎      | 156/480 [4:55:50<9:11:01, 102.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  33%|███▎      | 157/480 [4:57:27<9:00:25, 100.39s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  33%|███▎      | 158/480 [4:59:09<9:01:41, 100.94s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  33%|███▎      | 159/480 [5:00:49<8:58:53, 100.73s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  33%|███▎      | 160/480 [5:03:41<10:50:28, 121.96s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  34%|███▎      | 161/480 [5:05:27<10:23:07, 117.20s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  34%|███▍      | 162/480 [5:07:09<9:57:02, 112.65s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  34%|███▍      | 163/480 [5:08:43<9:25:48, 107.09s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  34%|███▍      | 164/480 [5:10:18<9:04:43, 103.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  34%|███▍      | 165/480 [5:11:54<8:50:50, 101.11s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  35%|███▍      | 166/480 [5:13:35<8:49:14, 101.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  35%|███▍      | 167/480 [5:15:09<8:37:19, 99.17s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  35%|███▌      | 168/480 [5:16:51<8:39:38, 99.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  35%|███▌      | 169/480 [5:18:27<8:31:04, 98.60s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  35%|███▌      | 170/480 [5:21:14<10:16:15, 119.27s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  36%|███▌      | 171/480 [5:22:51<9:39:04, 112.44s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  36%|███▌      | 172/480 [5:24:27<9:12:27, 107.62s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  36%|███▌      | 173/480 [5:26:03<8:52:13, 104.02s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 03:27:12,289:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 03:27:17,827:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  36%|███▋      | 174/480 [5:27:46<8:49:13, 103.77s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  36%|███▋      | 175/480 [5:29:24<8:38:11, 101.94s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  37%|███▋      | 176/480 [5:31:01<8:29:54, 100.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  37%|███▋      | 177/480 [5:32:38<8:22:22, 99.48s/it] 
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 03:33:51,251:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  37%|███▋      | 178/480 [5:34:22<8:27:00, 100.73s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  37%|███▋      | 179/480 [5:35:59<8:20:55, 99.85s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  38%|███▊      | 180/480 [5:38:52<10:07:45, 121.55s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 03:40:03,006:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 03:40:08,877:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  38%|███▊      | 181/480 [5:40:39<9:44:29, 117.29s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  38%|███▊      | 182/480 [5:42:15<9:11:38, 111.07s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  38%|███▊      | 183/480 [5:43:54<8:50:49, 107.24s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  38%|███▊      | 184/480 [5:45:28<8:29:21, 103.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  39%|███▊      | 185/480 [5:47:10<8:26:26, 103.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  39%|███▉      | 186/480 [5:48:47<8:16:19, 101.29s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  39%|███▉      | 187/480 [5:50:21<8:03:54, 99.09s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  39%|███▉      | 188/480 [5:51:58<7:59:19, 98.49s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  39%|███▉      | 189/480 [5:53:38<7:59:38, 98.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  40%|███▉      | 190/480 [5:56:24<9:34:26, 118.85s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  40%|███▉      | 191/480 [5:57:58<8:56:48, 111.45s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  40%|████      | 192/480 [5:59:31<8:28:50, 106.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  40%|████      | 193/480 [6:01:08<8:13:48, 103.24s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  40%|████      | 194/480 [6:02:45<8:02:51, 101.30s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  41%|████      | 195/480 [6:04:19<7:50:42, 99.10s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  41%|████      | 196/480 [6:05:56<7:46:24, 98.54s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  41%|████      | 197/480 [6:07:28<7:35:49, 96.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  41%|████▏     | 198/480 [6:09:04<7:33:39, 96.52s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 04:10:14,411:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 04:10:19,440:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  41%|████▏     | 199/480 [6:10:48<7:41:42, 98.59s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  42%|████▏     | 200/480 [6:13:52<9:40:20, 124.36s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  42%|████▏     | 201/480 [6:15:28<8:57:43, 115.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  42%|████▏     | 202/480 [6:17:02<8:25:58, 109.20s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  42%|████▏     | 203/480 [6:18:36<8:03:07, 104.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  42%|████▎     | 204/480 [6:20:12<7:49:35, 102.09s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  43%|████▎     | 205/480 [6:21:48<7:39:42, 100.30s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  43%|████▎     | 206/480 [6:23:25<7:33:30, 99.31s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  43%|████▎     | 207/480 [6:25:06<7:33:52, 99.75s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  43%|████▎     | 208/480 [6:26:36<7:19:28, 96.94s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  44%|████▎     | 209/480 [6:28:09<7:12:48, 95.82s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  44%|████▍     | 210/480 [6:31:00<8:52:35, 118.35s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  44%|████▍     | 211/480 [6:32:34<8:17:49, 111.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  44%|████▍     | 212/480 [6:34:10<7:55:46, 106.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  44%|████▍     | 213/480 [6:35:49<7:43:08, 104.08s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  45%|████▍     | 214/480 [6:37:24<7:29:46, 101.45s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  45%|████▍     | 215/480 [6:38:56<7:15:11, 98.54s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  45%|████▌     | 216/480 [6:40:30<7:07:36, 97.18s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  45%|████▌     | 217/480 [6:42:03<7:01:16, 96.11s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  45%|████▌     | 218/480 [6:43:34<6:52:45, 94.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  46%|████▌     | 219/480 [6:45:18<7:03:24, 97.33s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  46%|████▌     | 220/480 [6:48:01<8:26:44, 116.94s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  46%|████▌     | 221/480 [6:49:36<7:56:28, 110.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  46%|████▋     | 222/480 [6:51:14<7:38:40, 106.67s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  46%|████▋     | 223/480 [6:52:44<7:15:30, 101.67s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  47%|████▋     | 224/480 [6:54:22<7:09:08, 100.58s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  47%|████▋     | 225/480 [6:55:57<7:01:03, 99.07s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  47%|████▋     | 226/480 [6:57:30<6:51:40, 97.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  47%|████▋     | 227/480 [6:59:12<6:55:50, 98.62s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  48%|████▊     | 228/480 [7:00:47<6:49:30, 97.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  48%|████▊     | 229/480 [7:02:26<6:48:57, 97.76s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  48%|████▊     | 230/480 [7:05:12<8:12:51, 118.29s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  48%|████▊     | 231/480 [7:06:44<7:38:25, 110.46s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  48%|████▊     | 232/480 [7:08:18<7:16:19, 105.56s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  49%|████▊     | 233/480 [7:09:53<7:01:58, 102.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  49%|████▉     | 234/480 [7:11:25<6:46:57, 99.26s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  49%|████▉     | 235/480 [7:13:00<6:40:06, 97.98s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  49%|████▉     | 236/480 [7:14:35<6:34:59, 97.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  49%|████▉     | 237/480 [7:16:08<6:27:37, 95.71s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  50%|████▉     | 238/480 [7:17:48<6:31:51, 97.16s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  50%|████▉     | 239/480 [7:19:22<6:25:46, 96.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  50%|█████     | 240/480 [7:22:09<7:49:49, 117.45s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  50%|█████     | 241/480 [7:23:54<7:33:20, 113.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  50%|█████     | 242/480 [7:25:30<7:09:44, 108.34s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  51%|█████     | 243/480 [7:27:05<6:52:00, 104.31s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  51%|█████     | 244/480 [7:28:40<6:39:38, 101.60s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  51%|█████     | 245/480 [7:30:19<6:34:11, 100.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  51%|█████▏    | 246/480 [7:31:52<6:24:30, 98.59s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  51%|█████▏    | 247/480 [7:33:28<6:19:49, 97.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  52%|█████▏    | 248/480 [7:35:07<6:19:39, 98.19s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  52%|█████▏    | 249/480 [7:36:43<6:15:05, 97.43s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  52%|█████▏    | 250/480 [7:39:48<7:53:43, 123.58s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  52%|█████▏    | 251/480 [7:41:22<7:17:39, 114.67s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  52%|█████▎    | 252/480 [7:42:56<6:52:22, 108.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  53%|█████▎    | 253/480 [7:44:30<6:33:57, 104.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  53%|█████▎    | 254/480 [7:46:04<6:21:46, 101.35s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  53%|█████▎    | 255/480 [7:47:37<6:10:05, 98.69s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  53%|█████▎    | 256/480 [7:49:14<6:06:54, 98.28s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  54%|█████▎    | 257/480 [7:50:46<5:58:21, 96.42s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  54%|█████▍    | 258/480 [7:52:25<5:59:02, 97.04s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 05:53:32,665:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  54%|█████▍    | 259/480 [7:54:00<5:55:56, 96.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  54%|█████▍    | 260/480 [7:56:45<7:09:20, 117.09s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  54%|█████▍    | 261/480 [7:58:21<6:44:22, 110.79s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  55%|█████▍    | 262/480 [8:00:00<6:29:12, 107.12s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  55%|█████▍    | 263/480 [8:01:37<6:16:40, 104.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  55%|█████▌    | 264/480 [8:03:19<6:12:05, 103.36s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  55%|█████▌    | 265/480 [8:04:52<5:59:21, 100.29s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  55%|█████▌    | 266/480 [8:06:27<5:51:56, 98.67s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  56%|█████▌    | 267/480 [8:08:01<5:45:26, 97.31s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  56%|█████▌    | 268/480 [8:09:32<5:37:01, 95.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  56%|█████▌    | 269/480 [8:11:07<5:35:10, 95.31s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 06:12:16,321:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 06:12:21,336:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 06:12:27,095:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  56%|█████▋    | 270/480 [8:14:07<7:02:16, 120.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  56%|█████▋    | 271/480 [8:15:43<6:34:28, 113.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  57%|█████▋    | 272/480 [8:17:14<6:09:51, 106.69s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  57%|█████▋    | 273/480 [8:18:49<5:56:19, 103.28s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  57%|█████▋    | 274/480 [8:20:28<5:49:57, 101.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  57%|█████▋    | 275/480 [8:22:02<5:40:20, 99.61s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  57%|█████▊    | 276/480 [8:23:41<5:37:25, 99.24s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  58%|█████▊    | 277/480 [8:25:17<5:33:13, 98.49s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  58%|█████▊    | 278/480 [8:26:52<5:27:34, 97.30s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  58%|█████▊    | 279/480 [8:28:27<5:24:10, 96.77s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  58%|█████▊    | 280/480 [8:31:13<6:31:07, 117.34s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  59%|█████▊    | 281/480 [8:32:41<5:59:55, 108.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  59%|█████▉    | 282/480 [8:34:15<5:43:33, 104.11s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  59%|█████▉    | 283/480 [8:35:48<5:31:43, 101.03s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  59%|█████▉    | 284/480 [8:37:28<5:28:06, 100.44s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  59%|█████▉    | 285/480 [8:39:04<5:22:58, 99.38s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  60%|█████▉    | 286/480 [8:40:39<5:16:29, 97.88s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  60%|█████▉    | 287/480 [8:42:15<5:12:58, 97.30s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  60%|██████    | 288/480 [8:43:51<5:10:07, 96.92s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  60%|██████    | 289/480 [8:45:23<5:04:31, 95.66s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  60%|██████    | 290/480 [8:48:12<6:12:32, 117.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  61%|██████    | 291/480 [8:49:44<5:45:33, 109.70s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  61%|██████    | 292/480 [8:51:16<5:27:31, 104.53s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  61%|██████    | 293/480 [8:52:47<5:13:11, 100.49s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  61%|██████▏   | 294/480 [8:54:22<5:06:10, 98.76s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  61%|██████▏   | 295/480 [8:55:56<5:00:36, 97.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  62%|██████▏   | 296/480 [8:57:36<5:00:54, 98.12s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  62%|██████▏   | 297/480 [8:59:07<4:52:49, 96.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  62%|██████▏   | 298/480 [9:00:42<4:50:17, 95.70s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  62%|██████▏   | 299/480 [9:02:13<4:44:36, 94.35s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  62%|██████▎   | 300/480 [9:05:14<6:01:09, 120.38s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  63%|██████▎   | 301/480 [9:06:49<5:35:48, 112.56s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  63%|██████▎   | 302/480 [9:08:22<5:16:23, 106.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  63%|██████▎   | 303/480 [9:09:59<5:06:10, 103.79s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  63%|██████▎   | 304/480 [9:11:34<4:56:42, 101.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  64%|██████▎   | 305/480 [9:13:04<4:45:46, 97.98s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  64%|██████▍   | 306/480 [9:14:38<4:40:15, 96.64s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  64%|██████▍   | 307/480 [9:16:09<4:33:38, 94.90s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  64%|██████▍   | 308/480 [9:17:41<4:29:40, 94.07s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  64%|██████▍   | 309/480 [9:19:19<4:31:38, 95.31s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  65%|██████▍   | 310/480 [9:22:03<5:28:19, 115.88s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  65%|██████▍   | 311/480 [9:23:37<5:08:13, 109.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  65%|██████▌   | 312/480 [9:25:11<4:53:22, 104.78s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  65%|██████▌   | 313/480 [9:26:43<4:40:50, 100.90s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  65%|██████▌   | 314/480 [9:28:18<4:33:56, 99.01s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  66%|██████▌   | 315/480 [9:29:55<4:30:55, 98.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  66%|██████▌   | 316/480 [9:31:34<4:29:50, 98.72s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:32:40,503:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:32:46,047:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:32:55,907:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  66%|██████▌   | 317/480 [9:33:22<4:35:38, 101.46s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  66%|██████▋   | 318/480 [9:34:59<4:30:04, 100.03s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  66%|██████▋   | 319/480 [9:36:35<4:25:04, 98.79s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  67%|██████▋   | 320/480 [9:39:22<5:18:13, 119.33s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  67%|██████▋   | 321/480 [9:40:58<4:57:33, 112.28s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:42:05,722:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:42:10,742:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:42:16,372:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:42:21,986:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 07:42:26,996:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  67%|██████▋   | 322/480 [9:42:59<5:02:32, 114.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  67%|██████▋   | 323/480 [9:44:32<4:43:44, 108.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  68%|██████▊   | 324/480 [9:46:12<4:35:16, 105.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  68%|██████▊   | 325/480 [9:47:48<4:25:53, 102.92s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  68%|██████▊   | 326/480 [9:49:27<4:21:07, 101.74s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  68%|██████▊   | 327/480 [9:51:04<4:16:10, 100.46s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  68%|██████▊   | 328/480 [9:52:41<4:11:52, 99.43s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  69%|██████▊   | 329/480 [9:54:13<4:04:37, 97.20s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  69%|██████▉   | 330/480 [9:56:59<4:54:39, 117.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  69%|██████▉   | 331/480 [9:58:31<4:32:44, 109.83s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  69%|██████▉   | 332/480 [10:00:02<4:17:34, 104.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  69%|██████▉   | 333/480 [10:01:41<4:11:54, 102.82s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  70%|██████▉   | 334/480 [10:03:18<4:05:54, 101.06s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  70%|██████▉   | 335/480 [10:04:51<3:58:26, 98.66s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  70%|███████   | 336/480 [10:06:27<3:54:15, 97.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  70%|███████   | 337/480 [10:08:02<3:50:49, 96.85s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  70%|███████   | 338/480 [10:09:37<3:48:25, 96.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  71%|███████   | 339/480 [10:11:09<3:43:29, 95.10s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  71%|███████   | 340/480 [10:13:55<4:31:39, 116.42s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  71%|███████   | 341/480 [10:15:34<4:16:59, 110.93s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  71%|███████▏  | 342/480 [10:17:11<4:05:47, 106.87s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  71%|███████▏  | 343/480 [10:18:47<3:56:27, 103.56s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  72%|███████▏  | 344/480 [10:20:17<3:45:39, 99.56s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  72%|███████▏  | 345/480 [10:21:55<3:42:56, 99.09s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  72%|███████▏  | 346/480 [10:23:32<3:39:41, 98.37s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  72%|███████▏  | 347/480 [10:25:08<3:37:00, 97.90s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  72%|███████▎  | 348/480 [10:26:48<3:36:22, 98.35s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  73%|███████▎  | 349/480 [10:28:21<3:31:19, 96.79s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  73%|███████▎  | 350/480 [10:31:28<4:28:38, 123.99s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  73%|███████▎  | 351/480 [10:33:08<4:10:54, 116.70s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  73%|███████▎  | 352/480 [10:34:48<3:58:12, 111.66s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  74%|███████▎  | 353/480 [10:36:29<3:49:24, 108.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  74%|███████▍  | 354/480 [10:38:08<3:41:45, 105.60s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  74%|███████▍  | 355/480 [10:39:47<3:35:48, 103.59s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  74%|███████▍  | 356/480 [10:41:22<3:28:46, 101.02s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  74%|███████▍  | 357/480 [10:43:00<3:25:21, 100.17s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  75%|███████▍  | 358/480 [10:44:33<3:19:04, 97.90s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  75%|███████▍  | 359/480 [10:46:16<3:21:01, 99.68s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  75%|███████▌  | 360/480 [10:49:02<3:59:00, 119.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  75%|███████▌  | 361/480 [10:50:39<3:43:32, 112.71s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  75%|███████▌  | 362/480 [10:52:19<3:33:57, 108.79s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  76%|███████▌  | 363/480 [10:53:53<3:23:24, 104.32s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  76%|███████▌  | 364/480 [10:55:28<3:16:15, 101.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  76%|███████▌  | 365/480 [10:57:01<3:09:45, 99.00s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  76%|███████▋  | 366/480 [10:58:34<3:04:34, 97.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  76%|███████▋  | 367/480 [11:00:05<2:59:50, 95.50s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  77%|███████▋  | 368/480 [11:01:45<3:00:25, 96.66s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  77%|███████▋  | 369/480 [11:03:17<2:56:16, 95.29s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  77%|███████▋  | 370/480 [11:06:05<3:34:48, 117.17s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  77%|███████▋  | 371/480 [11:07:41<3:21:11, 110.75s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  78%|███████▊  | 372/480 [11:09:18<3:12:19, 106.85s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  78%|███████▊  | 373/480 [11:10:58<3:06:35, 104.63s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  78%|███████▊  | 374/480 [11:12:28<2:57:15, 100.33s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  78%|███████▊  | 375/480 [11:14:06<2:54:14, 99.57s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  78%|███████▊  | 376/480 [11:15:40<2:49:51, 98.00s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  79%|███████▊  | 377/480 [11:17:16<2:47:02, 97.30s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  79%|███████▉  | 378/480 [11:18:51<2:44:24, 96.72s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  79%|███████▉  | 379/480 [11:20:22<2:39:56, 95.02s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  79%|███████▉  | 380/480 [11:23:08<3:13:54, 116.35s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  79%|███████▉  | 381/480 [11:24:45<3:02:01, 110.32s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 09:25:53,596:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 09:25:58,619:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  80%|███████▉  | 382/480 [11:26:29<2:57:23, 108.61s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  80%|███████▉  | 383/480 [11:28:09<2:51:14, 105.92s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 09:29:27,936:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  80%|████████  | 384/480 [11:29:59<2:51:26, 107.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  80%|████████  | 385/480 [11:31:31<2:42:40, 102.74s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  80%|████████  | 386/480 [11:33:05<2:36:37, 99.97s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  81%|████████  | 387/480 [11:34:43<2:33:57, 99.33s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  81%|████████  | 388/480 [11:36:16<2:29:32, 97.52s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  81%|████████  | 389/480 [11:37:52<2:27:13, 97.07s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  81%|████████▏ | 390/480 [11:40:37<2:56:15, 117.51s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  81%|████████▏ | 391/480 [11:42:14<2:45:01, 111.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  82%|████████▏ | 392/480 [11:43:47<2:35:11, 105.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  82%|████████▏ | 393/480 [11:45:16<2:26:10, 100.81s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  82%|████████▏ | 394/480 [11:46:49<2:21:06, 98.45s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  82%|████████▏ | 395/480 [11:48:27<2:19:02, 98.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  82%|████████▎ | 396/480 [11:49:56<2:13:38, 95.45s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  83%|████████▎ | 397/480 [11:51:29<2:11:16, 94.89s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  83%|████████▎ | 398/480 [11:53:01<2:08:21, 93.92s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  83%|████████▎ | 399/480 [11:54:33<2:06:07, 93.43s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  83%|████████▎ | 400/480 [11:57:33<2:38:56, 119.21s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  84%|████████▎ | 401/480 [11:59:08<2:27:27, 112.00s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  84%|████████▍ | 402/480 [12:00:46<2:20:21, 107.97s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  84%|████████▍ | 403/480 [12:02:20<2:13:11, 103.79s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  84%|████████▍ | 404/480 [12:03:54<2:07:23, 100.57s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  84%|████████▍ | 405/480 [12:05:23<2:01:30, 97.21s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  85%|████████▍ | 406/480 [12:06:58<1:58:58, 96.46s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 10:08:11,160:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  85%|████████▍ | 407/480 [12:08:40<1:59:24, 98.14s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  85%|████████▌ | 408/480 [12:10:14<1:56:25, 97.03s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  85%|████████▌ | 409/480 [12:11:45<1:52:36, 95.16s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  85%|████████▌ | 410/480 [12:14:33<2:16:30, 117.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  86%|████████▌ | 411/480 [12:16:06<2:06:24, 109.92s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  86%|████████▌ | 412/480 [12:17:38<1:58:28, 104.54s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 10:18:47,965:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  86%|████████▌ | 413/480 [12:19:15<1:54:04, 102.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  86%|████████▋ | 414/480 [12:20:46<1:48:46, 98.89s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  86%|████████▋ | 415/480 [12:22:13<1:43:05, 95.16s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  87%|████████▋ | 416/480 [12:23:43<1:39:58, 93.73s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  87%|████████▋ | 417/480 [12:25:17<1:38:31, 93.83s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  87%|████████▋ | 418/480 [12:26:49<1:36:21, 93.24s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  87%|████████▋ | 419/480 [12:28:20<1:34:00, 92.47s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  88%|████████▊ | 420/480 [12:31:05<1:54:25, 114.43s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  88%|████████▊ | 421/480 [12:32:38<1:46:10, 107.97s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  88%|████████▊ | 422/480 [12:34:17<1:41:49, 105.34s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  88%|████████▊ | 423/480 [12:35:49<1:36:06, 101.16s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  88%|████████▊ | 424/480 [12:37:24<1:32:43, 99.34s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  89%|████████▊ | 425/480 [12:38:59<1:29:47, 97.95s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  89%|████████▉ | 426/480 [12:40:31<1:26:38, 96.26s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  89%|████████▉ | 427/480 [12:42:03<1:23:53, 94.97s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  89%|████████▉ | 428/480 [12:43:40<1:22:53, 95.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  89%|████████▉ | 429/480 [12:45:14<1:20:47, 95.05s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  90%|████████▉ | 430/480 [12:47:55<1:35:50, 115.00s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  90%|████████▉ | 431/480 [12:49:27<1:28:14, 108.05s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  90%|█████████ | 432/480 [12:50:57<1:22:06, 102.65s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  90%|█████████ | 433/480 [12:52:36<1:19:24, 101.38s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  90%|█████████ | 434/480 [12:54:09<1:15:52, 98.97s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  91%|█████████ | 435/480 [12:55:39<1:12:09, 96.21s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  91%|█████████ | 436/480 [12:57:11<1:09:46, 95.14s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  91%|█████████ | 437/480 [12:58:44<1:07:40, 94.44s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  91%|█████████▏| 438/480 [13:00:16<1:05:34, 93.69s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  91%|█████████▏| 439/480 [13:01:48<1:03:38, 93.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  92%|█████████▏| 440/480 [13:04:31<1:16:01, 114.05s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  92%|█████████▏| 441/480 [13:06:02<1:09:43, 107.27s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  92%|█████████▏| 442/480 [13:07:37<1:05:32, 103.48s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  92%|█████████▏| 443/480 [13:09:09<1:01:40, 100.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  92%|█████████▎| 444/480 [13:10:45<59:20, 98.91s/it]   
+[36m(TaskRunner pid=4052094)[0m Training Progress:  93%|█████████▎| 445/480 [13:12:20<57:02, 97.77s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  93%|█████████▎| 446/480 [13:13:49<53:57, 95.23s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  93%|█████████▎| 447/480 [13:15:23<52:03, 94.66s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  93%|█████████▎| 448/480 [13:16:55<50:09, 94.04s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  94%|█████████▎| 449/480 [13:18:29<48:35, 94.04s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress:  94%|█████████▍| 450/480 [13:21:31<1:00:04, 120.16s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=4052094)[0m Training Progress:  94%|█████████▍| 451/480 [13:23:04<54:15, 112.26s/it]  
+[36m(TaskRunner pid=4052094)[0m Training Progress:  94%|█████████▍| 452/480 [13:24:35<49:23, 105.84s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  94%|█████████▍| 453/480 [13:26:08<45:54, 102.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  95%|█████████▍| 454/480 [13:27:41<43:00, 99.26s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  95%|█████████▍| 455/480 [13:29:12<40:18, 96.73s/it]
+[36m(TaskRunner pid=4052094)[0m WARNING:2025-11-17 11:30:21,217:Timeout during comparison
+[36m(TaskRunner pid=4052094)[0m Training Progress:  95%|█████████▌| 456/480 [13:30:49<38:44, 96.86s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  95%|█████████▌| 457/480 [13:32:29<37:28, 97.75s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  95%|█████████▌| 458/480 [13:34:03<35:24, 96.55s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  96%|█████████▌| 459/480 [13:35:35<33:17, 95.13s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  96%|█████████▌| 460/480 [13:38:22<38:57, 116.88s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  96%|█████████▌| 461/480 [13:39:58<35:00, 110.54s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  96%|█████████▋| 462/480 [13:41:30<31:30, 105.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  96%|█████████▋| 463/480 [13:43:02<28:39, 101.15s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  97%|█████████▋| 464/480 [13:44:35<26:18, 98.64s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  97%|█████████▋| 465/480 [13:46:09<24:18, 97.23s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  97%|█████████▋| 466/480 [13:47:42<22:25, 96.14s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  97%|█████████▋| 467/480 [13:49:17<20:42, 95.55s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  98%|█████████▊| 468/480 [13:50:51<19:02, 95.21s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  98%|█████████▊| 469/480 [13:52:24<17:18, 94.44s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  98%|█████████▊| 470/480 [13:55:15<19:33, 117.39s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  98%|█████████▊| 471/480 [13:56:50<16:38, 110.90s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  98%|█████████▊| 472/480 [13:58:26<14:10, 106.25s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  99%|█████████▊| 473/480 [13:59:59<11:55, 102.19s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  99%|█████████▉| 474/480 [14:01:33<10:00, 100.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  99%|█████████▉| 475/480 [14:03:05<08:06, 97.32s/it] 
+[36m(TaskRunner pid=4052094)[0m Training Progress:  99%|█████████▉| 476/480 [14:04:40<06:27, 96.86s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress:  99%|█████████▉| 477/480 [14:06:12<04:45, 95.23s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress: 100%|█████████▉| 478/480 [14:07:50<03:12, 96.01s/it]
+[36m(TaskRunner pid=4052094)[0m Training Progress: 100%|█████████▉| 479/480 [14:09:31<01:37, 97.56s/it]
+[36m(WorkerDict pid=4055732)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=4055732)[0m   warnings.warn(
+[36m(TaskRunner pid=4052094)[0m Training Progress: 100%|█████████▉| 479/480 [14:12:38<01:46, 106.80s/it]
+[36m(WorkerDict pid=4055930)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=4055930)[0m   warnings.warn([32m [repeated 3x across cluster][0m
++ ISODES
+./scripts/train_1_5b.sh: line 73: ISODES: command not found

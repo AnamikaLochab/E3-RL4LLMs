@@ -1,0 +1,14 @@
+=== RUNTIME ENV ===
+which python: /scratch/gautschi/alochab/conda_envs/e3/bin/python
+Python 3.10.19
+which accelerate: /scratch/gautschi/alochab/conda_envs/e3/bin/accelerate
+CUDA_HOME      : /apps/gautschi/cuda/12.6
+ENV            : /scratch/gautschi/alochab/conda_envs/e3
+===================
+PY: /scratch/gautschi/alochab/conda_envs/e3/bin/python
+Torch: 2.8.0+cu128 CUDA: 12.8
+Launching eval at Sun Dec 14 09:23:51 PM EST 2025
+INFO 12-14 21:24:01 [__init__.py:216] Automatically detected platform cuda.
+INFO 12-14 21:24:07 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_1.0_r_norm_dyn_clamp_2.0/global_step_480/actor/huggingface'}
+INFO 12-14 21:24:12 [__init__.py:216] Automatically detected platform cuda.
+INFO 12-14 21:24:16 [utils.py:233] non-default args: {'gpu_memory_utilization': 0.95, 'disable_log_stats': True, 'model': '../checkpoint/e3_1_5b_dGRPO_1.0_r_norm_dyn_clamp_2.0/global_step_480/actor/huggingface'}

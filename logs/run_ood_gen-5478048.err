@@ -1,0 +1,601 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) xalt/3.1.4
++ NUM_EPISODES=3
++ n_samples_per_prompt=8
++ n_rollout_max=8
++ n_rollout_min=8
++ LR_ACTOR=5e-6
++ entropy_coeff=0
++ n_rollout_update=0
++ enable_temperature_scheduler=False
++ enable_annealing=False
++ TRAIN_DATADIR=./dataset/train_data_10k.parquet
++ VAL_DATADIR=./dataset/valid_data.parquet
++ MODELDIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ PRETRAIN_DIR=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
++ SAVE_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14/
++ TENSORBOARD_PATH=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ export TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ TENSORBOARD_DIR=../checkpoint/e3_1_5b_dGRPO_1.0_a14//tensorboard
++ export HYDRA_FULL_ERROR=1
++ HYDRA_FULL_ERROR=1
++ python3 -m e3.main_e3 algorithm.adv_estimator=divgrpo data.train_files=./dataset/train_data_10k.parquet data.val_files=./dataset/valid_data.parquet data.train_batch_size=64 data.max_prompt_length=2048 data.max_response_length=6144 data.filter_overlong_prompts=True data.truncation=error actor_rollout_ref.model.path=deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B actor_rollout_ref.actor.optim.lr=5e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=512 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.entropy_coeff=0 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.gpu_memory_utilization=0.8 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_low=8 actor_rollout_ref.rollout.n_high=8 actor_rollout_ref.rollout.n_update=0 actor_rollout_ref.rollout.temperature=1 actor_rollout_ref.rollout.enable_temperature_scheduler=False actor_rollout_ref.rollout.enable_annealing=False actor_rollout_ref.rollout.max_steps=4 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.use_kl_in_reward=False trainer.critic_warmup=0 'trainer.logger=[console,tensorboard]' trainer.project_name=GRPO trainer.experiment_name=Qwen trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.default_local_dir=../checkpoint/e3_1_5b_dGRPO_1.0_a14/ trainer.save_freq=50 trainer.test_freq=10 trainer.total_epochs=3
+2025-12-23 08:48:50,550	INFO worker.py:2003 -- Started a local Ray instance. View the dashboard at [1m[32m127.0.0.1:8265 [39m[22m
+/scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[36m(TaskRunner pid=3434279)[0m DeprecationWarning: `ray.state.available_resources_per_node` is a private attribute and access will be removed in a future Ray version.
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 08:49:10,628:Waiting for register center actor vdt2iY_register_center to be ready. Elapsed time: 0 seconds out of 300 seconds.
+[36m(WorkerDict pid=3438011)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3438011)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+[36m(WorkerDict pid=3438011)[0m   warnings.warn(  # warn only once
+[36m(WorkerDict pid=3437834)[0m [rank0]:[W1223 08:49:28.698379379 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[36m(WorkerDict pid=3437834)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=3437834)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=3437834)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(  # warn only once[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438010)[0m [rank2]:[W1223 08:49:28.933143746 ProcessGroupNCCL.cpp:5023] [PG ID 0 PG GUID 0 Rank 2]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`[32m [repeated 6x across cluster][0m
+[36m(WorkerDict pid=3437834)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. [32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn(  # warn only once[32m [repeated 4x across cluster][0m
+[36m(WorkerDict pid=3438011)[0m `torch_dtype` is deprecated! Use `dtype` instead!
+[36m(WorkerDict pid=3438010)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3438010)[0m   warnings.warn(
+[36m(WorkerDict pid=3438008)[0m `torch_dtype` is deprecated! Use `dtype` instead![32m [repeated 2x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:   0%|          | 0/480 [00:00<?, ?it/s]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m /scratch/gautschi/alochab/E3-RL4LLMs/verl/verl/trainer/ppo/core_algos.py:745: RuntimeWarning: divide by zero encountered in log
+[36m(TaskRunner pid=3434279)[0m   print(f"    Entropy H(q):   {Hq.item():.4f} (Max possible: {np.log(corr_mask.sum().item()):.4f})")
+[36m(TaskRunner pid=3434279)[0m Training Progress:   0%|          | 1/480 [02:01<16:12:10, 121.78s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   0%|          | 2/480 [04:02<16:06:25, 121.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   1%|          | 3/480 [06:07<16:16:18, 122.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   1%|          | 4/480 [08:05<16:01:13, 121.16s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   1%|          | 5/480 [10:06<15:58:36, 121.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   1%|▏         | 6/480 [12:12<16:07:30, 122.47s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   1%|▏         | 7/480 [14:16<16:10:00, 123.05s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   2%|▏         | 8/480 [16:17<16:03:22, 122.46s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   2%|▏         | 9/480 [18:19<15:59:29, 122.23s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 09:13:01,072:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:   2%|▏         | 10/480 [21:48<19:28:12, 149.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   2%|▏         | 11/480 [23:46<18:11:14, 139.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   2%|▎         | 12/480 [25:47<17:24:02, 133.85s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   3%|▎         | 13/480 [27:49<16:53:17, 130.19s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   3%|▎         | 14/480 [29:52<16:35:14, 128.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   3%|▎         | 15/480 [31:50<16:09:42, 125.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   3%|▎         | 16/480 [33:51<15:56:43, 123.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   4%|▎         | 17/480 [35:50<15:45:18, 122.50s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   4%|▍         | 18/480 [37:47<15:29:51, 120.76s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   4%|▍         | 19/480 [39:46<15:24:23, 120.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   4%|▍         | 20/480 [43:12<18:39:46, 146.06s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 09:36:06,430:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:   4%|▍         | 21/480 [45:18<17:50:53, 139.99s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   5%|▍         | 22/480 [47:19<17:04:25, 134.20s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   5%|▍         | 23/480 [49:18<16:27:20, 129.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   5%|▌         | 24/480 [51:19<16:05:37, 127.06s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   5%|▌         | 25/480 [53:14<15:37:25, 123.62s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   5%|▌         | 26/480 [55:13<15:24:21, 122.16s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   6%|▌         | 27/480 [57:15<15:21:11, 122.01s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   6%|▌         | 28/480 [59:10<15:03:16, 119.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   6%|▌         | 29/480 [1:01:12<15:05:41, 120.49s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   6%|▋         | 30/480 [1:04:21<17:37:53, 141.05s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 09:57:05,392:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:   6%|▋         | 31/480 [1:06:15<16:34:55, 132.95s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   7%|▋         | 32/480 [1:08:03<15:37:35, 125.57s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   7%|▋         | 33/480 [1:10:09<15:35:00, 125.50s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   7%|▋         | 34/480 [1:12:06<15:16:05, 123.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   7%|▋         | 35/480 [1:13:59<14:50:05, 120.01s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   8%|▊         | 36/480 [1:15:51<14:31:24, 117.76s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   8%|▊         | 37/480 [1:17:49<14:28:42, 117.66s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   8%|▊         | 38/480 [1:19:49<14:31:32, 118.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   8%|▊         | 39/480 [1:21:39<14:12:29, 115.98s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   8%|▊         | 40/480 [1:24:48<16:51:19, 137.91s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   9%|▊         | 41/480 [1:26:40<15:51:20, 130.02s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   9%|▉         | 42/480 [1:28:36<15:19:07, 125.91s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   9%|▉         | 43/480 [1:30:24<14:37:14, 120.45s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   9%|▉         | 44/480 [1:32:15<14:14:51, 117.64s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:   9%|▉         | 45/480 [1:34:02<13:48:53, 114.33s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  10%|▉         | 46/480 [1:35:55<13:45:37, 114.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  10%|▉         | 47/480 [1:37:49<13:43:04, 114.05s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  10%|█         | 48/480 [1:39:45<13:45:12, 114.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  10%|█         | 49/480 [1:41:40<13:44:49, 114.83s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  10%|█         | 50/480 [1:45:03<16:51:12, 141.10s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  11%|█         | 51/480 [1:46:54<15:45:32, 132.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  11%|█         | 52/480 [1:48:48<15:02:25, 126.51s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  11%|█         | 53/480 [1:50:35<14:20:26, 120.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  11%|█▏        | 54/480 [1:52:24<13:52:49, 117.30s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  11%|█▏        | 55/480 [1:54:12<13:31:26, 114.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  12%|█▏        | 56/480 [1:56:00<13:15:08, 112.52s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  12%|█▏        | 57/480 [1:57:50<13:07:01, 111.64s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  12%|█▏        | 58/480 [1:59:36<12:53:07, 109.92s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  12%|█▏        | 59/480 [2:01:21<12:42:29, 108.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  12%|█▎        | 60/480 [2:04:15<14:57:03, 128.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  13%|█▎        | 61/480 [2:06:05<14:17:41, 122.82s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  13%|█▎        | 62/480 [2:07:51<13:39:14, 117.60s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  13%|█▎        | 63/480 [2:09:35<13:10:03, 113.68s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  13%|█▎        | 64/480 [2:11:31<13:11:25, 114.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  14%|█▎        | 65/480 [2:13:17<12:54:12, 111.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  14%|█▍        | 66/480 [2:15:10<12:53:25, 112.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  14%|█▍        | 67/480 [2:17:00<12:48:10, 111.60s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  14%|█▍        | 68/480 [2:18:47<12:37:15, 110.28s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  14%|█▍        | 69/480 [2:20:34<12:28:39, 109.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  15%|█▍        | 70/480 [2:23:36<14:54:58, 130.97s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  15%|█▍        | 71/480 [2:25:23<14:04:33, 123.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  15%|█▌        | 72/480 [2:27:11<13:29:05, 118.98s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  15%|█▌        | 73/480 [2:28:57<13:00:45, 115.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  15%|█▌        | 74/480 [2:30:46<12:47:12, 113.38s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  16%|█▌        | 75/480 [2:32:31<12:28:19, 110.86s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  16%|█▌        | 76/480 [2:34:22<12:26:51, 110.92s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 11:27:10,071:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  16%|█▌        | 77/480 [2:36:17<12:33:05, 112.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  16%|█▋        | 78/480 [2:38:10<12:32:41, 112.34s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  16%|█▋        | 79/480 [2:40:05<12:36:00, 113.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  17%|█▋        | 80/480 [2:43:02<14:40:54, 132.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  17%|█▋        | 81/480 [2:44:49<13:49:50, 124.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  17%|█▋        | 82/480 [2:46:39<13:18:01, 120.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  17%|█▋        | 83/480 [2:48:28<12:53:20, 116.88s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  18%|█▊        | 84/480 [2:50:16<12:33:20, 114.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  18%|█▊        | 85/480 [2:52:05<12:21:53, 112.69s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  18%|█▊        | 86/480 [2:53:51<12:07:38, 110.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  18%|█▊        | 87/480 [2:55:40<12:00:47, 110.04s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  18%|█▊        | 88/480 [2:57:32<12:03:56, 110.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  19%|█▊        | 89/480 [2:59:16<11:47:37, 108.59s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  19%|█▉        | 90/480 [3:02:11<13:56:31, 128.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  19%|█▉        | 91/480 [3:03:54<13:03:01, 120.77s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 11:56:33,134:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 11:56:38,157:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 11:56:43,175:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  19%|█▉        | 92/480 [3:05:50<12:52:28, 119.45s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  19%|█▉        | 93/480 [3:07:35<12:21:45, 115.00s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  20%|█▉        | 94/480 [3:09:27<12:14:17, 114.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  20%|█▉        | 95/480 [3:11:12<11:55:41, 111.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  20%|██        | 96/480 [3:13:01<11:47:48, 110.60s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  20%|██        | 97/480 [3:14:42<11:27:41, 107.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  20%|██        | 98/480 [3:16:19<11:05:41, 104.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  21%|██        | 99/480 [3:18:11<11:18:54, 106.91s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 12:10:53,351:Timeout during comparison
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(WorkerDict pid=3437834)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(WorkerDict pid=3437834)[0m Flash Attention 2 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2Model is bfloat16. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", dtype=torch.float16)`
+[36m(TaskRunner pid=3434279)[0m Training Progress:  21%|██        | 100/480 [3:21:31<14:13:07, 134.70s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  21%|██        | 101/480 [3:23:13<13:09:11, 124.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  21%|██▏       | 102/480 [3:24:58<12:30:21, 119.11s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  21%|██▏       | 103/480 [3:26:39<11:54:23, 113.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  22%|██▏       | 104/480 [3:28:20<11:27:36, 109.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  22%|██▏       | 105/480 [3:30:06<11:18:12, 108.51s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  22%|██▏       | 106/480 [3:31:42<10:53:12, 104.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  22%|██▏       | 107/480 [3:33:27<10:51:35, 104.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  22%|██▎       | 108/480 [3:35:04<10:35:27, 102.49s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  23%|██▎       | 109/480 [3:36:57<10:54:16, 105.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  23%|██▎       | 110/480 [3:39:56<13:06:58, 127.62s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  23%|██▎       | 111/480 [3:41:41<12:23:41, 120.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  23%|██▎       | 112/480 [3:43:22<11:44:06, 114.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  24%|██▎       | 113/480 [3:45:04<11:19:40, 111.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  24%|██▍       | 114/480 [3:46:49<11:06:39, 109.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  24%|██▍       | 115/480 [3:48:24<10:37:57, 104.87s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 12:41:00,882:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  24%|██▍       | 116/480 [3:50:05<10:29:07, 103.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  24%|██▍       | 117/480 [3:51:46<10:22:47, 102.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  25%|██▍       | 118/480 [3:53:32<10:26:54, 103.91s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  25%|██▍       | 119/480 [3:55:12<10:18:55, 102.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  25%|██▌       | 120/480 [3:58:10<12:30:49, 125.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  25%|██▌       | 121/480 [3:59:50<11:44:47, 117.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  25%|██▌       | 122/480 [4:01:39<11:27:36, 115.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  26%|██▌       | 123/480 [4:03:23<11:05:02, 111.77s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 12:56:13,953:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  26%|██▌       | 124/480 [4:05:26<11:22:47, 115.08s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  26%|██▌       | 125/480 [4:07:12<11:05:33, 112.49s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  26%|██▋       | 126/480 [4:08:56<10:47:26, 109.74s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  26%|██▋       | 127/480 [4:10:38<10:33:14, 107.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  27%|██▋       | 128/480 [4:12:23<10:25:38, 106.64s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  27%|██▋       | 129/480 [4:14:05<10:16:22, 105.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  27%|██▋       | 130/480 [4:16:56<12:09:40, 125.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  27%|██▋       | 131/480 [4:18:41<11:32:10, 119.00s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  28%|██▊       | 132/480 [4:20:20<10:55:40, 113.05s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  28%|██▊       | 133/480 [4:22:03<10:35:52, 109.95s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  28%|██▊       | 134/480 [4:23:46<10:22:19, 107.92s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  28%|██▊       | 135/480 [4:25:30<10:13:42, 106.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  28%|██▊       | 136/480 [4:27:10<10:00:45, 104.78s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  29%|██▊       | 137/480 [4:28:51<9:52:30, 103.65s/it] 
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 13:21:30,276:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  29%|██▉       | 138/480 [4:30:38<9:56:45, 104.69s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  29%|██▉       | 139/480 [4:32:23<9:54:53, 104.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  29%|██▉       | 140/480 [4:35:10<11:38:28, 123.26s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 13:27:46,086:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  29%|██▉       | 141/480 [4:36:55<11:05:38, 117.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  30%|██▉       | 142/480 [4:38:29<10:24:31, 110.86s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  30%|██▉       | 143/480 [4:40:10<10:05:31, 107.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  30%|███       | 144/480 [4:41:48<9:47:12, 104.86s/it] 
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 13:34:29,989:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  30%|███       | 145/480 [4:43:35<9:49:38, 105.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  30%|███       | 146/480 [4:45:10<9:28:59, 102.21s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  31%|███       | 147/480 [4:46:44<9:13:40, 99.76s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  31%|███       | 148/480 [4:48:20<9:06:15, 98.72s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 13:41:03,518:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  31%|███       | 149/480 [4:50:14<9:30:08, 103.35s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  31%|███▏      | 150/480 [4:53:19<11:42:37, 127.75s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  31%|███▏      | 151/480 [4:55:01<10:57:57, 119.99s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  32%|███▏      | 152/480 [4:56:44<10:27:56, 114.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  32%|███▏      | 153/480 [4:58:20<9:55:55, 109.34s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  32%|███▏      | 154/480 [5:00:00<9:37:54, 106.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  32%|███▏      | 155/480 [5:01:37<9:22:10, 103.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  32%|███▎      | 156/480 [5:03:09<9:00:41, 100.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  33%|███▎      | 157/480 [5:04:49<8:59:07, 100.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  33%|███▎      | 158/480 [5:06:30<8:58:14, 100.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  33%|███▎      | 159/480 [5:08:11<8:58:07, 100.58s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  33%|███▎      | 160/480 [5:11:02<10:49:07, 121.71s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 14:03:43,046:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  34%|███▎      | 161/480 [5:12:50<10:25:25, 117.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  34%|███▍      | 162/480 [5:14:32<9:57:38, 112.76s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  34%|███▍      | 163/480 [5:16:09<9:31:17, 108.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  34%|███▍      | 164/480 [5:17:43<9:07:22, 103.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  34%|███▍      | 165/480 [5:19:18<8:50:55, 101.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  35%|███▍      | 166/480 [5:21:01<8:52:21, 101.72s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  35%|███▍      | 167/480 [5:22:35<8:39:27, 99.58s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  35%|███▌      | 168/480 [5:24:14<8:36:26, 99.32s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  35%|███▌      | 169/480 [5:25:49<8:27:38, 97.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  35%|███▌      | 170/480 [5:28:36<10:13:25, 118.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  36%|███▌      | 171/480 [5:30:14<9:39:55, 112.61s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  36%|███▌      | 172/480 [5:31:52<9:15:37, 108.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  36%|███▌      | 173/480 [5:33:33<9:01:58, 105.92s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  36%|███▋      | 174/480 [5:35:06<8:40:57, 102.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  36%|███▋      | 175/480 [5:36:52<8:45:39, 103.41s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  37%|███▋      | 176/480 [5:38:33<8:39:10, 102.47s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  37%|███▋      | 177/480 [5:40:10<8:29:26, 100.88s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  37%|███▋      | 178/480 [5:41:51<8:27:30, 100.83s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  37%|███▋      | 179/480 [5:43:31<8:25:48, 100.83s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  38%|███▊      | 180/480 [5:46:24<10:11:14, 122.25s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 14:39:03,826:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  38%|███▊      | 181/480 [5:48:11<9:46:43, 117.74s/it] 
+[36m(TaskRunner pid=3434279)[0m Training Progress:  38%|███▊      | 182/480 [5:49:47<9:13:14, 111.39s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  38%|███▊      | 183/480 [5:51:30<8:57:27, 108.58s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  38%|███▊      | 184/480 [5:53:05<8:36:05, 104.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  39%|███▊      | 185/480 [5:54:52<8:38:30, 105.46s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  39%|███▉      | 186/480 [5:56:32<8:28:41, 103.82s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  39%|███▉      | 187/480 [5:58:10<8:18:18, 102.04s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  39%|███▉      | 188/480 [5:59:52<8:16:43, 102.07s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  39%|███▉      | 189/480 [6:01:35<8:15:49, 102.23s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  40%|███▉      | 190/480 [6:04:26<9:53:59, 122.89s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  40%|███▉      | 191/480 [6:06:04<9:15:35, 115.35s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  40%|████      | 192/480 [6:07:41<8:47:30, 109.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  40%|████      | 193/480 [6:09:19<8:28:10, 106.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  40%|████      | 194/480 [6:11:00<8:19:15, 104.74s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  41%|████      | 195/480 [6:12:39<8:09:39, 103.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  41%|████      | 196/480 [6:14:24<8:10:31, 103.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  41%|████      | 197/480 [6:15:59<7:56:03, 100.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  41%|████▏     | 198/480 [6:17:40<7:55:13, 101.11s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  41%|████▏     | 199/480 [6:19:16<7:46:09, 99.54s/it] 
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  42%|████▏     | 200/480 [6:22:25<9:49:06, 126.24s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  42%|████▏     | 201/480 [6:24:06<9:12:30, 118.82s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  42%|████▏     | 202/480 [6:25:46<8:44:08, 113.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  42%|████▏     | 203/480 [6:27:24<8:21:59, 108.74s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  42%|████▎     | 204/480 [6:29:09<8:14:56, 107.59s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  43%|████▎     | 205/480 [6:30:51<8:04:30, 105.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  43%|████▎     | 206/480 [6:32:33<7:57:26, 104.55s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  43%|████▎     | 207/480 [6:34:20<7:59:45, 105.44s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  43%|████▎     | 208/480 [6:36:00<7:49:59, 103.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  44%|████▎     | 209/480 [6:37:40<7:43:31, 102.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  44%|████▍     | 210/480 [6:40:39<9:25:15, 125.61s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 15:33:20,205:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  44%|████▍     | 211/480 [6:42:26<8:57:45, 119.95s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  44%|████▍     | 212/480 [6:44:05<8:28:28, 113.84s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  44%|████▍     | 213/480 [6:45:51<8:15:23, 111.32s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  45%|████▍     | 214/480 [6:47:34<8:02:09, 108.76s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  45%|████▍     | 215/480 [6:49:13<7:48:17, 106.03s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  45%|████▌     | 216/480 [6:50:54<7:39:59, 104.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  45%|████▌     | 217/480 [6:52:38<7:36:30, 104.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  45%|████▌     | 218/480 [6:54:13<7:23:24, 101.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  46%|████▌     | 219/480 [6:56:04<7:33:39, 104.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  46%|████▌     | 220/480 [6:58:55<8:59:40, 124.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  46%|████▌     | 221/480 [7:00:37<8:27:39, 117.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  46%|████▋     | 222/480 [7:02:23<8:11:13, 114.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  46%|████▋     | 223/480 [7:03:59<7:45:40, 108.72s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  47%|████▋     | 224/480 [7:05:46<7:41:35, 108.19s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  47%|████▋     | 225/480 [7:07:31<7:35:53, 107.27s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  47%|████▋     | 226/480 [7:09:11<7:24:13, 104.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  47%|████▋     | 227/480 [7:10:56<7:23:22, 105.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  48%|████▊     | 228/480 [7:12:39<7:18:21, 104.37s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  48%|████▊     | 229/480 [7:14:25<7:19:02, 104.95s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  48%|████▊     | 230/480 [7:17:19<8:43:10, 125.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  48%|████▊     | 231/480 [7:18:58<8:08:46, 117.78s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  48%|████▊     | 232/480 [7:20:42<7:48:49, 113.42s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  49%|████▊     | 233/480 [7:22:24<7:32:32, 109.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  49%|████▉     | 234/480 [7:24:01<7:15:11, 106.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  49%|████▉     | 235/480 [7:25:41<7:05:48, 104.28s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  49%|████▉     | 236/480 [7:27:19<6:57:05, 102.57s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  49%|████▉     | 237/480 [7:28:57<6:49:24, 101.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  50%|████▉     | 238/480 [7:30:46<6:56:53, 103.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  50%|████▉     | 239/480 [7:32:26<6:51:08, 102.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  50%|█████     | 240/480 [7:35:22<8:18:29, 124.62s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  50%|█████     | 241/480 [7:37:12<7:58:13, 120.06s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  50%|█████     | 242/480 [7:38:55<7:35:49, 114.91s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  51%|█████     | 243/480 [7:40:37<7:19:22, 111.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  51%|█████     | 244/480 [7:42:17<7:03:38, 107.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  51%|█████     | 245/480 [7:44:04<7:01:24, 107.59s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  51%|█████▏    | 246/480 [7:45:45<6:51:37, 105.55s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  51%|█████▏    | 247/480 [7:47:29<6:47:49, 105.02s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  52%|█████▏    | 248/480 [7:49:15<6:47:21, 105.35s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  52%|█████▏    | 249/480 [7:50:59<6:44:05, 104.96s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 16:45:13,607:Timeout during comparison
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  52%|█████▏    | 250/480 [7:54:16<8:28:23, 132.62s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  52%|█████▏    | 251/480 [7:55:55<7:48:09, 122.66s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  52%|█████▎    | 252/480 [7:57:35<7:19:39, 115.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  53%|█████▎    | 253/480 [7:59:14<6:59:35, 110.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  53%|█████▎    | 254/480 [8:00:53<6:44:04, 107.28s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 16:53:33,593:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  53%|█████▎    | 255/480 [8:02:38<6:39:50, 106.62s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  53%|█████▎    | 256/480 [8:04:21<6:33:28, 105.40s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  54%|█████▎    | 257/480 [8:06:04<6:29:00, 104.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  54%|█████▍    | 258/480 [8:07:53<6:31:52, 105.91s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 17:00:33,797:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  54%|█████▍    | 259/480 [8:09:39<6:30:49, 106.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  54%|█████▍    | 260/480 [8:12:30<7:40:42, 125.65s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  54%|█████▍    | 261/480 [8:14:13<7:13:33, 118.78s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  55%|█████▍    | 262/480 [8:15:58<6:55:43, 114.42s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  55%|█████▍    | 263/480 [8:17:40<6:41:07, 110.91s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  55%|█████▌    | 264/480 [8:19:26<6:34:01, 109.45s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  55%|█████▌    | 265/480 [8:21:07<6:22:57, 106.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  55%|█████▌    | 266/480 [8:22:52<6:19:04, 106.28s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  56%|█████▌    | 267/480 [8:24:34<6:12:17, 104.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  56%|█████▌    | 268/480 [8:26:10<6:01:53, 102.42s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  56%|█████▌    | 269/480 [8:27:54<6:01:44, 102.87s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 17:20:34,969:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  56%|█████▋    | 270/480 [8:30:52<7:18:22, 125.25s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  56%|█████▋    | 271/480 [8:32:35<6:53:22, 118.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  57%|█████▋    | 272/480 [8:34:15<6:32:21, 113.18s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  57%|█████▋    | 273/480 [8:35:57<6:18:33, 109.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  57%|█████▋    | 274/480 [8:37:44<6:13:36, 108.82s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  57%|█████▋    | 275/480 [8:39:24<6:02:57, 106.23s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  57%|█████▊    | 276/480 [8:41:11<6:02:28, 106.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  58%|█████▊    | 277/480 [8:42:57<5:59:40, 106.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  58%|█████▊    | 278/480 [8:44:41<5:55:38, 105.64s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  58%|█████▊    | 279/480 [8:46:26<5:53:11, 105.43s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  58%|█████▊    | 280/480 [8:49:20<7:00:00, 126.00s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  59%|█████▊    | 281/480 [8:50:55<6:26:57, 116.67s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  59%|█████▉    | 282/480 [8:52:37<6:10:04, 112.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  59%|█████▉    | 283/480 [8:54:21<6:00:59, 109.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  59%|█████▉    | 284/480 [8:56:09<5:56:56, 109.27s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  59%|█████▉    | 285/480 [8:57:54<5:50:55, 107.98s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  60%|█████▉    | 286/480 [8:59:38<5:44:47, 106.64s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 17:52:21,525:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  60%|█████▉    | 287/480 [9:01:30<5:48:39, 108.39s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  60%|██████    | 288/480 [9:03:20<5:48:38, 108.95s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  60%|██████    | 289/480 [9:05:01<5:38:47, 106.43s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  60%|██████    | 290/480 [9:08:02<6:48:17, 128.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  61%|██████    | 291/480 [9:09:47<6:23:02, 121.60s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  61%|██████    | 292/480 [9:11:29<6:02:51, 115.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  61%|██████    | 293/480 [9:13:12<5:48:59, 111.98s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  61%|██████▏   | 294/480 [9:14:58<5:41:05, 110.03s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  61%|██████▏   | 295/480 [9:16:47<5:38:40, 109.84s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 18:09:30,269:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  62%|██████▏   | 296/480 [9:18:39<5:39:06, 110.58s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  62%|██████▏   | 297/480 [9:20:21<5:29:34, 108.06s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  62%|██████▏   | 298/480 [9:22:08<5:26:21, 107.59s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  62%|██████▏   | 299/480 [9:23:52<5:21:02, 106.42s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  62%|██████▎   | 300/480 [9:27:02<6:34:33, 131.52s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  63%|██████▎   | 301/480 [9:28:46<6:07:55, 123.33s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  63%|██████▎   | 302/480 [9:30:28<5:47:03, 116.98s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  63%|██████▎   | 303/480 [9:32:15<5:35:51, 113.85s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  63%|██████▎   | 304/480 [9:33:58<5:25:02, 110.81s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  64%|██████▎   | 305/480 [9:35:37<5:12:37, 107.19s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  64%|██████▍   | 306/480 [9:37:22<5:08:50, 106.50s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  64%|██████▍   | 307/480 [9:39:03<5:02:09, 104.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  64%|██████▍   | 308/480 [9:40:45<4:58:29, 104.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  64%|██████▍   | 309/480 [9:42:34<5:00:11, 105.33s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  65%|██████▍   | 310/480 [9:45:29<5:57:51, 126.30s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  65%|██████▍   | 311/480 [9:47:11<5:35:31, 119.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  65%|██████▌   | 312/480 [9:48:57<5:22:40, 115.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  65%|██████▌   | 313/480 [9:50:43<5:12:38, 112.33s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  65%|██████▌   | 314/480 [9:52:26<5:02:57, 109.50s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  66%|██████▌   | 315/480 [9:54:13<4:58:54, 108.69s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  66%|██████▌   | 316/480 [9:56:03<4:58:40, 109.27s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  66%|██████▌   | 317/480 [9:57:39<4:45:43, 105.18s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  66%|██████▋   | 318/480 [9:59:21<4:41:48, 104.37s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  66%|██████▋   | 319/480 [10:01:06<4:40:01, 104.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  67%|██████▋   | 320/480 [10:04:00<5:34:24, 125.40s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  67%|██████▋   | 321/480 [10:05:42<5:13:39, 118.36s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 18:58:21,281:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 18:58:26,304:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  67%|██████▋   | 322/480 [10:07:33<5:05:47, 116.12s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  67%|██████▋   | 323/480 [10:09:12<4:50:09, 110.89s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  68%|██████▊   | 324/480 [10:10:59<4:45:11, 109.69s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  68%|██████▊   | 325/480 [10:12:42<4:38:39, 107.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  68%|██████▊   | 326/480 [10:14:26<4:33:41, 106.64s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  68%|██████▊   | 327/480 [10:16:12<4:31:44, 106.57s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  68%|██████▊   | 328/480 [10:17:57<4:28:11, 105.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  69%|██████▊   | 329/480 [10:19:35<4:20:56, 103.68s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  69%|██████▉   | 330/480 [10:22:28<5:10:59, 124.40s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  69%|██████▉   | 331/480 [10:24:08<4:50:34, 117.01s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  69%|██████▉   | 332/480 [10:25:46<4:34:47, 111.40s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  69%|██████▉   | 333/480 [10:27:34<4:30:40, 110.48s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  70%|██████▉   | 334/480 [10:29:13<4:20:35, 107.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  70%|██████▉   | 335/480 [10:30:52<4:12:38, 104.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  70%|███████   | 336/480 [10:32:34<4:09:17, 103.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  70%|███████   | 337/480 [10:34:19<4:08:12, 104.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  70%|███████   | 338/480 [10:36:06<4:08:08, 104.85s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  71%|███████   | 339/480 [10:37:47<4:03:54, 103.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  71%|███████   | 340/480 [10:40:44<4:53:31, 125.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  71%|███████   | 341/480 [10:42:34<4:40:25, 121.05s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  71%|███████▏  | 342/480 [10:44:17<4:26:03, 115.68s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  71%|███████▏  | 343/480 [10:45:59<4:14:46, 111.58s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  72%|███████▏  | 344/480 [10:47:38<4:03:54, 107.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  72%|███████▏  | 345/480 [10:49:23<4:00:44, 107.00s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  72%|███████▏  | 346/480 [10:51:09<3:57:54, 106.52s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  72%|███████▏  | 347/480 [10:52:54<3:55:28, 106.23s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  72%|███████▎  | 348/480 [10:54:40<3:53:13, 106.01s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  73%|███████▎  | 349/480 [10:56:19<3:46:59, 103.96s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  73%|███████▎  | 350/480 [10:59:40<4:48:20, 133.08s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  73%|███████▎  | 351/480 [11:01:26<4:28:57, 125.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  73%|███████▎  | 352/480 [11:03:17<4:17:40, 120.79s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  74%|███████▎  | 353/480 [11:05:11<4:11:16, 118.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  74%|███████▍  | 354/480 [11:07:08<4:08:14, 118.21s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  74%|███████▍  | 355/480 [11:08:56<3:59:52, 115.14s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  74%|███████▍  | 356/480 [11:10:41<3:51:37, 112.07s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  74%|███████▍  | 357/480 [11:12:33<3:49:30, 111.96s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  75%|███████▍  | 358/480 [11:14:17<3:42:48, 109.58s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  75%|███████▍  | 359/480 [11:16:14<3:45:32, 111.84s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  75%|███████▌  | 360/480 [11:19:11<4:22:56, 131.47s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  75%|███████▌  | 361/480 [11:21:01<4:08:14, 125.16s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  75%|███████▌  | 362/480 [11:22:51<3:56:42, 120.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  76%|███████▌  | 363/480 [11:24:39<3:47:49, 116.83s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  76%|███████▌  | 364/480 [11:26:23<3:38:38, 113.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  76%|███████▌  | 365/480 [11:28:07<3:31:16, 110.23s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  76%|███████▋  | 366/480 [11:29:51<3:25:57, 108.39s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  76%|███████▋  | 367/480 [11:31:35<3:21:47, 107.15s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  77%|███████▋  | 368/480 [11:33:25<3:21:09, 107.76s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  77%|███████▋  | 369/480 [11:35:12<3:19:24, 107.78s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  77%|███████▋  | 370/480 [11:38:16<3:59:29, 130.63s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  77%|███████▋  | 371/480 [11:40:08<3:47:00, 124.96s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  78%|███████▊  | 372/480 [11:41:57<3:36:04, 120.04s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  78%|███████▊  | 373/480 [11:43:47<3:29:06, 117.26s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  78%|███████▊  | 374/480 [11:45:30<3:19:30, 112.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  78%|███████▊  | 375/480 [11:47:20<3:15:57, 111.97s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  78%|███████▊  | 376/480 [11:49:04<3:10:03, 109.65s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  79%|███████▊  | 377/480 [11:50:50<3:06:11, 108.46s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  79%|███████▉  | 378/480 [11:52:35<3:02:32, 107.38s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  79%|███████▉  | 379/480 [11:54:18<2:58:52, 106.26s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  79%|███████▉  | 380/480 [11:57:16<3:32:48, 127.68s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  79%|███████▉  | 381/480 [11:59:04<3:20:45, 121.67s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 20:51:45,731:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  80%|███████▉  | 382/480 [12:00:57<3:14:41, 119.20s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  80%|███████▉  | 383/480 [12:02:45<3:07:18, 115.86s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  80%|████████  | 384/480 [12:04:38<3:04:08, 115.09s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  80%|████████  | 385/480 [12:06:21<2:56:10, 111.26s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  80%|████████  | 386/480 [12:08:05<2:51:01, 109.17s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  81%|████████  | 387/480 [12:09:51<2:47:51, 108.30s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  81%|████████  | 388/480 [12:11:38<2:45:06, 107.68s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  81%|████████  | 389/480 [12:13:23<2:42:21, 107.05s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  81%|████████▏ | 390/480 [12:16:23<3:13:22, 128.92s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  81%|████████▏ | 391/480 [12:18:05<2:59:24, 120.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  82%|████████▏ | 392/480 [12:19:50<2:49:58, 115.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  82%|████████▏ | 393/480 [12:21:28<2:40:19, 110.57s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  82%|████████▏ | 394/480 [12:23:14<2:36:38, 109.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  82%|████████▏ | 395/480 [12:25:04<2:34:55, 109.36s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  82%|████████▎ | 396/480 [12:26:43<2:29:03, 106.47s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  83%|████████▎ | 397/480 [12:28:29<2:26:55, 106.22s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  83%|████████▎ | 398/480 [12:30:12<2:23:55, 105.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  83%|████████▎ | 399/480 [12:31:55<2:21:09, 104.56s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  83%|████████▎ | 400/480 [12:35:10<2:55:27, 131.60s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  84%|████████▎ | 401/480 [12:36:55<2:43:04, 123.85s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  84%|████████▍ | 402/480 [12:38:45<2:35:24, 119.54s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  84%|████████▍ | 403/480 [12:40:35<2:29:39, 116.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  84%|████████▍ | 404/480 [12:42:20<2:23:33, 113.33s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  84%|████████▍ | 405/480 [12:44:02<2:17:27, 109.96s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  85%|████████▍ | 406/480 [12:45:46<2:13:10, 107.97s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  85%|████████▍ | 407/480 [12:47:30<2:10:01, 106.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  85%|████████▌ | 408/480 [12:49:15<2:07:36, 106.34s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  85%|████████▌ | 409/480 [12:50:59<2:04:46, 105.45s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  85%|████████▌ | 410/480 [12:54:02<2:30:22, 128.89s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  86%|████████▌ | 411/480 [12:55:44<2:18:48, 120.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  86%|████████▌ | 412/480 [12:57:24<2:09:57, 114.66s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  86%|████████▌ | 413/480 [12:59:09<2:04:44, 111.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  86%|████████▋ | 414/480 [13:00:52<2:00:00, 109.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  86%|████████▋ | 415/480 [13:02:29<1:54:11, 105.41s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  87%|████████▋ | 416/480 [13:04:12<1:51:42, 104.73s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  87%|████████▋ | 417/480 [13:06:01<1:51:11, 105.90s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  87%|████████▋ | 418/480 [13:07:44<1:48:37, 105.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  87%|████████▋ | 419/480 [13:09:27<1:46:18, 104.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  88%|████████▊ | 420/480 [13:12:25<2:06:33, 126.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  88%|████████▊ | 421/480 [13:14:10<1:57:55, 119.92s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  88%|████████▊ | 422/480 [13:15:57<1:52:26, 116.31s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  88%|████████▊ | 423/480 [13:17:38<1:46:07, 111.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  88%|████████▊ | 424/480 [13:19:23<1:42:20, 109.65s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  89%|████████▊ | 425/480 [13:21:08<1:39:05, 108.11s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  89%|████████▉ | 426/480 [13:22:51<1:35:54, 106.56s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  89%|████████▉ | 427/480 [13:24:34<1:33:22, 105.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  89%|████████▉ | 428/480 [13:26:21<1:31:53, 106.02s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  89%|████████▉ | 429/480 [13:28:03<1:28:59, 104.70s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  90%|████████▉ | 430/480 [13:30:56<1:44:24, 125.28s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  90%|████████▉ | 431/480 [13:32:37<1:36:15, 117.88s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  90%|█████████ | 432/480 [13:34:16<1:29:56, 112.43s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  90%|█████████ | 433/480 [13:36:05<1:27:10, 111.30s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  90%|█████████ | 434/480 [13:37:46<1:23:01, 108.28s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  91%|█████████ | 435/480 [13:39:25<1:18:56, 105.25s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  91%|█████████ | 436/480 [13:41:06<1:16:17, 104.04s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  91%|█████████ | 437/480 [13:42:49<1:14:29, 103.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  91%|█████████▏| 438/480 [13:44:30<1:12:03, 102.94s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  91%|█████████▏| 439/480 [13:46:14<1:10:34, 103.29s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  92%|█████████▏| 440/480 [13:49:07<1:22:49, 124.24s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  92%|█████████▏| 441/480 [13:50:46<1:15:42, 116.47s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  92%|█████████▏| 442/480 [13:52:30<1:11:22, 112.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  92%|█████████▏| 443/480 [13:54:09<1:06:59, 108.62s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  92%|█████████▎| 444/480 [13:55:51<1:04:03, 106.76s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  93%|█████████▎| 445/480 [13:57:32<1:01:15, 105.00s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  93%|█████████▎| 446/480 [13:59:12<58:43, 103.62s/it]  
+[36m(TaskRunner pid=3434279)[0m Training Progress:  93%|█████████▎| 447/480 [14:00:53<56:34, 102.87s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  93%|█████████▎| 448/480 [14:02:35<54:36, 102.39s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  94%|█████████▎| 449/480 [14:04:17<52:51, 102.30s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress:  94%|█████████▍| 450/480 [14:07:23<1:03:45, 127.51s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m
+[36m(TaskRunner pid=3434279)[0m Training Progress:  94%|█████████▍| 451/480 [14:09:04<57:45, 119.50s/it]  
+[36m(TaskRunner pid=3434279)[0m Training Progress:  94%|█████████▍| 452/480 [14:10:39<52:17, 112.04s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  94%|█████████▍| 453/480 [14:12:23<49:24, 109.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  95%|█████████▍| 454/480 [14:14:03<46:15, 106.75s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  95%|█████████▍| 455/480 [14:15:38<43:03, 103.32s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  95%|█████████▌| 456/480 [14:17:19<41:02, 102.61s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  95%|█████████▌| 457/480 [14:19:04<39:35, 103.30s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  95%|█████████▌| 458/480 [14:20:45<37:39, 102.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  96%|█████████▌| 459/480 [14:22:22<35:20, 100.96s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  96%|█████████▌| 460/480 [14:25:16<40:56, 122.80s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  96%|█████████▌| 461/480 [14:27:05<37:35, 118.71s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  96%|█████████▋| 462/480 [14:28:46<34:01, 113.43s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  96%|█████████▋| 463/480 [14:30:27<31:02, 109.55s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  97%|█████████▋| 464/480 [14:32:06<28:25, 106.59s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  97%|█████████▋| 465/480 [14:33:47<26:12, 104.82s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  97%|█████████▋| 466/480 [14:35:29<24:13, 103.84s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  97%|█████████▋| 467/480 [14:37:10<22:19, 103.03s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  98%|█████████▊| 468/480 [14:38:49<20:24, 102.01s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  98%|█████████▊| 469/480 [14:40:31<18:40, 101.85s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  98%|█████████▊| 470/480 [14:43:30<20:50, 125.06s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  98%|█████████▊| 471/480 [14:45:12<17:43, 118.13s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  98%|█████████▊| 472/480 [14:46:54<15:05, 113.24s/it]
+[36m(TaskRunner pid=3434279)[0m WARNING:2025-12-23 23:39:34,669:Timeout during comparison
+[36m(TaskRunner pid=3434279)[0m Training Progress:  99%|█████████▊| 473/480 [14:48:40<12:58, 111.18s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  99%|█████████▉| 474/480 [14:50:21<10:47, 107.93s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  99%|█████████▉| 475/480 [14:51:59<08:45, 105.10s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  99%|█████████▉| 476/480 [14:53:39<06:54, 103.52s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress:  99%|█████████▉| 477/480 [14:55:17<05:05, 101.75s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress: 100%|█████████▉| 478/480 [14:57:02<03:25, 102.96s/it]
+[36m(TaskRunner pid=3434279)[0m Training Progress: 100%|█████████▉| 479/480 [14:58:48<01:43, 103.82s/it]
+[36m(WorkerDict pid=3437834)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+[36m(WorkerDict pid=3437834)[0m   warnings.warn(
+[36m(TaskRunner pid=3434279)[0m Training Progress: 100%|█████████▉| 479/480 [15:01:58<01:52, 112.98s/it]
+[36m(WorkerDict pid=3438008)[0m /scratch/gautschi/alochab/conda_envs/e3/lib/python3.10/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:678: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=3438008)[0m   warnings.warn([32m [repeated 3x across cluster][0m

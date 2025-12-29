@@ -25,6 +25,7 @@ class NaiveRewardManager:
     def __init__(self, tokenizer, num_examine, compute_score=None) -> None:
         self.tokenizer = tokenizer
         self.num_examine = num_examine  # the number of batches of decoded responses to print to the console
+        print("Initialized Naive Reward with,", self.num_examine)
         self.compute_score = compute_score or _default_compute_score
 
     def verify(self, data):
@@ -46,6 +47,7 @@ class NaiveRewardManager:
             # decode
             prompt_str = self.tokenizer.decode(valid_prompt_ids, skip_special_tokens=True)
             response_str = self.tokenizer.decode(valid_response_ids, skip_special_tokens=True)
+            
 
             ground_truth = data_item.non_tensor_batch['reward_model']['ground_truth']
 
@@ -118,6 +120,10 @@ class NaiveRewardManager:
 
             if data_source not in already_print_data_sources:
                 already_print_data_sources[data_source] = 0
+
+            #change start
+            # print("Here at: ", data_source, already_print_data_sources[data_source], self.num_examine)
+            #change end
 
             if already_print_data_sources[data_source] < self.num_examine:
                 already_print_data_sources[data_source] += 1

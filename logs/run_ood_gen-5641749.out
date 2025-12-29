@@ -1,0 +1,7 @@
+=== RUNTIME ENV ===
+which python: /scratch/gautschi/alochab/conda_envs/e3/bin/python
+Python 3.10.19
+which accelerate: /scratch/gautschi/alochab/conda_envs/e3/bin/accelerate
+CUDA_HOME      : /apps/gautschi/cuda/12.6
+ENV            : /scratch/gautschi/alochab/conda_envs/e3
+===================
