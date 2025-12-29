@@ -1,0 +1,14 @@
+wandb/
+runs/
+outputs/
+checkpoints/
+logs/
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+*.pkl
+*.npy
+*.npz
+*.tar
+*.zip
